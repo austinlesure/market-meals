@@ -1,1 +1,1 @@
-web: marketmeals manage:app
+web: gunicorn main:app
