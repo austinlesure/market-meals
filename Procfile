@@ -1,0 +1,1 @@
+web: marketmeals manage:app
