@@ -1,7 +1,7 @@
 astroid==1.5.2
 cffi==1.9.1
 click==6.7
-conda==4.3.22
+conda==4.3.16
 cryptography==1.7.1
 idna==2.2
 isort==4.2.5
