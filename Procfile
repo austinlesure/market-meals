@@ -1,1 +1,1 @@
-web: marketmeals manage:app
+web: market-meals manage:app
