@@ -8,7 +8,7 @@ click==6.7
 conda==4.3.16
 cryptography==1.7.1
 gunicorn==19.7.1
-idna==2.2
+SQLAlchemy==1.1.13
 isort==4.2.5
 Jinja2==2.9.6
 lazy-object-proxy==1.2.2
@@ -23,4 +23,4 @@ requests==2.18.4
 urllib3==1.22
 virtualenv==15.1.0
 virtualenv-clone==0.2.6
-flask>=0.11.0
+flask==0.12.2
