@@ -1,9 +1,7 @@
-<<<<<<< HEAD
 certifi==2018.1.18
 chardet==3.0.4
 flake8==3.5.0
 idna==2.6
-=======
 astroid==1.5.2
 cffi==1.9.1
 click==6.7
@@ -15,7 +13,6 @@ isort==4.2.5
 Jinja2==2.9.6
 lazy-object-proxy==1.2.2
 MarkupSafe==1.0
->>>>>>> c654694e37df578ebe32a8bd986dd145bebfc1de
 mccabe==0.6.1
 pew==1.1.2
 pipenv==9.0.3
