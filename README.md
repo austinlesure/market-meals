@@ -3,9 +3,8 @@
 <h1>Project Location</h1>
 This project is live at <a href="https://market-meals.herokuapp.com/">market-meals.herokuapp.com</a>.
 
-
 <h1>Project Description</h1>
-There have been recent trends for people to prepare more home-cooked meals, and a greater desire for more produce being locally-sourced. 
+There have been recent trends for people to prepare more home-cooked meals, and a greater desire for more produce to be locally-sourced. 
 <br />
 <br />
 Combining these two trends, this app will show people what farmers markets are near them, what produce is available, and suggest recipes that can be prepared with the produce found at that market. 
@@ -33,3 +32,15 @@ This helps to improve eating habits, allow people to explore local farmers marke
  </li>
 </ul>
 
+<h1>Tech Stack</h1>
+<ol>
+  <li>VCS: GitHub</li>
+  <li>Hosting instance: Heroku</li>
+  <li>Front End languages: HTML, CSS</li>
+  <li>Scripting languages: Python 3.x, JavaScript</li>
+  <li>Database: MySQL</li>
+  <li>Server framework: Flask</li>
+  <li>Template engine: Jinja</li>
+  <li>API: Google Maps API JavaScript</li>
+  <li>CSS Framework: Bootstrap</li>
+</ol>
