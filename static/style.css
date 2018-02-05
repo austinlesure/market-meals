@@ -2,6 +2,9 @@
 
 html {
   font-family: 'Montserrat', sans-serif;
+  max-width: 780px;
+  margin: auto;
+
 }
 
 h1 {
