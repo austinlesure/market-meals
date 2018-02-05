@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Hello World!</title>
-</head>
-<body>
-      <h1>Hello World!</h1>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Welcome to MarketMeals!</h2>
+  <p>Thank you for visiting MarketMeals, the link between your local farmer and your next meal.<p>
+  <p>Please enter your zipcode below, so we can show the markets near you.</p>
+  <div class="zipcode">
+    <code>Zipcode Textbox</code>
+  </div>
+  <div class="map">
+    <code>Map of Markets</code>
+  </div>
+{% endblock %}
