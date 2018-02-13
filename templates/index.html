@@ -4,9 +4,15 @@
   <h2>Welcome to MarketMeals!</h2>
   <p>Thank you for visiting MarketMeals, the link between your local farmer and your next meal.<p>
   <p>Please enter your zipcode below, so we can show the markets near you.</p>
-  <div class="zipcode">
-    <code>Zipcode Textbox</code>
-  </div>
+  
+  <form>
+    <div>
+      <Label>ZIP Code</Label>
+      <input id="example" type="text" name="text" pattern="[0-9]{5}" title="Five digit zip code" />
+      <input type="submit" value="Send">
+    </div>
+  </form>
+  
   <div class="map">
     <code>Map of Markets</code>
   </div>
