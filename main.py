@@ -1,7 +1,7 @@
-from flask import render_template #session, flash, request, redirect
-from app import app #db
-#from models import User
-#from hashutils import check_pw_hash
+from flask import render_template, session, flash, request, redirect
+from app import app, db
+from models import Farmer, Product, Prodcat, Market, Marketday, Recipe, Recipeproduct
+from hashutils import check_pw_hash
 
 @app.route('/')
 def index():
