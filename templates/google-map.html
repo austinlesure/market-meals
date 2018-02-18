@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<html>
+<body>
+  <h2>Welcome to MarketMeals!</h2>
+  <p>Thank you for visiting MarketMeals, the link between your local farmer and your next meal.<p>
+  <p>Please enter your zipcode below, so we can show the markets near you.</p>
+  
+  <form>
+    <div>
+      <Label>Zipcode</Label>
+      <input id="example" type="text" name="zipcode" pattern="[0-9]{5}" title="Five digit zip code" />
+      <input type="submit" value="Send">
+    </div>
+  </form>
+
+  <div class="map">
+    <label>Map of Markets</label>
+  </div>
+ 
+  <head>
+    <title>Geocoding service</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 80%;
+        margin: 0;
+        padding: 0;
+      }
+      #floating-panel {
+        position: absolute;
+        top: 10px;
+        left: 25%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map" style="height:px; width: 700px;"></div>
+    <script type="text/javascript">
+    var marker, i;
+    var locations = [
+      ['market1', '1600 Lind Ave SW, Renton, WA 98057'],
+      ['market2', '800 sunrise pl sw, issaquah, wa 98027'],
+      ['market3', '6100 E Lake Sammamish Pkwy SE, Issaquah, WA 98029'] 
+    ];
+    function initMap() {
+      
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 10,
+        center: {lat: 47.4925009, lng: -121.9516339}
+      });
+      var geocoder = new google.maps.Geocoder();
+        for(i = 0; i < locations.length; i += 1){
+          var address = locations[i][1];
+          var name = locations[i][0];
+          geocodeAddress(geocoder, map, address, name);
+        } 
+      }
+
+  function geocodeAddress(geocoder, resultsMap, address, name) {
+
+    geocoder.geocode({'address': address}, function(results, status) {
+      if (status === 'OK') {
+        resultsMap.setCenter(results[0].geometry.location);
+           
+          var infoWindow = new google.maps.InfoWindow();
+
+          var marker = new google.maps.Marker({
+            map: resultsMap,
+            position: results[0].geometry.location 
+          });
+
+          google.maps.event.addListener(marker, 'click', function() {
+            infoWindow.setContent(name);
+            infoWindow.open(map, marker);
+          });
+
+
+       } else {
+          alert('Geocode was not successful for the following reason: ' + status);
+         }
+    });
+
+  }
+  </script>
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbMJCohPUaKEFGsIzZjG1K3mbU2NRMvjc&callback=initMap">
+   </script>
+</body>
+</html>
+{% endblock %}
