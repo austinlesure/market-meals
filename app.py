@@ -12,22 +12,4 @@ app.config['SQLALCHEMY_ECHO'] = True
 db = SQLAlchemy(app)
 app.secret_key = 'MarKetMeaLSiSAMAzinG'
 
-@app.route('/', methods=['GET', 'POST'])
-def func():
-  if request.method == 'POST':
-    zipcode = request.form['zipcode']
-    return redirect(url_for('success', name = zipcode) )
-  else:
-    zipcode = request.args.get('zipcode')
-    return redirect(url_for('success', name = zipcode) )
-    
-@app.route("/google-maps", methods=['GET'])
-def func(marketName):
-def names():
-  result = query_db("SELECT mname FROM market.marketName")
-  data = json.dumps(result)
-  resp = Response(data, status=200, mimetype='application/json')
-  return resp
-   
-
 
