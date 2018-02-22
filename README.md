@@ -31,7 +31,7 @@ This helps to improve eating habits, allow people to explore local farmers marke
    Austin	LeSure - Github: <a href = "https://github.com/austinlesure">austinlesure</a>
  </li>
   <li>
-    Ian Petersen - Github: __
+    Ian Peterson - Github: __
   </li>
 </ul>
 
