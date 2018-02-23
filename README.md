@@ -31,7 +31,7 @@ This helps to improve eating habits, allow people to explore local farmers marke
    Austin	LeSure - Github: <a href = "https://github.com/austinlesure">austinlesure</a>
  </li>
   <li>
-    Ian Peterson - Github: __
+    Ian Peterson - Github: <a href = "https://github.com/Xoadra">Xoadra</a>
   </li>
 </ul>
 
@@ -41,7 +41,7 @@ This helps to improve eating habits, allow people to explore local farmers marke
   <li>Hosting instance: Heroku</li>
   <li>Front End languages: HTML, CSS</li>
   <li>Scripting languages: Python 3.x, JavaScript</li>
-  <li>Database: SQLAlchemy & PhpMyAdmin</li>
+  <li>Database: PostgreSQL with SQLAlchemy</li>
   <li>Server framework: Flask</li>
   <li>Template engine: Jinja</li>
   <li>API: Google Maps API JavaScript</li>
