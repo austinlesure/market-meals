@@ -19,7 +19,7 @@ This helps to improve eating habits, allow people to explore local farmers marke
 
 <ul>
   <li>
-    Sigala	Hernandez - Github: <a href = "https://github.com/SigalaHr">SigalaHr</a>
+    Sigala Hernandez - Github: <a href = "https://github.com/SigalaHr">SigalaHr</a>
  </li>
   <li>
    Marianne	Goldin - Github: <a href = "https://github.com/mariannegoldin">mariannegoldin</a>
@@ -28,7 +28,7 @@ This helps to improve eating habits, allow people to explore local farmers marke
    Lynnette	Haukap - Github: <a href = "https://github.com/lynnettehaukap">lynnettehaukap</a>
  </li>
   <li>
-   Austin	LeSure - Github: <a href = "https://github.com/austinlesure">austinlesure</a>
+   Austin LeSure - Github: <a href = "https://github.com/austinlesure">austinlesure</a>
  </li>
   <li>
     Ian Peterson - Github: <a href = "https://github.com/Xoadra">Xoadra</a>
