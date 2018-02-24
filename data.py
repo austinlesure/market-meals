@@ -12,8 +12,8 @@ data = Blueprint( 'data', __name__ )
 
 @data.route( '/core' )
 def core( ):
-	snek = 'SNEK!!!'
-	print( 'From Python' )
-	return snek
+	print( 'In the snake cave!' )
+	return 'Snake in my script!'
+
 
 

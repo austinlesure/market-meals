@@ -6,32 +6,26 @@
 
 
 
-// Immediately execute's the api request once page is loaded
+var http = new XMLHttpRequest( )
+
+// Initiate http request once page is loaded
 window.onload = fetchData
+// Verify successful script call
+console.log( 'At the script!' )
 
 
-// Making the request for requesting backend data
+// Send request to server and react to feedback
 function fetchData( ) {
-	// Http object which will handle api calls to the server via ajax 
-	var http = new XMLHttpRequest( )
-	// Request access to the server
-	http.getData = function( ) {
-		// Log the server response if successful
-		if ( http.readyState === XMLHttpRequest.DONE && http.status === 200 ) {
-			console.log( http.response )
-			// Not working yet
-			console.log( 'SUCCESS!!!' )
-		}
-		else {
-			// Also not working
-			console.log( 'FAILURE!!!' )
-		}
-	}
-	// Set http method, server url, and async status, then send request
-	http.open( 'GET', '/core', true )
+	http.onreadystatechange = viewData
+	http.open( 'GET', '/core' )
 	http.send( )
-	// Test successful script call
-	console.log( 'From JavaScript' )
+}
+
+// Prepare and output response if successful
+function viewData( ) {
+	if ( http.readyState === XMLHttpRequest.DONE && http.status === 200 ) {
+		console.log( http.response )
+	}
 }
 
 
