@@ -2,14 +2,16 @@
 
 
 
-from app import app
-from flask import request
+from flask import Blueprint, request
 
 
 
-## Route won't run from this file yet
-@app.route( '/data' )
-def data( ):
+## Setup blueprint for data module to enable route access
+data = Blueprint( 'data', __name__ )
+
+
+@data.route( '/core' )
+def core( ):
 	snek = 'SNEK!!!'
 	print( 'From Python' )
 	return snek
