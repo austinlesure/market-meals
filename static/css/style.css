@@ -33,5 +33,9 @@ nav ul li {
 	display: inline;
 }
 
+form, form div {
+	display: inline-block;
+}
+
 
 

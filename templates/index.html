@@ -2,7 +2,6 @@
 
 
 
-
 {% block content %}
 	<h2>Welcome to MarketMeals!</h2>
 	<p>Thank you for visiting MarketMeals, the link between your local farmer and your next meal.<p>
@@ -11,15 +10,16 @@
 	<form>
 		<div>
 			<Label>ZIP Code</Label>
-			<input id="example" type="text" name="text" pattern="[0-9]{5}" title="Five digit zip code" />
-			<input type="submit" value="Send">
+			<input id="zipcode" type="text" name="zipcode" pattern="[0-9]{5}" title="Five digit zip code" />
+			<input type="submit" value="Search">
 		</div>
 	</form>
+	<!-- Ajax http post method only works outside of form -->
+	<button id="assign">Assign</button>
   
 	<div class="map">
 		<code>Map of Markets</code>
 	</div>
 {% endblock %}
-
 
 
