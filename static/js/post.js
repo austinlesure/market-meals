@@ -15,11 +15,14 @@ window.addEventListener( 'load', grabData )
 
 // Generate click event on identified button
 function grabData( ) {
-	document.getElementById( 'assign' ).onclick = function( ) {
-		// Value from input field used for post method
-		var zipcode = document.getElementById( 'zipcode' ).value
-		// Execute the post http request and send data
-		hostData( zipcode )
+	// Verify correct route before trying to add event
+	if ( window.location.pathname === '/' ) {
+		document.getElementById( 'assign' ).onclick = function( ) {
+			// Value from input field used for post method
+			var zipcode = document.getElementById( 'zipcode' ).value
+			// Execute the post http request and send data
+			hostData( zipcode )
+		}
 	}
 }
 
@@ -41,5 +44,6 @@ function returnData( ) {
 		console.log( 'It liked the ' + http.response + '!' )
 	}
 }
+
 
 
