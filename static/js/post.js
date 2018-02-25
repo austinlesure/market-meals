@@ -30,18 +30,16 @@ function hostData( zipcode ) {
 	console.log( 'From another script!' )
 	http.open( 'POST', '/post' )
 	// Declare request header's MIME type before sending
-	/* http.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' ) */
+	http.setRequestHeader( 'Content-Type', 'text/plain' )
 	// Format/encode data to ensure server can parse it
-	/* http.send( encodeURIComponent( zipcode ) ) */
-	http.send( zipcode )
+	http.send( encodeURIComponent( zipcode ) )
 }
 
 // Output server's response to post method
 function returnData( ) {
 	if ( http.readyState === XMLHttpRequest.DONE && http.status === 200 ) {
-		console.log( http.response )
+		console.log( 'It liked the ' + http.response + '!' )
 	}
 }
-
 
 

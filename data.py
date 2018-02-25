@@ -2,7 +2,7 @@
 
 
 
-from flask import Blueprint
+from flask import Blueprint, request
 
 
 
@@ -16,10 +16,10 @@ def get( ):
 	return 'Snake in my script!'
 
 @data.route( '/post', methods = [ 'POST' ] )
-def post( input = None ):
-	item = input
-	print( 'Feed the snake!' )
-	print( item )
-	return item
+def post( ):
+	## Decode encoded data posted from frontend
+	data = request.data.decode( 'utf-8' )
+	print( 'Feed the snake ' + data + '!' )
+	return data
 
 
