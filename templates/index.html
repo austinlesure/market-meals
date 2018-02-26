@@ -6,20 +6,22 @@
 	<h2>Welcome to MarketMeals!</h2>
 	<p>Thank you for visiting MarketMeals, the link between your local farmer and your next meal.<p>
 	<p>Please enter your zipcode below, so we can show the markets near you.</p>
-  
-	<form method="post">
+	
+	<!-- Form method and action are placeholders for development -->
+	<form method="post" action="">
 		<div>
-			<Label>ZIP Code</Label>
+			<label>ZIP Code</label>
 			<input id="zipcode" type="text" name="zipcode" pattern="[0-9]{5}" title="Five digit zip code" />
 			<input type="submit" value="Search">
 		</div>
 	</form>
-	<!-- Ajax http post method only works outside of form -->
+	<!-- Ajax http post method only works outside of form for now -->
 	<button id="assign">Assign</button>
-  
+	
 	<div class="map">
 		<code>Map of Markets</code>
 	</div>
 {% endblock %}
+
 
 

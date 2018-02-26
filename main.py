@@ -9,7 +9,7 @@ from hashutils import check_pw_hash
 
 
 
-@app.route( '/' )
+@app.route( '/', methods = [ 'GET', 'POST' ] )
 def index( ):
 	return render_template( 'index.html' )
 

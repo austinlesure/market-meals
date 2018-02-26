@@ -30,7 +30,7 @@ function grabData( ) {
 function hostData( zipcode ) {
 	http.onreadystatechange = returnData
 	// See if script is ran on click by logging the below
-	console.log( 'From another script!' )
+	console.log( 'Ajax JavaScript POST' )
 	http.open( 'POST', '/post' )
 	// Declare request header's MIME type before sending
 	http.setRequestHeader( 'Content-Type', 'text/plain' )
@@ -41,7 +41,7 @@ function hostData( zipcode ) {
 // Output server's response to post method
 function returnData( ) {
 	if ( http.readyState === XMLHttpRequest.DONE && http.status === 200 ) {
-		console.log( 'It liked the ' + http.response + '!' )
+		console.log( 'POST Response: ' + http.response )
 	}
 }
 
