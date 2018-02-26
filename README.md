@@ -41,10 +41,9 @@ This helps to improve eating habits, allow people to explore local farmers marke
   <li>VCS: GitHub</li>
   <li>Hosting instance: Heroku</li>
   <li>Front End languages: HTML, CSS</li>
-  <li>Scripting languages: Python 3.x, JavaScript</li>
+  <li>Scripting languages: Python 3, JavaScript with AJAX</li>
   <li>Database: PostgreSQL with SQLAlchemy</li>
   <li>Server framework: Flask</li>
-  <li>Template engine: Jinja</li>
   <li>API: Google Maps API JavaScript</li>
   <li>CSS Framework: Bootstrap</li>
 </ol>
