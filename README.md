@@ -2,7 +2,7 @@
 
 <h1>Project Location</h1>
 <h2>Production link: <a href="https://market-meals.herokuapp.com/">market-meals.herokuapp.com</a>.</h2>
-<h2>Testing link: <a href = "https://market-meals-test.herokuapp.com/">market-meals-test.herokuapp.com/</a></h2>
+<h2>Testing link: <a href = "https://market-meals-test.herokuapp.com/">market-meals-test.herokuapp.com</a></h2>
 
 <h1>Project Description</h1>
 There have been recent trends for people to prepare more home-cooked meals, and a greater desire for more produce to be locally-sourced. 
