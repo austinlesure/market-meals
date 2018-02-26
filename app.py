@@ -3,8 +3,10 @@
 
 
 import os
+import psycopg2
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from urllib import parse
 
 from data import data
 
@@ -16,14 +18,28 @@ app.register_blueprint( data )
 
 db = SQLAlchemy( app )
 
-app.config[ 'DEBUG' ] = True
-app.config[ 'SQLALCHEMY_DATABASE_URI' ] = os.environ.get(
-	'DATABASE_URL',
-	'mysql+pymysql://market-meals:market-meals@localhost:8889/market-meals'
+## Using psycopg2 to connect to database
+parse.uses_netloc.append( 'postgres' )
+url = parse.urlparse( os.environ[ 'DATABASE_URL' ] )
+
+conn = psycopg2.connect(
+	database = url.path[ 1: ],
+	user = url.username,
+	password = url.password,
+	host = url.hostname,
+	port = url.port
 )
+
+app.config[ 'DEBUG' ] = True
+## Hook up SQLAlchemy to the connection info
+app.config[ 'SQLALCHEMY_DATABASE_URI' ] = os.environ[ 'DATABASE_URL' ]
+## Omitted placeholder database access data
+''' app.config[ 'SQLALCHEMY_DATABASE_URI' ] = os.environ.get(
+	'DATABASE_URL',
+	'postgresql+psycopg2://' + 'user' + ':' + 'password' + '@' + 'host' + ':' + 'port' + '/' + 'dbname'
+) '''
 app.config[ 'SQLALCHEMY_ECHO' ] = True
 
 app.secret_key = 'MarKetMeaLSiSAMAzinG'
-
 
 
