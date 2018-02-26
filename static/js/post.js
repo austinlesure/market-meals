@@ -2,10 +2,6 @@
 
 
 
-// Making http post request to the Flask backend and returning response to frontend
-
-
-
 var http = new XMLHttpRequest( )
 
 

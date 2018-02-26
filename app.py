@@ -8,15 +8,14 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from urllib import parse
 
-from data import data
-
 
 
 app = Flask( __name__ )
-## Modularize app by registering blueprints
-app.register_blueprint( data )
-
 db = SQLAlchemy( app )
+
+## Modularize app by registering blueprints
+from data import data
+app.register_blueprint( data )
 
 ## Using psycopg2 to connect to database
 parse.uses_netloc.append( 'postgres' )
@@ -41,5 +40,6 @@ app.config[ 'SQLALCHEMY_DATABASE_URI' ] = os.environ[ 'DATABASE_URL' ]
 app.config[ 'SQLALCHEMY_ECHO' ] = True
 
 app.secret_key = 'MarKetMeaLSiSAMAzinG'
+
 
 

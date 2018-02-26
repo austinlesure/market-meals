@@ -2,10 +2,6 @@
 
 
 
-// Exploring http get request data retrieval from the Flask backend to the frontend
-
-
-
 var http = new XMLHttpRequest( )
 
 
