@@ -37,5 +37,9 @@ form, form div {
 	display: inline-block;
 }
 
+#map {
+	height: 600px;
+}
+
 
 

@@ -9,7 +9,7 @@ window.addEventListener( 'load', loadData )
 
 
 function loadData( ) {
-	if ( window.location.pathname === '/' ) {
+	if ( document.getElementById( 'query' ) ) {
 		// Allow button element to initialize query
 		document.getElementById( 'query' ).onclick = function( ) {
 			insertData( )

@@ -3,7 +3,19 @@
 
 
 {% block content %}
-	<h1>map.html</h1>
+	<!-- Map element to contain the api map -->
+	<div id="map"></div>
+	<!-- Local script to create and operate api -->
+	<script type="text/javascript" src="{{ url_for( 'static', filename='js/map.js' ) }}"></script>
+	<!-- Importing in Google Maps api source -->
+	<script
+		async
+		defer
+		type="text/javascript"
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuoLYlF4zLuGmp1Ex9Q2J2w8mYpG6FiZM&callback=drawMap"
+	>
+	</script>
 {% endblock %}
+
 
 

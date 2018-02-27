@@ -9,7 +9,7 @@ window.addEventListener( 'load', grabData )
 
 
 function grabData( ) {
-	if ( window.location.pathname === '/' ) {
+	if ( document.getElementById( 'assign' ) ) {
 		// Generate click event on identified button
 		document.getElementById( 'assign' ).onclick = function( ) {
 			// Value from input field used for post method

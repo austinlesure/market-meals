@@ -11,9 +11,12 @@ from hashutils import check_pw_hash
 
 @app.route( '/', methods = [ 'GET', 'POST' ] )
 def index( ):
-	return render_template( 'index.html' )
+	if request.method == 'GET':
+		return render_template( 'index.html' )
+	elif request.method == 'POST':
+		return render_template( 'map.html' )
 
-@app.route( '/about' )
+@app.route( '/about', methods = [ 'GET' ] )
 def about( ):
 	return render_template( 'about.html' )
 
@@ -51,5 +54,6 @@ def recipe( ):
 
 if __name__ == '__main__':
 	app.run( )
+
 
 
