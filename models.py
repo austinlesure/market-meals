@@ -113,6 +113,5 @@ class Recipeproduct( db.Model ):
 	
 	def __repr__( self ):
 		return '<Recipeproduct %r' % self.recipe_product_amount_required
-		
-		
-		
+
+
