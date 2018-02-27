@@ -2,4 +2,15 @@
 
 {% block content %}
   <h1>market.html</h1>
+
+    {% if markets %}
+        {% for market in markets %}
+            <h1>
+                {{market.market_name}}<br>
+                {{market.market_address1}}<br>
+                {{market.market_address2}}
+            </h1>
+        {% endfor %}
+    {% endif %}
+
 {% endblock %}

@@ -3,14 +3,23 @@ from app import app, db
 from models import Farmer, Product, Prodcat, Market, Marketday, Recipe, Recipeproduct
 from hashutils import check_pw_hash
 
-@app.route('/')
+def get_farmers():
+    return Farmer.query.filter_by().all()
+
+@app.route('/', methods=['POST', 'GET'])
 def index():
-    return render_template('index.html')
+    if request.method == 'GET':
+        return render_template('index.html')
+    elif request.method == 'POST':
+        zipcode = request.form['zipcode']
+        markets = Market.query.filter_by(market_zip=zipcode)
+        return render_template('market.html', markets=markets)
 
 @app.route('/about')
 def about():
     return render_template('about.html')
 
+'''
 @app.route('/login')
 def login():
     return render_template('login.html')
@@ -18,6 +27,7 @@ def login():
 @app.route('/logout')
 def logout():
     return render_template('index.html')
+'''
 
 @app.route('/customer')
 def customer():

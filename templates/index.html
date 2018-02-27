@@ -4,11 +4,11 @@
   <h2>Welcome to MarketMeals!</h2>
   <p>Thank you for visiting MarketMeals, the link between your local farmer and your next meal.<p>
   <p>Please enter your zipcode below, so we can show the markets near you.</p>
-  
-  <form>
+
+  <form method="post">
     <div>
       <Label>ZIP Code</Label>
-      <input id="example" type="text" name="text" pattern="[0-9]{5}" title="Five digit zip code" />
+      <input id="example" type="text" name="zipcode" pattern="[0-9]{5}" title="Five digit zip code" />
       <input type="submit" value="Send">
     </div>
   </form>
@@ -17,3 +17,25 @@
     <code>Map of Markets</code>
   </div>
 {% endblock %}
+
+
+<!--
+{% if not farmers %}
+    <h1>No farmers yet</h1>
+{% else %}
+    {% for farmer in farmers %}
+        <h1>
+            {{farmer.farmer_name}}
+        </h1>
+    {% endfor %}
+{% endif %}
+{% if markets %}
+    {% for market in markets %}
+        <h1>
+            {{market.market_name}}<br>
+            {{market.market_address1}}<br>
+            {{market.market_address2}}
+        </h1>
+    {% endfor %}
+{% endif %}
+-->
