@@ -12,11 +12,13 @@ from app import db
 data = Blueprint( 'data', __name__ )
 
 
+
 @data.route( '/get', methods = [ 'GET' ] )
 def get( ):
 	data = 'Python'
 	print( data )
 	return data
+
 
 @data.route( '/post', methods = [ 'POST' ] )
 def post( ):
@@ -24,6 +26,7 @@ def post( ):
 	data = request.data.decode( 'utf-8' )
 	print( data )
 	return data
+
 
 @data.route( '/query', methods = [ 'GET', 'POST' ] )
 def query( ):
@@ -34,6 +37,5 @@ def query( ):
 	## Query new entry and return it
 	data = Farmer.query.filter_by( farmer_name = 'Bob' ).first( )
 	return data.farmer_name
-
 
 
