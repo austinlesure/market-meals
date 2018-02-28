@@ -11,15 +11,20 @@ from hashutils import check_pw_hash
 
 @app.route( '/', methods = [ 'GET', 'POST' ] )
 def index( ):
-	if request.method == 'GET':
-		return render_template( 'index.html' )
-	elif request.method == 'POST':
-		zipcode = request.form[ 'zipcode' ]
-		return redirect( url_for( 'zipcode', zipcode = zipcode ) )
+	return render_template( 'index.html' )
 
 @app.route( '/about', methods = [ 'GET' ] )
 def about( ):
 	return render_template( 'about.html' )
+	
+@app.route( '/data', methods = [ 'GET', 'POST' ] )
+def data( ):
+	if request.method == 'GET':
+		return session[ 'zipcode' ]
+	elif request.method == 'POST':
+		zipcode = request.form[ 'zipcode' ]
+		session[ 'zipcode' ] = zipcode
+		return redirect( url_for( 'zipcode', zipcode = zipcode ) )
 
 @app.route( '/<zipcode>', methods = [ 'GET' ] )
 def zipcode( zipcode ):
@@ -50,16 +55,11 @@ def farmer( ):
 def market( ):
 	return render_template( 'market.html' )
 
-@app.route( '/map' )
-def map( ):
-	return render_template( 'map.html' )
-
 @app.route( '/recipe' )
 def recipe( ):
 	return render_template( 'recipe.html' )
 
 if __name__ == '__main__':
 	app.run( )
-
 
 
