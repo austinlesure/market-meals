@@ -7,23 +7,21 @@
 	<p>Thank you for visiting MarketMeals, the link between your local farmer and your next meal.<p>
 	<p>Please enter your zipcode below, so we can show the markets near you.</p>
 	
-	<!-- Form method and action are placeholders for development -->
+	<!-- Form behavior below can also be replicated by entering zip a code through the url -->
 	<form action="/data" method="POST">
 		<div>
 			<label>ZIP Code</label>
 			<input id="zipcode" type="text" name="zipcode" pattern="[0-9]{5}" title="Five digit zip code" />
-			<button type="submit" value="Search">Search</button>
+			<!-- Ajax method listens on this button, but actual form submission is not async -->
+			<button id="search" type="submit" value="Search">Search</button>
 		</div>
 	</form>
-	<!-- Ajax http post method only works outside of form for now -->
-	<button id="assign">Assign</button>
-	<!-- Experimental button for testing database interaction -->
+	<!-- Experimental button for testing database inserts and queries -->
 	<button id="query">Query</button>
 	
 	<!-- <div class="map">
 		<code>Map of Markets</code>
 	</div> -->
 {% endblock %}
-
 
 

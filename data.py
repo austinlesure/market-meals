@@ -13,13 +13,6 @@ data = Blueprint( 'data', __name__ )
 
 
 
-@data.route( '/get', methods = [ 'GET' ] )
-def get( ):
-	data = 'Python'
-	print( data )
-	return data
-
-
 @data.route( '/post', methods = [ 'POST' ] )
 def post( ):
 	## Decode encoded data posted from frontend
@@ -37,5 +30,6 @@ def query( ):
 	## Query new entry and return it
 	data = Farmer.query.filter_by( farmer_name = 'Bob' ).first( )
 	return data.farmer_name
+
 
 

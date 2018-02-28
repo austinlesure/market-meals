@@ -11,7 +11,7 @@ window.addEventListener( 'load', grabData )
 function grabData( ) {
 	if ( window.location.pathname === '/' ) {
 		// Generate click event on identified button
-		document.getElementById( 'assign' ).onclick = function( ) {
+		document.getElementById( 'search' ).onclick = function( ) {
 			// Value from input field used for post method
 			var zipcode = document.getElementById( 'zipcode' ).value
 			hostData( zipcode )
