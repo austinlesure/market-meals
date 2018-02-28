@@ -14,7 +14,7 @@ window.addEventListener( 'load', drawMap )
 
 function drawMap( ) {
 	// Set example coordinates to Seattle
-	var seattle = new google.maps.LatLng( 47.5129432, -122.282146 )
+	var seattle = new google.maps.LatLng( 47.5429432, -122.382146 )
 	// Generate interactive map from api
 	map = new google.maps.Map(
 		document.getElementById( 'map' ),

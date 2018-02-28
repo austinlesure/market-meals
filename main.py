@@ -3,7 +3,7 @@
 
 
 from app import app, db
-from flask import render_template, session, flash, request, redirect
+from flask import render_template, redirect, url_for, request, session, flash
 from models import Farmer, Product, Prodcat, Market, Marketday, Recipe, Recipeproduct
 from hashutils import check_pw_hash
 
@@ -14,11 +14,17 @@ def index( ):
 	if request.method == 'GET':
 		return render_template( 'index.html' )
 	elif request.method == 'POST':
-		return render_template( 'map.html' )
+		zipcode = request.form[ 'zipcode' ]
+		return redirect( url_for( 'zipcode', zipcode = zipcode ) )
 
 @app.route( '/about', methods = [ 'GET' ] )
 def about( ):
 	return render_template( 'about.html' )
+
+@app.route( '/<zipcode>', methods = [ 'GET' ] )
+def zipcode( zipcode ):
+	zipcode = zipcode
+	return render_template( 'map.html', zipcode = zipcode )
 
 @app.route( '/login' )
 def login( ):
