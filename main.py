@@ -76,6 +76,8 @@ def market( ):
 def recipe( ):
 	return render_template( 'recipe.html' )
 
+
+
 if __name__ == '__main__':
 	app.run( )
 
