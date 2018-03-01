@@ -13,30 +13,13 @@ function getZipCode( ) {
 	var http = new XMLHttpRequest( )
 	http.onreadystatechange = function( ) {
 		if ( http.readyState === XMLHttpRequest.DONE && http.status === 200 ) {
+			// Search for geocode data that matches zip code
 			console.log( 'ZipCode HTTP: ' + http.responseText )
-			// Load map before passing the zipcode
-			document.getElementById( 'map' ).onload = drawMap( http.responseText )
+			viewGeocode( http.responseText )
 		}
 	}
 	http.open( 'GET', '/data' )
 	http.send( )
-}
-
-function drawMap( zipcode ) {
-	// Avoid annoying, meaningless console errors
-	if ( zipcode ) {
-		console.log( 'ZipCode API: ' + zipcode )
-		// Non-functional fetching of geocode objects
-		var zone = viewGeocode( zipcode )
-		console.log( 'Geocode is... ' + zone )
-		// Example coordinates for the Seattle area
-		var seattle = new google.maps.LatLng( 47.6029432, -122.332146 )
-		// Generate new interactive map from the api
-		var map = new google.maps.Map(
-			document.getElementById( 'map' ),
-			{ center: seattle, zoom: 11 }
-		)
-	}
 }
 
 function viewGeocode( zipcode ) {
@@ -55,20 +38,39 @@ function viewGeocode( zipcode ) {
 					// Inspect the single geocode element in full
 					console.log( element )
 					// Transform location into json for portability
-					var coord = element.geometry.location.toJSON( )
+					var coord = data[ 0 ].geometry.location.toJSON( )
 					console.log( 'JSON Location:', coord )
 					// View location coordinates in greater detail
 					console.log( 'LatLng Location: ' + element.geometry.location )
 					console.log( '    Latitude: ' + element.geometry.location.lat( ) )
 					console.log( '    Longitude: ' + element.geometry.location.lng( ) )
 				} )
+				// Utilize geocode results to render map contents
+				drawMap( data, zipcode )
 			}
-			// Watch and report on any errors from geocoding
+			// Watch for and redirect on errors from geocoding
 			else {
-				console.log( 'There was a problem!  ' + fate )
+				console.error( 'There was a problem!  ' + fate )
+				window.location.pathname = ''
 			}
 		}
 	)
+}
+
+function drawMap( geocode, zipcode ) {
+	// Avoid annoying, meaningless console errors
+	if ( geocode ) {
+		console.log( 'ZipCode API: ' + zipcode )
+		// Non-functional fetching of geocode objects
+		console.log( 'Geocode is... ', geocode[ 0 ] )
+		// Example coordinates for the Seattle area
+		var seattle = new google.maps.LatLng( 47.6029432, -122.332146 )
+		// Generate new interactive map from the api
+		var map = new google.maps.Map(
+			document.getElementById( 'map' ),
+			{ center: seattle, zoom: 11 }
+		)
+	}
 }
 
 
