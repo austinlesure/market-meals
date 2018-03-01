@@ -1,10 +1,11 @@
-# market-meals
+# MarketMeals
+## Source farm-fresh, locally grown meals with ease - digitally!
 
-<h1>Project Location</h1>
-<h2>Production link: <a href="https://market-meals.herokuapp.com/">market-meals.herokuapp.com</a>.</h2>
-<h2>Testing link: <a href = "https://market-meals-test.herokuapp.com/">market-meals-test.herokuapp.com</a></h2>
+<h3>Project Location</h1>
+<h4>Production link: <a href="https://market-meals.herokuapp.com/">market-meals.herokuapp.com</a>.</h2>
+<h4>Testing link: <a href = "https://market-meals-test.herokuapp.com/">market-meals-test.herokuapp.com</a></h2>
 
-<h1>Project Description</h1>
+<h3>Project Description</h1>
 There have been recent trends for people to prepare more home-cooked meals, and a greater desire for more produce to be locally-sourced. 
 <br />
 <br />
@@ -16,7 +17,7 @@ This will allow people the ease of combining meal planning and recipe finding wi
 <br />
 This helps to improve eating habits, allow people to explore local farmers markets, and help to support local farmers and their business by connecting them with local customers in new ways.
 
-<h1>Members</h1>
+<h3>Members</h1>
 
 <ul>
   <li>
@@ -40,7 +41,7 @@ This helps to improve eating habits, allow people to explore local farmers marke
 
 </ul>
 
-<h1>Tech Stack</h1>
+<h3>Tech Stack</h1>
 <ol>
   <li>VCS: GitHub</li>
   <li>Hosting instance: Heroku</li>
