@@ -2,7 +2,7 @@
 ## Source farm-fresh, locally grown meals with ease - digitally!
 
 <h3>Project Location</h1>
-<h4>Production link: <a href="https://market-meals.herokuapp.com/">market-meals.herokuapp.com</a>.</h2>
+<h4>Production link: <a href="https://market-meals.herokuapp.com/">market-meals.herokuapp.com</a></h2>
 <h4>Testing link: <a href = "https://market-meals-test.herokuapp.com/">market-meals-test.herokuapp.com</a></h2>
 
 <h3>Project Description</h1>
