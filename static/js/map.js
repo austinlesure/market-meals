@@ -56,7 +56,7 @@ function drawMap( coords, zipcode ) {
 			document.getElementById( 'map' ),
 			{ center: coords, zoom: 12 }
 		)
-		// Lookup farmers' markets in the vicinity
+		// Look up farmers' markets in the vicinity
 		browseMarkets( map, coords )
 	}
 }
@@ -72,16 +72,32 @@ function browseMarkets( map, coords ) {
 		if ( status == google.maps.places.PlacesServiceStatus.OK ) {
 			// Nearby farmers markets, but not working yet
 			console.log( 'NEAR Markets:', markets )
+			// Distribute upon the map market location identifiers
+			for ( var idx = 0; idx < markets.length; idx++ ) {
+				createLocation( markets[ idx ], map )
+			}
 		}
 	} )
 	// Find markets in the region through text searching
 	seeker.textSearch( zone, function( markets, status ) {
 		if ( status == google.maps.places.PlacesServiceStatus.OK ) {
-			// Markets array filled with nearby market data
+			// Query api for markets and show resulting array
 			console.log( 'TEXT Markets:', markets )
+			// Read through markets and place them on the map
+			for ( var idx = 0; idx < markets.length; idx++ ) {
+				createLocation( markets[ idx ], map )
+			}
 		}
 	} )
 }
 
+function createLocation( market, map ) {
+	// Create a new market location identifier on the map
+	var location = new google.maps.Marker( {
+		map: map,
+		position: market.geometry.location.toJSON( ),
+		title: market.name
+	} )
+}
 
 
