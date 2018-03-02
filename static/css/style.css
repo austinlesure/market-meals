@@ -46,4 +46,48 @@ form, form div {
 	height: 600px;
 }
 
+/* Map's market custom tooltip settings */
+.anchor {
+	height: 0;
+	position: absolute;
+	width: 400px;
+}
+
+.source {
+	position: absolute;
+	width: 100%;
+	bottom: 8px;
+	left: 0;
+}
+
+/* Design the bottom pointer */
+.source::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	transform: translate( -50%, 0 );
+	width: 0;
+	height: 0;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-top: 8px solid white;
+}
+
+/* Style the tooltip window */
+.market {
+	position: absolute;
+	top: 0;
+	left: 0;
+	transform: translate( -50%, -100% );
+	background-color: white;
+	padding: 5px;
+	border-radius: 5px;
+	font-family: sans-serif;
+	overflow-y: auto;
+	max-height: 60px;
+	box-shadow: 0px 2px 10px 1px rgba( 0, 0, 0, 0.5 );
+}
+
+
 
