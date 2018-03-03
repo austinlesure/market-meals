@@ -46,40 +46,52 @@ form, form div {
 	height: 600px;
 }
 
-/* Map's market custom tooltip settings */
-.anchor {
+
+/** *** ** Map tooltip-specific stylings ** *** **/
+
+/* Location pointer placed at the tooltip tip */
+.popup-tip-anchor {
 	height: 0;
 	position: absolute;
-	width: 400px;
+	width: 200px; /* Width maximum of the info window */
 }
 
-.source {
+/* Anchor just above the tip for the tooltip */
+.popup-bubble-anchor {
 	position: absolute;
 	width: 100%;
-	bottom: 8px;
+	bottom: 8px; /* Tip height for the anchor */
 	left: 0;
 }
 
-/* Design the bottom pointer */
-.source::after {
-	content: '';
+/* Draw the actual anchor tip itself */
+.popup-bubble-anchor::after {
+	content: "";
 	position: absolute;
 	top: 0;
 	left: 0;
-	transform: translate( -50%, 0 );
+	transform: translate( -50%, 0 ); /* Position the tip horizontally */
+	/* Create a triangular-shaped tip */
+	/*
+		Go to:
+			https://css-tricks.com/snippets/css/css-triangle/
+		...for more!
+	*/
 	width: 0;
 	height: 0;
-	border-left: 6px solid transparent;
-	border-right: 6px solid transparent;
-	border-top: 8px solid white;
+	/* Using borders for tip height and width */
+	border-left: 6px solid transparent; /* On the left, half of the width */
+	border-right: 6px solid transparent; /* Right half, a 12px total width */
+	border-top: 8px solid white; /* Height of tip is 8px high */
 }
 
-/* Style the tooltip window */
-.market {
+/* Farmer market content itself lies here */
+.popup-bubble-content {
 	position: absolute;
 	top: 0;
 	left: 0;
 	transform: translate( -50%, -100% );
+	/* Style the market content window */
 	background-color: white;
 	padding: 5px;
 	border-radius: 5px;

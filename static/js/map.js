@@ -20,7 +20,6 @@ function getZipCode( ) {
 function viewGeocode( zipcode ) {
 	// Geocode location data based upon zip code input
 	var geo = new google.maps.Geocoder( )
-	console.log( 'ZipCode: ' + zipcode )
 	geo.geocode( {
 			address: zipcode,
 			componentRestrictions: { postalCode: zipcode },
@@ -33,7 +32,7 @@ function viewGeocode( zipcode ) {
 				// Output geocode objects found via zip code
 				console.log( 'Geocode:', geodata[ 0 ] )
 				// Utilize geocode results to render map contents
-				browseMarkets( coords, zipcode )
+				drawMap( coords, zipcode )
 			}
 			else {
 				// Watch for and redirect on geocoding errors
@@ -44,46 +43,46 @@ function viewGeocode( zipcode ) {
 	)
 }
 
-function drawMap( coords, market ) {
+function drawMap( coords, zipcode ) {
 	// Avoid annoying, meaningless console errors
-	if ( coords && market ) {
-		Market( )
+	if ( coords ) {
 		// View location details used for api mapping
+		console.log( 'ZipCode: ' + zipcode )
 		console.log( 'Location:', coords )
 		// Example coordinates for the Seattle area
 		var seattle = new google.maps.LatLng( 47.6029432, -122.332146 )
 		// Instantiate new interactive map from api
 		var map = new google.maps.Map(
 			document.getElementById( 'map' ),
-			{ center: coords, zoom: 10 }
+			{ center: coords, zoom: 11 }
 		)
-		// Design unique toolip marker for found markets
-		market = new Market(
-			market.geometry.location,
-			document.getElementById( 'tooltip' )
-		)
-		console.log( market )
-		market.setMap( map )
+		// Look up farmers' markets in the vicinity
+		browseMarkets( map, coords )
 	}
 }
 
-function browseMarkets( coords, zipcode ) {
-	var locale = new google.maps.Map(
-		document.getElementById( 'map' ),
-		{ center: coords, zoom: 10 }
-	)
+function browseMarkets( map, coords ) {
 	// Map out markets in the area via a search object
-	var seeker = new google.maps.places.PlacesService( locale )
-	// Parameters for searches within he zip code's region
+	var seeker = new google.maps.places.PlacesService( map )
+	// Parameters for searches within the zip code's region
 	var area = { location: coords, radius: '250', keyword: 'market' }
 	var zone = { location: coords, radius: '250', query: 'farmers market' }
+	// Hold generated market tooltips in array for future viewing
+	var farmersMarkets = [ ]
 	// Broken search meant to be based on proximity
 	seeker.nearbySearch( area, function( markets, status ) {
 		if ( status == google.maps.places.PlacesServiceStatus.OK ) {
 			// Nearby farmers markets, but not working yet
 			console.log( 'NEAR Markets:', markets )
-			console.log( markets[ 0 ] )
-			createLocation( markets, locale, coords )
+			// Distribute upon the map market location tooltips
+			for ( var idx = 0; idx < markets.length; idx++ ) {
+				var marketTooltip = createLocation( markets[ idx ], map )
+				farmersMarkets.push( marketTooltip )
+				// Sort through the list of generated tooltips
+				if ( idx + 1 === markets.length ) {
+					console.log( farmersMarkets )
+				}
+			}
 		}
 	} )
 	// Find markets in the region through text searching
@@ -91,22 +90,35 @@ function browseMarkets( coords, zipcode ) {
 		if ( status == google.maps.places.PlacesServiceStatus.OK ) {
 			// Query api for markets and show resulting array
 			console.log( 'TEXT Markets:', markets )
-			console.log( markets[ 0 ] )
-			createLocation( markets, locale, coords )
+			// Read through markets and place them on the map
+			for ( var idx = 0; idx < markets.length; idx++ ) {
+				var marketTooltip = createLocation( markets[ idx ], map )
+				farmersMarkets.push( marketTooltip )
+				// Use previous array to view all created tooltips
+				if ( idx + 1 === markets.length ) {
+					console.log( farmersMarkets )
+				}
+			}
 		}
 	} )
 }
 
-function createLocation( markets, locale, coords ) {
-	if ( markets && locale ) {
-		// Create a new market location identifier on the map
-		/* var location = new google.maps.Marker( {
-			map: map,
-			position: market.geometry.location.toJSON( ),
-			title: market.name
-		} ) */
-		drawMap( coords, markets[ 0 ] )
-	}
+function createLocation( market, map ) {
+	// Make custom marker tooltips class accessible
+	defineMarketClass( )
+	// Create a new market location identifier on the map
+	/* var location = new google.maps.Marker( {
+		map: map,
+		position: market.geometry.location.toJSON( ),
+		title: market.name
+	} ) */
+	// New html element made for displaying the tooltip
+	var element = document.createElement( 'div' ).classList.add( 'content' )
+	// Insert new custom market tooltips onto the map
+	farmerMarket = new Market( market.geometry.location, element )
+	farmerMarket.setMap( map )
+	// Give tooltip back to previous function to log result
+	return farmerMarket
 }
 
 

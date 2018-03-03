@@ -6,24 +6,30 @@
 
 
 
-var Market = function( ) {
+function defineMarketClass( ) {
 	
 	// Market class constructor for new custom tooltips
-	Market = function( coords, element ) {
+	Market = function ( position, content ) {
 		// Designate coordinates for positioning the tooltip
-		this.coords = coords
+		this.position = position
+		// Verify that the tooltip can attach to an element
+		if ( !content ) {
+			content = document.createElement( 'div' )
+			content.classList.add( 'content' )
+			content.innerText = 'FARMERS MARKET'
+		}
 		// Name the tooltip's class to should be applied to it
-		element.classList.add( 'market' )
+		content.classList.add( 'popup-bubble-content' )
 		// Positions the tooltip just above its location pointer
-		var offset = document.createElement( 'div' )
-		offset.classList.add( 'source' )
-		offset.appendChild( element )
+		var pixelOffset = document.createElement( 'div' )
+		pixelOffset.classList.add( 'popup-bubble-anchor' )
+		pixelOffset.appendChild( content )
 		// Generate anchor element to contain tooltip objects
 		this.anchor = document.createElement( 'div' )
-		this.anchor.classList.add( 'anchor' )
-		this.anchor.appendChild( offset )
+		this.anchor.classList.add( 'popup-tip-anchor' )
+		this.anchor.appendChild( pixelOffset )
 		// Optionally stop events from affecting the map
-		this.neutralize( )
+		this.stopEventPropagation( )
 	}
 	
 	
@@ -31,27 +37,27 @@ var Market = function( ) {
 	Market.prototype = Object.create( google.maps.OverlayView.prototype )
 	
 	// Add the tooltip on the map to display markets
-	Market.prototype.instantiate = function( ) {
+	Market.prototype.onAdd = function ( ) {
 		this.getPanes( ).floatPane.appendChild( this.anchor )
 	}
 	
 	// Remove tooltip from the map when finished
-	Market.prototype.terminate = function( ) {
+	Market.prototype.onRemove = function ( ) {
 		if ( this.anchor.parentElement ) {
 			this.anchor.parentElement.removeChild( this.anchor )
 		}
 	}
 	
 	// Calculate necessary tooltip positional specifications
-	Market.prototype.geoposition = function( ) {
+	Market.prototype.draw = function ( ) {
 		// Translate market coordinates into pixel positions
-		var position = this.getProjection( ).fromLatLngToDivPixel( this.coords )
+		var divPosition = this.getProjection( ).fromLatLngToDivPixel( this.position )
 		// Hides tooltip when far from view, but it's broken
-		var display = Math.abs( position.x ) < 4000 && Math.abs( position.y ) < 4000 ? 'block' : 'none'
+		var display = Math.abs( divPosition.x ) < 4000 && Math.abs( divPosition.y ) < 4000 ? 'block' : 'none'
 		// Likely affects the positioning of market tooltips
 		if ( display === 'block' ) {
-			this.anchor.style.left = position.x + 'px'
-			this.anchor.style.top = position.y + 'px'
+			this.anchor.style.left = divPosition.x + 'px'
+			this.anchor.style.top = divPosition.y + 'px'
 		}
 		if ( this.anchor.style.display !== display ) {
 			this.anchor.style.display = display
@@ -59,12 +65,12 @@ var Market = function( ) {
 	}
 	
 	// Stops user behavior from interfering with the map
-	Market.prototype.neutralize = function( ) {
+	Market.prototype.stopEventPropagation = function ( ) {
 		// Just styles the anchor element, apparently...
 		var anchor = this.anchor
 		anchor.style.cursor = 'auto'
 		// Watch out for and ignore the following events
-		var dynamics = [
+		var events = [
 			'click',
 			'dblclick',
 			'contextmenu',
@@ -74,16 +80,12 @@ var Market = function( ) {
 			'pointerdown'
 		]
 		// Interrupts attempts to distort any map objects
-		dynamics.forEach( function( event ) {
-			anchor.addEventListener( event, function( trigger ) {
-				trigger.stopPropagation( )
+		events.forEach( function ( event ) {
+			anchor.addEventListener( event, function ( e ) {
+				e.stopPropagation( )
 			} )
 		} )
 	}
-	
-	
-	// Exports the Market class for use elsewhere
-	return { Market : Market }
 	
 }
 

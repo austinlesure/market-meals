@@ -6,11 +6,9 @@
 	<h3>{{ zipcode }}</h3>
 	<!-- Map element to contain the api map -->
 	<div id="map"></div>
-	<!-- Placeholder for custom market tooltips -->
-	<div id="tooltip">Tooltip</div>
-	<!-- Local script to create and operate api -->
+	<!-- Local scripts to create and operate api -->
 	<script type="text/javascript" src="{{ url_for( 'static', filename='js/map.js' ) }}"></script>
-	<script type="text/javascript" src="{{ url_for( 'static', filename='js/market.js' ) }}"></script>
+	<script type="text/javascript" src="{{ url_for( 'static', filename='js/popup.js' ) }}"></script>
 	<!-- Importing in Google Maps api source -->
 	<script
 		async
