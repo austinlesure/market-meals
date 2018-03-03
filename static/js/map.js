@@ -105,7 +105,7 @@ function browseMarkets( map, coords ) {
 
 function createLocation( market, map ) {
 	// Make custom marker tooltips class accessible
-	defineMarketClass( )
+	ViewClass( )
 	// Create a new market location identifier on the map
 	/* var location = new google.maps.Marker( {
 		map: map,
@@ -115,7 +115,7 @@ function createLocation( market, map ) {
 	// New html element made for displaying the tooltip
 	var element = document.createElement( 'div' ).classList.add( 'content' )
 	// Insert new custom market tooltips onto the map
-	farmerMarket = new Market( market.geometry.location, element )
+	farmerMarket = new View( market.geometry.location, element )
 	farmerMarket.setMap( map )
 	// Give tooltip back to previous function to log result
 	return farmerMarket
