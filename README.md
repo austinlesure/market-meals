@@ -43,12 +43,12 @@ This helps to improve eating habits, allow people to explore local farmers marke
 
 <h3>Tech Stack</h1>
 <ol>
-  <li>VCS: GitHub</li>
-  <li>Hosting instance: Heroku</li>
-  <li>Front End languages: HTML, CSS</li>
-  <li>Scripting languages: Python 3, JavaScript with AJAX</li>
-  <li>Database: PostgreSQL with SQLAlchemy</li>
-  <li>Server framework: Flask</li>
+  <li>Server Framework: Flask</li>
   <li>API: Google Maps API JavaScript</li>
   <li>CSS Framework: Bootstrap</li>
+  <li>Frontend Languages: HTML, CSS, JavaScript with AJAX</li>
+  <li>Backend Languages: Python, SQL</li>
+  <li>Database: PostgreSQL with SQLAlchemy ORM</li>
+  <li>Hosting instance: Heroku</li>
+  <li>VCS: GitHub</li>
 </ol>
