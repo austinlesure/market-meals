@@ -6,7 +6,9 @@
 	
 	<head>
 		<meta charset="UTF-8">
+		<!-- Refactoring css files for more modular, area-specific development -->
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/map.css') }}">
 		<!-- Following looks to see if title is provided, renders default title if not -->
 		{% if title %}
 			<title>{{ title }} - MarketMeals</title>

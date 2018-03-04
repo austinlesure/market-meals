@@ -112,10 +112,8 @@ function createLocation( market, map ) {
 		position: market.geometry.location.toJSON( ),
 		title: market.name
 	} ) */
-	// New html element made for displaying the tooltip
-	var element = document.createElement( 'div' ).classList.add( 'content' )
 	// Insert new custom market tooltips onto the map
-	farmerMarket = new View( market.geometry.location, element )
+	farmerMarket = new View( market.geometry.location, market )
 	farmerMarket.setMap( map )
 	// Give tooltip back to previous function to log result
 	return farmerMarket

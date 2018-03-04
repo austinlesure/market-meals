@@ -9,24 +9,27 @@
 function ViewClass( ) {
 	
 	// View class constructor for new custom views
-	View = function( coords, element ) {
+	View = function( coords, market ) {
 		// Designate coordinates for positioning the view
 		this.coords = coords
-		// Verify that the view can attach to an element
-		if ( !element ) {
-			element = document.createElement( 'div' )
-			element.classList.add( 'content' )
-			element.innerText = 'FARMERS MARKET'
-		}
-		// Name the view's class to should be applied to it
-		element.classList.add( 'popup-bubble-content' )
+		// New html element for displaying view contents
+		var element = document.createElement( 'div' )
+		element.classList.add( 'view' )
+		// Insert farmers market title into an h6 element
+		var title = document.createElement( 'h6' )
+		element.appendChild( title )
+		title.innerText = market.name
+		// Extra address element added view contents
+		/* var address = document.createElement( 'p' )
+		element.appendChild( address )
+		address.innerText = market.formatted_address */
 		// Positions the view just above its location pointer
 		var offset = document.createElement( 'div' )
-		offset.classList.add( 'popup-bubble-anchor' )
+		offset.classList.add( 'spike' )
 		offset.appendChild( element )
 		// Generate anchor element to contain view objects
 		this.anchor = document.createElement( 'div' )
-		this.anchor.classList.add( 'popup-tip-anchor' )
+		this.anchor.classList.add( 'anchor' )
 		this.anchor.appendChild( offset )
 		// Optionally stop events from affecting the map
 		this.stopEventPropagation( )
@@ -88,6 +91,5 @@ function ViewClass( ) {
 	}
 	
 }
-
 
 
