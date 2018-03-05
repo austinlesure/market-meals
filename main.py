@@ -4,8 +4,8 @@
 
 import re
 from app import app, db
-from flask import render_template, redirect, url_for, request, session, flash
-from models import Farmer, Product, Prodcat, Market, Marketday, Recipe, Recipeproduct, FarmerProdcatLink
+from flask import render_template, redirect, url_for, request, session
+from models import Farmer, Market, Category, FarmerProduct
 from hashutils import check_pw_hash
 
 
@@ -56,15 +56,15 @@ def zipcode( zipcode ):
 
 @app.route( '/farm', methods = [ 'GET' ] )
 def farmer( ):
-	prodcat_list = [ ]
+	box = [ ]
 	farmer = request.args.get( 'farmer' )
 	if farmer:
-		farmer = Farmer.query.filter_by( farmer_name = farmer ).first( )
-		prodcatsId = FarmerProdcatLink.query.filter_by( farmer_id = farmer.farmer_id ).all( )
-		for prodcatId in prodcatsId:
-			prodcat = Prodcat.query.filter_by( prodcat_id = prodcatId.prodcat_id ).first( )
-			prodcat_list.append( prodcat )
-		return render_template( 'farm.html', farmer = farmer, prodcatsId = prodcatsId, prodcat_list = prodcat_list )
+		farmer = Farmer.query.filter_by( first_name = farmer ).first( )
+		farpros = FarmerProduct.query.filter_by( farmer_id = farmer.farmer_id ).all( )
+		for farpro in farpros:
+			category = Category.query.filter_by( category_id = category.category_id ).first( )
+			amount.append( category )
+		return render_template( 'farm.html', farmer = farmer, farpros = farpros, amount = amount )
 
 
 @app.route( '/login' )

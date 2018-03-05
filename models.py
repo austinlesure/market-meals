@@ -42,8 +42,8 @@ class Farmer( db.Model ):
 	## Temporarily omitted property snce its table is disabled
 	''' prodcats = db.relationship( 'Prodcat', secondary = 'farmer_prodcat_link' ) '''
 	
-	def __init__( self, first_name, last_name ):
-		self.farmer_name = first_name + last_name
+	def __init__( self, first_name ):
+		self.first_name = first_name
 	
 	def __repr__( self ):
 		return '<Farmer %r' % self.farmer_name
@@ -54,8 +54,8 @@ class FarmerProduct( db.Model ):
 	__tablename__ = 'farmer_products'
 	## Better to use foreign keys as the primary key here
 	''' farmer_product_id = db.Column( db.Integer, primary_key = True ) '''
-	farmer_id = db.Column( db.Integer, primary_key = True, db.ForeignKey( 'farmers.farmer_id' ) )
-	product_id = db.Column( db.Integer, primary_key = True, db.ForeignKey( 'products.product_id' ) )
+	farmer_id = db.Column( db.Integer, db.ForeignKey( 'farmers.farmer_id' ), primary_key = True )
+	product_id = db.Column( db.Integer, db.ForeignKey( 'products.product_id' ), primary_key = True )
 	price = db.Column( db.Integer ) ## NOT NULL
 	available = db.Column( db.Boolean ) ## NOT NULL
 	
@@ -151,7 +151,7 @@ class Market( db.Model ):
 	market_id = db.Column( db.Integer, primary_key = True )
 	name = db.Column( db.String( 255 ) ) ## NOT NULL
 	url = db.Column( db.Text, unique = True ) ## NOT NULL
-	website = db.Columb( db.Text, unique = True ) ## NOT NULL
+	website = db.Column( db.Text, unique = True ) ## NOT NULL
 	address1 = db.Column( db.String( 255 ) ) ## NOT NULL
 	address2 = db.Column( db.String( 255 ) )
 	city = db.Column( db.String( 255 ) ) ## NOT NULL
@@ -201,16 +201,16 @@ class MarketDay( db.Model ):
 
 
 ## Farmers' days at market, a many-to-many relationship
-farmer_days = db.Table(
-	db.Column( 'farmer_id', db.Integer, primary_key = True, db.ForeignKey( 'farmers.farmer_id' ) ),
-	db.Column( 'market_day_id', db.Integer, primary_key = True, db.ForeignKey( 'market_days.market_day_id' ) )
+farmer_days = db.Table( 'farmer_days',
+	db.Column( 'farmer_id', db.Integer, db.ForeignKey( 'farmers.farmer_id' ), primary_key = True ),
+	db.Column( 'market_day_id', db.Integer, db.ForeignKey( 'market_days.market_day_id' ), primary_key = True )
 )
 
 
 ## A many-to-many table for which day products are sold
-product_days = db.Table(
-	db.Column( 'product_id', db.Integer, primary_key = True, db.ForeignKey( 'products.product_id' ) ),
-	db.Column( 'market_day_id', db.Integer, primary_key = True, db.ForeignKey( 'market_days.market_day_id' ) )
+product_days = db.Table( 'product_days',
+	db.Column( 'product_id', db.Integer, db.ForeignKey( 'products.product_id' ), primary_key = True ),
+	db.Column( 'market_day_id', db.Integer, db.ForeignKey( 'market_days.market_day_id' ), primary_key = True )
 )
 
 
