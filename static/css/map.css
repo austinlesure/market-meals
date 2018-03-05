@@ -23,7 +23,11 @@
 .anchor {
 	height: 0;
 	position: absolute;
-	width: 400px; /* Width maximum of the info window */
+	width: 300px; /* Width maximum of the info window */
+}
+
+.anchor:hover {
+	z-index: 10;
 }
 
 /* Anchor just above the tip for the tooltip */
@@ -80,8 +84,26 @@
 	margin: 0;
 }
 
-.view p {
+.extra {
+	position: absolute;
+	text-align: center;
+	background-color: white;
+	border-radius: 20px;
+	height: 250px;
+	width: 100%;
+	transform: translate( -50%, -100% );
+	box-shadow: 0px 2px 10px 1px rgba( 0, 0, 0, 0.5 );
+}
+
+.extra h3 {
+	margin: 15px 10px 10px;
+}
+
+.extra p {
+	font-size: 1.25em;
+	padding: 0 15px;
 	margin: 0;
 }
+
 
 

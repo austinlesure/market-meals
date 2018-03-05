@@ -68,23 +68,23 @@ function browseMarkets( map, coords ) {
 	var area = { location: coords, radius: '250', keyword: 'market' }
 	var zone = { location: coords, radius: '250', query: 'farmers market' }
 	// Hold generated market tooltips in array for future viewing
-	var farmersMarkets = [ ]
+	var views = [ ]
 	// Broken search meant to be based on proximity
-	seeker.nearbySearch( area, function( markets, status ) {
+	/* seeker.nearbySearch( area, function( markets, status ) {
 		if ( status == google.maps.places.PlacesServiceStatus.OK ) {
 			// Nearby farmers markets, but not working yet
 			console.log( 'NEAR Markets:', markets )
 			// Distribute upon the map market location tooltips
 			for ( var idx = 0; idx < markets.length; idx++ ) {
-				var marketTooltip = createLocation( markets[ idx ], map )
-				farmersMarkets.push( marketTooltip )
+				var view = createLocation( markets[ idx ], map )
+				views.push( view )
 				// Sort through the list of generated tooltips
 				if ( idx + 1 === markets.length ) {
-					console.log( farmersMarkets )
+					console.log( views )
 				}
 			}
 		}
-	} )
+	} ) */
 	// Find markets in the region through text searching
 	seeker.textSearch( zone, function( markets, status ) {
 		if ( status == google.maps.places.PlacesServiceStatus.OK ) {
@@ -92,11 +92,11 @@ function browseMarkets( map, coords ) {
 			console.log( 'TEXT Markets:', markets )
 			// Read through markets and place them on the map
 			for ( var idx = 0; idx < markets.length; idx++ ) {
-				var marketTooltip = createLocation( markets[ idx ], map )
-				farmersMarkets.push( marketTooltip )
+				var view = createLocation( markets[ idx ], map )
+				views.push( view )
 				// Use previous array to view all created tooltips
 				if ( idx + 1 === markets.length ) {
-					console.log( farmersMarkets )
+					console.log( views )
 				}
 			}
 		}

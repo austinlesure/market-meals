@@ -19,10 +19,6 @@ function ViewClass( ) {
 		var title = document.createElement( 'h6' )
 		element.appendChild( title )
 		title.innerText = market.name
-		// Extra address element added view contents
-		/* var address = document.createElement( 'p' )
-		element.appendChild( address )
-		address.innerText = market.formatted_address */
 		// Positions the view just above its location pointer
 		var offset = document.createElement( 'div' )
 		offset.classList.add( 'spike' )
@@ -33,11 +29,14 @@ function ViewClass( ) {
 		this.anchor.appendChild( offset )
 		// Optionally stop events from affecting the map
 		this.stopEventPropagation( )
+		// Make expandable panels for sharing extra info
+		this.expandView( market, element, offset )
 	}
 	
 	
 	// Use api's OverlayView for using custom markers
 	View.prototype = Object.create( google.maps.OverlayView.prototype )
+	
 	
 	// Add the view on the map to display markets
 	View.prototype.onAdd = function( ) {
@@ -77,7 +76,6 @@ function ViewClass( ) {
 			'click',
 			'dblclick',
 			'contextmenu',
-			'wheel',
 			'mousedown',
 			'touchstart',
 			'pointerdown'
@@ -90,6 +88,46 @@ function ViewClass( ) {
 		} )
 	}
 	
+	// Open larger view frame to share additional info
+	View.prototype.expandView = function( market, view, offset ) {
+		// Create enlarged view from activation
+		var extra = document.createElement( 'div' )
+		extra.classList.add( 'extra' )
+		// Title of farmers market inserted into frame
+		var title = document.createElement( 'h3' )
+		extra.appendChild( title )
+		title.innerText = market.name
+		// Market address element added to larger view
+		var address = document.createElement( 'p' )
+		extra.appendChild( address )
+		address.innerText = market.formatted_address
+		// Locally saved preset variables of view object
+		this.offset = offset
+		this.view = view
+		// Activation toggle to expose a larger frame
+		view.addEventListener( 'click', function( ) {
+			var open = document.getElementsByClassName( 'extra' )[ 0 ]
+			if ( open ) {
+				// Exit last opened window for a new one
+				open.parentElement.firstChild.style.display = 'block'
+				open.parentElement.parentElement.style.zIndex = '0'
+				open.parentElement.removeChild( open )
+			}
+			// Won't restore if removed, so modify display
+			view.style.display = 'none'
+			offset.appendChild( extra )
+			offset.parentElement.style.zIndex = '15'
+		} )
+		// Deactivation toggle for the larger info window
+		extra.addEventListener( 'click', function( ) {
+			view.style.display = 'block'
+			offset.removeChild( extra )
+			offset.appendChild( view )
+			offset.parentElement.style.zIndex = '0'
+		} )
+	}
+	
 }
+
 
 
