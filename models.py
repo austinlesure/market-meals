@@ -30,6 +30,24 @@ class Farmer( db.Model ):
 		return '<Farmer %r' % self.farmer_name
 
 
+class FarmerProduct( db.Model ):
+	__table_args__ = { 'extend_existing': True }
+	farmerproduct_id = db.Column( db.Integer, primary_key = True )
+	farmerproduct_avail = db.Column( db.Boolean, unique = False)
+	farmer_id = db.Column( db.Integer, db.ForeignKey( 'Farmer.farmer_id' ) )
+	product_id = db.Column( db.Integer, db.ForeignKey( 'Product.product_id' ) )
+	marketday_id = db.Column( db.Integer, db.ForeignKey( 'Marketday.marketday_id' ) )
+	
+	def __init__( self, farmerproduct_avail, owner_farmer, owner_product, owner_marketday ):
+		self.farmerproduct_avail = farmerproduct_avail
+		self.owner_farmer = owner_farmer
+		self.owner_product = owner_product
+		self.owner_marketday = owner_marketday
+	
+	def __repr__( self ):
+		return '<FarmerProduct %r' % self.farmerproduct_avail
+
+
 class Product( db.Model ):
 	__table_args__ = { 'extend_existing': True }
 	__tablename__ = 'product'
