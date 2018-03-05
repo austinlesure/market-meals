@@ -117,6 +117,16 @@ function ViewClass( ) {
 			view.style.display = 'none'
 			offset.appendChild( extra )
 			offset.parentElement.style.zIndex = '15'
+			// View enlarged views on top of all others
+			offset.parentElement.onmouseenter = function( ) {
+				offset.parentElement.style.zIndex = '15'
+			}
+			offset.parentElement.onmouseover = function( ) {
+				offset.parentElement.style.zIndex = '15'
+			}
+			offset.parentElement.onmouseleave = function( ) {
+				offset.parentElement.style.zIndex = '15'
+			}
 		} )
 		// Deactivation toggle for the larger info window
 		extra.addEventListener( 'click', function( ) {
@@ -124,6 +134,16 @@ function ViewClass( ) {
 			offset.removeChild( extra )
 			offset.appendChild( view )
 			offset.parentElement.style.zIndex = '0'
+			// Hover over behavior for seeing views easier
+			offset.parentElement.onmouseenter = function( ) {
+				offset.parentElement.style.zIndex = '10'
+			}
+			offset.parentElement.onmouseover = function( ) {
+				offset.parentElement.style.zIndex = '10'
+			}
+			offset.parentElement.onmouseleave = function( ) {
+				offset.parentElement.style.zIndex = '0'
+			}
 		} )
 	}
 	
