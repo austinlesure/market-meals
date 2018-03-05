@@ -7,11 +7,20 @@ from app import db
 
 
 
+class FarmerProdcatLink( db.Model ):
+	__table_args__ = { 'extend_existing': True }
+	__tablename__ = 'farmer_prodcat_link'
+	farmer_id = db.Column( db.Integer, db.ForeignKey( 'farmer.farmer_id' ), primary_key = True )
+	prodcat_id = db.Column( db.Integer, db.ForeignKey( 'prodcat.prodcat_id' ), primary_key = True )
+
+
 class Farmer( db.Model ):
 	__table_args__ = { 'extend_existing': True }
+	__tablename__ = 'farmer'
 	farmer_id = db.Column( db.Integer, primary_key = True )
 	farmer_name = db.Column( db.String( 255 ) )
 	marketday_id = db.relationship( 'Marketday', backref = 'owner_farmer' )
+	prodcats = db.relationship( 'Prodcat', secondary = 'farmer_prodcat_link' )
 	
 	def __init__( self, farmer_name ):
 		self.farmer_name = farmer_name
@@ -19,8 +28,10 @@ class Farmer( db.Model ):
 	def __repr__( self ):
 		return '<Farmer %r' % self.farmer_name
 
+
 class Product( db.Model ):
 	__table_args__ = { 'extend_existing': True }
+	__tablename__ = 'product'
 	product_id = db.Column( db.Integer, primary_key = True )
 	product_name = db.Column( db.String( 255 ) )
 	prodcat_id = db.Column( db.Integer, db.ForeignKey( 'prodcat.prodcat_id' ) )
@@ -34,11 +45,14 @@ class Product( db.Model ):
 	def __repr__( self ):
 		return '<Product %r' % self.product_name
 
+
 class Prodcat( db.Model ):
 	__table_args__ = { 'extend_existing': True }
+	__tablename__ = 'prodcat'
 	prodcat_id = db.Column( db.Integer, primary_key = True )
 	prodcat_name = db.Column( db.String( 255 ) )
 	product = db.relationship( 'Product', backref = 'owner_prodcat' )
+	farmers = db.relationship( 'Farmer', secondary = 'farmer_prodcat_link' )
 	
 	def __init__( self, prodcat_name ):
 		self.prodcat_name = prodcat_name
@@ -46,8 +60,10 @@ class Prodcat( db.Model ):
 	def __repr__( self ):
 		return '<Prodcat %r' % self.prodcat_name
 
+
 class Market( db.Model ):
 	__table_args__ = { 'extend_existing': True }
+	__tablename__ = 'market'
 	market_id = db.Column( db.Integer, primary_key = True )
 	market_name = db.Column( db.String( 255 ) )
 	market_address1 = db.Column( db.String( 255 ) )
@@ -68,8 +84,10 @@ class Market( db.Model ):
 	def __repr__( self ):
 		return '<Market %r' % self.market_name
 
+
 class Marketday( db.Model ):
 	__table_args__ = { 'extend_existing': True }
+	__tablename__ = 'marketday'
 	marketday_id = db.Column( db.Integer, primary_key = True )
 	marketday_date = db.Column( db.DateTime ) #, default=datetime.utcnow
 	market_id = db.Column( db.Integer, db.ForeignKey( 'market.market_id' ) )
@@ -85,8 +103,10 @@ class Marketday( db.Model ):
 	def __repr__( self ):
 		return '<Marketday %r' % self.marketday_date
 
+
 class Recipe( db.Model ):
 	__table_args__ = { 'extend_existing': True }
+	__tablename__ = 'recipe'
 	recipe_id = db.Column( db.Integer, primary_key = True )
 	recipe_name = db.Column( db.String( 255 ) )
 	recipe_directions = db.Column( db.Text )
@@ -99,8 +119,10 @@ class Recipe( db.Model ):
 	def __repr__( self ):
 		return '<Recipe %r' % self.recipe_name
 
+
 class Recipeproduct( db.Model ):
 	__table_args__ = { 'extend_existing': True }
+	__tablename__ = 'recipeproduct'
 	recipeproduct_id = db.Column( db.Integer, primary_key = True )
 	recipeproduct_amount_required = db.Column( db.String( 255 ) )
 	recipe_id = db.Column( db.Integer, db.ForeignKey( 'recipe.recipe_id' ) )

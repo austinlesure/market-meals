@@ -5,14 +5,20 @@
 import re
 from app import app, db
 from flask import render_template, redirect, url_for, request, session, flash
-from models import Farmer, Product, Prodcat, Market, Marketday, Recipe, Recipeproduct
+from models import Farmer, Product, Prodcat, Market, Marketday, Recipe, Recipeproduct, FarmerProdcatLink
 from hashutils import check_pw_hash
 
 
 
 @app.route( '/', methods = [ 'GET', 'POST' ] )
 def index( ):
-	return render_template( 'index.html' )
+	if request.method == 'GET':
+		return render_template( 'index.html' )
+	## Unused method, but temporary placement for now
+	elif request.method == 'POST':
+		zipcode = request.form[ 'zipcode' ]
+		markets = Market.query.filter_by( market_zip = zipcode )
+		return render_template( 'market.html', markets = markets )
 
 
 @app.route( '/about', methods = [ 'GET' ] )
@@ -48,6 +54,19 @@ def zipcode( zipcode ):
 		return redirect( '/' )
 
 
+@app.route( '/farm', methods = [ 'GET' ] )
+def farmer( ):
+	prodcat_list = [ ]
+	farmer = request.args.get( 'farmer' )
+	if farmer:
+		farmer = Farmer.query.filter_by( farmer_name = farmer ).first( )
+		prodcatsId = FarmerProdcatLink.query.filter_by( farmer_id = farmer.farmer_id ).all( )
+		for prodcatId in prodcatsId:
+			prodcat = Prodcat.query.filter_by( prodcat_id = prodcatId.prodcat_id ).first( )
+			prodcat_list.append( prodcat )
+		return render_template( 'farm.html', farmer = farmer, prodcatsId = prodcatsId, prodcat_list = prodcat_list )
+
+
 @app.route( '/login' )
 def login( ):
 	return render_template( 'login.html' )
@@ -64,10 +83,6 @@ def customer( ):
 def farm_user( ):
 	return render_template( 'farmer_user.html' )
 
-@app.route( '/farm' )
-def farmer( ):
-	return render_template( 'farm.html' )
-
 @app.route( '/market' )
 def market( ):
 	return render_template( 'market.html' )
@@ -80,6 +95,5 @@ def recipe( ):
 
 if __name__ == '__main__':
 	app.run( )
-
 
 

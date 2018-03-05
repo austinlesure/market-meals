@@ -3,6 +3,18 @@
 
 
 {% block content %}
+	<h1>{{ farmer.farmer_name }}</h1>
+
+	{% for prodcat in prodcat_list %}
+		<h3>{{ prodcat.prodcat_name }}</h3>
+		
+		{% for product in prodcat.product %}
+			<p>{{ product.product_name }}</p>
+		{% endfor %}
+		
+		<hr />
+	{% endfor %}
+
 	<h1>farm.html</h1>
 {% endblock %}
 

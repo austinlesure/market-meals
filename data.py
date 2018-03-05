@@ -32,4 +32,22 @@ def query( ):
 	return data.farmer_name
 
 
+def get_farmers( ):
+	return Farmer.query.filter_by( ).all( )
+
+def get_markets( ):
+	return Market.query.filter_by( ).all( )
+
+def get_recipes( ):
+	return Recipe.query.filter_by( ).all( )
+
+def get_prodcats( ):
+	return Prodcat.query.filter_by( ).all( )
+
+def get_farmer_prodcat_link( ):
+	return FarmerProdcatLink.query.filter_by( ).all( )
+
+def get_products( ):
+	return Product.query.filter_by( ).all( )
+
 
