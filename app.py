@@ -37,7 +37,7 @@ app.config[ 'SQLALCHEMY_DATABASE_URI' ] = os.environ[ 'DATABASE_URL' ]
 	'DATABASE_URL',
 	'postgresql+psycopg2://' + 'user' + ':' + 'password' + '@' + 'host' + ':' + 'port' + '/' + 'dbname'
 ) '''
-app.config[ 'SQLALCHEMY_ECHO' ] = True
+app.config[ 'SQLALCHEMY_ECHO' ] = False
 
 app.secret_key = 'MarKetMeaLSiSAMAzinG'
 

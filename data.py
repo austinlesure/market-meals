@@ -2,9 +2,9 @@
 
 
 
+from app import db
 from flask import Blueprint, request
 from models import Farmer
-from app import db
 
 
 
@@ -24,11 +24,11 @@ def post( ):
 @data.route( '/query', methods = [ 'GET', 'POST' ] )
 def query( ):
 	## Insert a new database entry
-	bob = Farmer( first_name = 'Bob' )
+	bob = Farmer( first_name = 'Bob', last_name = 'Bobbson' )
 	db.session.add( bob )
 	db.session.commit( )
 	## Query new entry and return it
-	data = Farmer.query.filter_by( first_name = 'Bob' ).first( )
+	data = db.session.query( Farmer ).filter_by( first_name = 'Bob' ).first( )
 	return data.first_name
 
 
