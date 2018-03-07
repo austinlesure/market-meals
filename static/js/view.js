@@ -110,7 +110,7 @@ function ViewClass( ) {
 		// Fetch reverse geocode market data before rerouting
 		visit.addEventListener( 'click', function( ) {
 			console.log( 'Reverse me!' )
-			reverseGeocode( market )
+			reverseGeocode( new google.maps.Geocoder( ), market )
 		} )
 		// Prepare event listeners onto larger view element
 		this.expandView( extra, retract, view, offset )

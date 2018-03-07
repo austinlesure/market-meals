@@ -6,28 +6,22 @@
 
 
 
-function viewGeocode( zipcode ) {
+function viewGeocode( geocode, zipcode ) {
 	// Stifle meaningless unfound reference console error
 	if ( window.location.pathname === '/' + zipcode ) {
-		// Geocode location data based upon zip code input
-		var geo = new google.maps.Geocoder( )
-		geo.geocode( {
+		geocode.geocode( {
 				address: zipcode,
 				componentRestrictions: { postalCode: zipcode },
 				region: '021'
 			},
 			function( geodata, feedback ) {
 				if ( feedback === 'OK' ) {
-					// Transform location into json for portability
 					var coords = geodata[ 0 ].geometry.location.toJSON( )
-					// Output geocode objects found via zip code
 					console.log( 'Geocode:', geodata[ 0 ] )
-					// Utilize geocode results to render map contents
 					drawMap( coords, zipcode )
 				}
 				else {
-					// Watch for and redirect on geocoding errors
-					console.error( 'There was a problem!  ' + feedback )
+					console.error( 'There was a problem trying to geocode!  ' + feedback )
 					window.location.pathname = ''
 				}
 			}
@@ -35,9 +29,23 @@ function viewGeocode( zipcode ) {
 	}
 }
 
-function reverseGeocode( market ) {
+function reverseGeocode( geocode, market ) {
 	// Inspect the received market data that will be used
 	console.log( market )
+	// Find the location details based on the market's id
+	geocode.geocode( {
+			placeId: market.place_id
+		},
+		function( geodata, feedback ) {
+			if ( feedback === 'OK' ) {
+				console.log( geodata )
+			}
+			else {
+				console.error( 'An error occurred while reverse geocoding!  ' + feedback )
+			}
+		}
+	)
 }
+
 
 

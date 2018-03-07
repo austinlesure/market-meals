@@ -6,15 +6,18 @@ window.addEventListener( 'load', getZipCode )
 
 
 function getZipCode( ) {
-	var http = new XMLHttpRequest( )
-	http.onreadystatechange = function( ) {
-		if ( http.readyState === XMLHttpRequest.DONE && http.status === 200 ) {
-			// Search for geocode data that matches zip code
-			viewGeocode( http.responseText )
+	// Omit irrelevent console log error harassment
+	if ( document.getElementById( 'map' ) ) {
+		var http = new XMLHttpRequest( )
+		http.onreadystatechange = function( ) {
+			if ( http.readyState === XMLHttpRequest.DONE && http.status === 200 ) {
+				// Search geocode data that matches zip code
+				viewGeocode( new google.maps.Geocoder( ), http.responseText )
+			}
 		}
+		http.open( 'GET', '/data' )
+		http.send( )
 	}
-	http.open( 'GET', '/data' )
-	http.send( )
 }
 
 function drawMap( coords, zipcode ) {
@@ -92,6 +95,5 @@ function createLocation( market, map ) {
 	// Give tooltip back to previous function to log result
 	return farmerMarket
 }
-
 
 
