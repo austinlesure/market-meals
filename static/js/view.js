@@ -30,7 +30,7 @@ function ViewClass( ) {
 		// Optionally stop events from affecting the map
 		this.stopEventPropagation( )
 		// Make expandable panels for sharing extra info
-		this.expandView( market, element, offset )
+		this.buildElements( market, element, offset )
 	}
 	
 	
@@ -88,19 +88,35 @@ function ViewClass( ) {
 		} )
 	}
 	
-	// Open larger view frame to share additional info
-	View.prototype.expandView = function( market, view, offset ) {
-		// Create enlarged view from activation
+	// Insert enlarged view frames into the html document
+	View.prototype.buildElements = function( market, view, offset ) {
+		// Create enlarged view to appear via activation
 		var extra = document.createElement( 'div' )
 		extra.classList.add( 'extra' )
-		// Title of farmers market inserted into frame
+		// Title header of farmers market inserted into frame
+		var head = document.createElement( 'div' )
+		extra.appendChild( head )
 		var title = document.createElement( 'h3' )
-		extra.appendChild( title )
+		head.appendChild( title )
 		title.innerText = market.name
+		// Exits the expanded view and shrink it back down
+		var retract = document.createElement( 'button' )
+		head.appendChild( retract )
+		retract.innerText = 'X'
 		// Market address element added to larger view
 		var address = document.createElement( 'p' )
 		extra.appendChild( address )
 		address.innerText = market.formatted_address
+		// Go to the selected market's details page
+		var visit = document.createElement( 'a' )
+		extra.appendChild( visit )
+		visit.innerText = 'View This Market'
+		// Prepare event listeners onto larger view element
+		this.expandView( extra, retract, view, offset )
+	}
+	
+	// Open larger view frame to share additional info
+	View.prototype.expandView = function( extra, retract, view, offset ) {
 		// Locally saved preset variables of view object
 		this.offset = offset
 		this.view = view
@@ -110,40 +126,18 @@ function ViewClass( ) {
 			if ( open ) {
 				// Exit last opened window for a new one
 				open.parentElement.firstChild.style.display = 'block'
-				open.parentElement.parentElement.style.zIndex = '0'
 				open.parentElement.removeChild( open )
 			}
 			// Won't restore if removed, so modify display
 			view.style.display = 'none'
 			offset.appendChild( extra )
-			offset.parentElement.style.zIndex = '15'
-			// View enlarged views on top of all others
-			offset.parentElement.onmouseenter = function( ) {
-				offset.parentElement.style.zIndex = '15'
-			}
-			offset.parentElement.onmouseover = function( ) {
-				offset.parentElement.style.zIndex = '15'
-			}
-			offset.parentElement.onmouseleave = function( ) {
-				offset.parentElement.style.zIndex = '15'
-			}
 		} )
 		// Deactivation toggle for the larger info window
-		extra.addEventListener( 'click', function( ) {
+		retract.addEventListener( 'click', function( ) {
 			view.style.display = 'block'
 			offset.removeChild( extra )
 			offset.appendChild( view )
-			offset.parentElement.style.zIndex = '0'
-			// Hover over behavior for seeing views easier
-			offset.parentElement.onmouseenter = function( ) {
-				offset.parentElement.style.zIndex = '10'
-			}
-			offset.parentElement.onmouseover = function( ) {
-				offset.parentElement.style.zIndex = '10'
-			}
-			offset.parentElement.onmouseleave = function( ) {
-				offset.parentElement.style.zIndex = '0'
-			}
+			console.log( view )
 		} )
 	}
 	

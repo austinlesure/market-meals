@@ -13,6 +13,7 @@ from datetime import datetime, timezone
 Base = db.Model
 
 
+
 ## Unsure of the exact purpose of this table
 ''' class FarmerProdcatLink( Base ):
 	__table_args__ = { 'extend_existing': True }
@@ -308,6 +309,5 @@ class Ingredient( Base ):
 	
 	def __repr__( self ):
 		return '<Ingredient %r' % self.ingredient_quantity
-
 
 

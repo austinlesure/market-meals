@@ -54,6 +54,11 @@ def zipcode( zipcode ):
 		return redirect( '/' )
 
 
+@app.route( '/market' )
+def market( ):
+	return render_template( 'market.html' )
+
+
 @app.route( '/farm', methods = [ 'GET' ] )
 def farmer( ):
 	box = [ ]
@@ -83,10 +88,6 @@ def customer( ):
 def farm_user( ):
 	return render_template( 'farmer_user.html' )
 
-@app.route( '/market' )
-def market( ):
-	return render_template( 'market.html' )
-
 @app.route( '/recipe' )
 def recipe( ):
 	return render_template( 'recipe.html' )
@@ -95,5 +96,6 @@ def recipe( ):
 
 if __name__ == '__main__':
 	app.run( )
+
 
 

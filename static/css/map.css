@@ -6,24 +6,12 @@
 	height: 600px;
 }
 
-/* #item {
-	position: absolute;
-	display: inline-block;
-	text-align: center;
-	top: 450px;
-	left: 50%;
-	right: 0;
-	margin: 0 auto;
-} */
-
-
-/** *** ** Map tooltip-specific stylings ** *** **/
-
 /* Location pointer placed at the tooltip tip */
 .anchor {
-	height: 0;
 	position: absolute;
-	width: 300px; /* Width maximum of the info window */
+	height: 0;
+	/* Width maximum of the mini view */
+	width: 300px;
 }
 
 .anchor:hover {
@@ -33,9 +21,10 @@
 /* Anchor just above the tip for the tooltip */
 .spike {
 	position: absolute;
-	width: 100%;
-	bottom: 12px; /* Tip height for the anchor */
 	left: 0;
+	/* Tip height for the anchor */
+	bottom: 12px;
+	width: 100%;
 }
 
 /* Draw the actual anchor tip itself */
@@ -44,42 +33,44 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-	transform: translate( -50%, 0 ); /* Position the tip horizontally */
+	width: 0;
+	height: 0;
+	/* Height of tip is 8px high */
+	border-top: 8px solid white;
+	/* On the left, half of the width */
+	border-left: 6px solid transparent;
+	/* Right half, a 12px total width */
+	border-right: 6px solid transparent;
+	/* Position the tip horizontally */
+	transform: translate( -50%, 0 );
 	/* Create a triangular-shaped tip */
 	/*
 		Go to:
 			https://css-tricks.com/snippets/css/css-triangle/
 		...for more!
 	*/
-	width: 0;
-	height: 0;
-	/* Using borders for tip height and width */
-	border-left: 6px solid transparent; /* On the left, half of the width */
-	border-right: 6px solid transparent; /* Right half, a 12px total width */
-	border-top: 8px solid white; /* Height of tip is 8px high */
 }
 
 /* Farmer market content itself lies here */
 .view {
 	position: absolute;
+	font-family: sans-serif;
 	text-align: center;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+	overflow-y: auto;
 	top: 0;
 	left: 0;
-	transform: translate( -50%, -100% );
 	/* Style the market content window */
 	background-color: white;
-	padding: 5px;
 	border-radius: 25px;
-	font-family: sans-serif;
-	overflow-y: auto;
+	box-shadow: 0 2px 10px 1px rgba( 0, 0, 0, 0.5 );
 	max-height: 60px;
-	/* height: 25px; */
 	min-width: 40px;
-	box-shadow: 0px 2px 10px 1px rgba( 0, 0, 0, 0.5 );
+	padding: 5px;
+	transform: translate( -50%, -100% );
 }
 
 .view h6 {
@@ -89,25 +80,68 @@
 }
 
 .extra {
+	z-index: 15;
 	position: absolute;
 	text-align: center;
 	background-color: white;
 	border-radius: 20px;
-	height: 250px;
-	width: 100%;
+	min-height: 150px;
+	width: 400px;
 	transform: translate( -50%, -100% );
-	box-shadow: 0px 2px 10px 1px rgba( 0, 0, 0, 0.5 );
+	box-shadow: 0 2px 10px 1px rgba( 0, 0, 0, 0.5 );
 }
 
 .extra h3 {
-	margin: 15px 10px 10px;
+	margin: 25px 40px 10px;
+}
+
+.extra button {
+	position: absolute;
+	font-size: 1.5em;
+	text-align: center;
+	background: transparent;
+	color: #9e9e9e;
+	border: 0;
+	top: 10px;
+	right: 10px;
+	padding: 2px 4px;
+	transform: scale( 1.25, 1 );
+}
+
+.extra button:hover {
+	background: #dedede;
+	color: #757575;
 }
 
 .extra p {
 	font-size: 1.25em;
-	padding: 0 15px;
-	margin: 0;
+	margin: 0 25px 75px;
 }
 
+.extra a {
+	position: absolute;
+	font-size: 1.5em;
+	background: #a5ef8a;
+	border-radius: 5px;
+	left: 0;
+	right: 0;
+	bottom: 15px;
+	padding: 10px 0;
+	margin: 0 100px;
+}
+
+.extra::after {
+	content: "";
+	position: absolute;
+	border-top: 8px solid white;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	left: 0;
+	right: 0;
+	bottom: -8px;
+	height: 0;
+	width: 0;
+	margin: 0 auto;
+}
 
 
