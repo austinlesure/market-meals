@@ -2,10 +2,6 @@
 
 
 
-// Preview customized market popup previews using a View class
-
-
-
 function ViewClass( ) {
 	
 	// View class constructor for new custom views
@@ -111,6 +107,11 @@ function ViewClass( ) {
 		var visit = document.createElement( 'a' )
 		extra.appendChild( visit )
 		visit.innerText = 'View This Market'
+		// Fetch reverse geocode market data before rerouting
+		visit.addEventListener( 'click', function( ) {
+			console.log( 'Reverse me!' )
+			reverseGeocode( market )
+		} )
 		// Prepare event listeners onto larger view element
 		this.expandView( extra, retract, view, offset )
 	}
@@ -137,7 +138,6 @@ function ViewClass( ) {
 			view.style.display = 'block'
 			offset.removeChild( extra )
 			offset.appendChild( view )
-			console.log( view )
 		} )
 	}
 	

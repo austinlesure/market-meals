@@ -17,32 +17,6 @@ function getZipCode( ) {
 	http.send( )
 }
 
-function viewGeocode( zipcode ) {
-	// Geocode location data based upon zip code input
-	var geo = new google.maps.Geocoder( )
-	geo.geocode( {
-			address: zipcode,
-			componentRestrictions: { postalCode: zipcode },
-			region: '021'
-		},
-		function( geodata, feedback ) {
-			if ( feedback == 'OK' ) {
-				// Transform location into json for portability
-				var coords = geodata[ 0 ].geometry.location.toJSON( )
-				// Output geocode objects found via zip code
-				console.log( 'Geocode:', geodata[ 0 ] )
-				// Utilize geocode results to render map contents
-				drawMap( coords, zipcode )
-			}
-			else {
-				// Watch for and redirect on geocoding errors
-				console.error( 'There was a problem!  ' + feedback )
-				window.location.pathname = ''
-			}
-		}
-	)
-}
-
 function drawMap( coords, zipcode ) {
 	// Avoid annoying, meaningless console errors
 	if ( coords ) {
@@ -65,7 +39,7 @@ function browseMarkets( map, coords ) {
 	// Map out markets in the area via a search object
 	var seeker = new google.maps.places.PlacesService( map )
 	// Parameters for searches within the zip code's region
-	var area = { location: coords, radius: '250', keyword: 'market' }
+	/* var area = { location: coords, radius: '250', keyword: 'market' } */
 	var zone = { location: coords, radius: '250', query: 'farmers market' }
 	// Hold generated market tooltips in array for future viewing
 	var views = [ ]
