@@ -41,8 +41,8 @@ class Farmer( Base ):
 	city = db.Column( db.String( 40 ) )
 	state = db.Column( db.String( 2 ) )
 	zip_code = zip_code = db.Column( db.Integer( 5 ) ) '''
-	joined_at = db.Column( db.DateTime( timezone = True ), nullable = False, default = datetime.now( timezone.utc ) )
-	updated_at = db.Column( db.DateTime( timezone = True ), onupdate = datetime.now( timezone.utc ) )
+	joined_at = db.Column( db.DateTime( timezone = True ), nullable = False, default = lambda : datetime.now( timezone.utc ) )
+	updated_at = db.Column( db.DateTime( timezone = True ), onupdate = lambda : datetime.now( timezone.utc ) )
 	
 	farm_id = db.Column( db.Integer, db.ForeignKey( 'farms.farm_id' ) )
 	
@@ -93,8 +93,8 @@ class Product( Base ):
 	__tablename__ = 'products'
 	product_id = db.Column( db.Integer, autoincrement = True, primary_key = True )
 	name = db.Column( db.String( 40 ), nullable = False )
-	created_at = db.Column( db.DateTime( timezone = True ), nullable = False, default = datetime.now( timezone.utc ) )
-	updated_at = db.Column( db.DateTime( timezone = True ), onupdate = datetime.now( timezone.utc ) )
+	created_at = db.Column( db.DateTime( timezone = True ), nullable = False, default = lambda : datetime.now( timezone.utc ) )
+	updated_at = db.Column( db.DateTime( timezone = True ), onupdate = lambda : datetime.now( timezone.utc ) )
 	
 	category_id = db.Column( db.Integer, db.ForeignKey( 'categories.category_id' ) )
 	
@@ -118,8 +118,8 @@ class Category( Base ):
 	__tablename__ = 'categories'
 	category_id = db.Column( db.Integer, autoincrement = True, primary_key = True )
 	category = db.Column( db.String( 255 ) )
-	created_at = db.Column( db.DateTime( timezone = True ), nullable = False, default = datetime.now( timezone.utc ) )
-	updated_at = db.Column( db.DateTime( timezone = True ), onupdate = datetime.now( timezone.utc ) )
+	created_at = db.Column( db.DateTime( timezone = True ), nullable = False, default = lambda : datetime.now( timezone.utc ) )
+	updated_at = db.Column( db.DateTime( timezone = True ), onupdate = lambda : datetime.now( timezone.utc ) )
 	
 	products = db.relationship( 'Product', backref = 'categories' )
 	## Not sure what db.relationship this table has with farmers
@@ -144,8 +144,8 @@ class Farm( Base ):
 	city = db.Column( db.String( 40 ) ) ## NOT NULL
 	state = db.Column( db.String( 2 ) ) ## NOT NULL
 	zip_code = zip_code = db.Column( db.Integer )
-	created_at = db.Column( db.DateTime( timezone = True ), nullable = False, default = datetime.now( timezone.utc ) )
-	updated_at = db.Column( db.DateTime( timezone = True ), onupdate = datetime.now( timezone.utc ) )
+	created_at = db.Column( db.DateTime( timezone = True ), nullable = False, default = lambda : datetime.now( timezone.utc ) )
+	updated_at = db.Column( db.DateTime( timezone = True ), onupdate = lambda : datetime.now( timezone.utc ) )
 	
 	farmers = db.relationship( 'Farmer', backref = 'farms' )
 	
@@ -176,8 +176,8 @@ class Market( Base ):
 	city = db.Column( db.String( 40 ) ) ## NOT NULL
 	state = db.Column( db.String( 2 ) ) ## NOT NULL
 	zip_code = db.Column( db.Integer ) ## NOT NULL
-	created_at = db.Column( db.DateTime( timezone = True ), nullable = False, default = datetime.now( timezone.utc ) )
-	updated_at = db.Column( db.DateTime( timezone = True ), onupdate = datetime.now( timezone.utc ) )
+	created_at = db.Column( db.DateTime( timezone = True ), nullable = False, default = lambda : datetime.now( timezone.utc ) )
+	updated_at = db.Column( db.DateTime( timezone = True ), onupdate = lambda : datetime.now( timezone.utc ) )
 	
 	days = db.relationship( 'MarketDay', backref = 'markets' )
 	
@@ -206,8 +206,8 @@ class MarketDay( Base ):
 	day = db.Column( postgresql.ENUM( Day ) ) ## NOT NULL
 	opens = db.Column( db.Time( timezone = True ) ) ## NOT NULL
 	closes = db.Column( db.Time( timezone = True ) ) ## NOT NULL
-	created_at = db.Column( db.DateTime( timezone = True ), nullable = False, default = datetime.now( timezone.utc ) )
-	updated_at = db.Column( db.DateTime( timezone = True ), onupdate = datetime.now( timezone.utc ) )
+	created_at = db.Column( db.DateTime( timezone = True ), nullable = False, default = lambda : datetime.now( timezone.utc ) )
+	updated_at = db.Column( db.DateTime( timezone = True ), onupdate = lambda : datetime.now( timezone.utc ) )
 	
 	market_id = db.Column( db.Integer, db.ForeignKey( 'markets.market_id' ) )
 	## Better used in two separate many-to-many tables
@@ -253,8 +253,8 @@ class Recipe( Base ):
 	name = db.Column( db.String( 50 ), nullable = False, unique = True )
 	## Refactoring into its own normalized, alternative table
 	''' recipe_directions = db.Column( db.Text ) '''
-	created_at = db.Column( db.DateTime( timezone = True ), nullable = False, default = datetime.now( timezone.utc ) )
-	updated_at = db.Column( db.DateTime( timezone = True ), onupdate = datetime.now( timezone.utc ) )
+	created_at = db.Column( db.DateTime( timezone = True ), nullable = False, default = lambda : datetime.now( timezone.utc ) )
+	updated_at = db.Column( db.DateTime( timezone = True ), onupdate = lambda : datetime.now( timezone.utc ) )
 	
 	ingredients = db.relationship( 'Ingredient', backref = 'recipes' )
 	directions = db.relationship( 'Direction', backref = 'recipes' )
@@ -275,8 +275,8 @@ class Direction( Base ):
 	direction_id = db.Column( db.Integer, autoincrement = True, primary_key = True )
 	order = db.Column( db.SmallInteger ) ## NOT NULL
 	instruction = db.Column( db.Text ) ## NOT NULL
-	created_at = db.Column( db.DateTime( timezone = True ), nullable = False, default = datetime.now( timezone.utc ) )
-	updated_at = db.Column( db.DateTime( timezone = True ), onupdate = datetime.now( timezone.utc ) )
+	created_at = db.Column( db.DateTime( timezone = True ), nullable = False, default = lambda : datetime.now( timezone.utc ) )
+	updated_at = db.Column( db.DateTime( timezone = True ), onupdate = lambda : datetime.now( timezone.utc ) )
 	
 	recipe_id = db.Column( db.Integer, db.ForeignKey( 'recipes.recipe_id' ) )
 	
@@ -294,8 +294,8 @@ class Ingredient( Base ):
 	__tablename__ = 'ingredients'
 	ingredient_id = db.Column( db.Integer, autoincrement = True, primary_key = True )
 	ingredient_quantity = db.Column( db.String( 255 ) )
-	created_at = db.Column( db.DateTime( timezone = True ), nullable = False, default = datetime.now( timezone.utc ) )
-	updated_at = db.Column( db.DateTime( timezone = True ), onupdate = datetime.now( timezone.utc ) )
+	created_at = db.Column( db.DateTime( timezone = True ), nullable = False, default = lambda : datetime.now( timezone.utc ) )
+	updated_at = db.Column( db.DateTime( timezone = True ), onupdate = lambda : datetime.now( timezone.utc ) )
 	
 	recipe_id = db.Column( db.Integer, db.ForeignKey( 'recipes.recipe_id' ) )
 	product_id = db.Column( db.Integer, db.ForeignKey( 'products.product_id' ) )

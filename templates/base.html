@@ -6,21 +6,19 @@
 	
 	<head>
 		<meta charset="UTF-8">
-		<!-- Refactoring css files for more modular, area-specific development -->
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/map.css') }}">
-		<!-- Following looks to see if title is provided, renders default title if not -->
 		{% if title %}
 			<title>{{ title }} - MarketMeals</title>
 		{% else %}
 			<title>MarketMeals</title>
 		{% endif %}
+		<!-- JavaScript file for frontend calls to the Flask backend -->
+		<script type="text/javascript" src="{{ url_for( 'static', filename='js/http.js' ) }}"></script>
 		<!-- Local scripts to create and operate the google maps api -->
 		<script type="text/javascript" src="{{ url_for( 'static', filename='js/map.js' ) }}"></script>
 		<script type="text/javascript" src="{{ url_for( 'static', filename='js/geo.js' ) }}"></script>
 		<script type="text/javascript" src="{{ url_for( 'static', filename='js/view.js' ) }}"></script>
-		<!-- JavaScript file for frontend calls to the Flask backend -->
-		<script type="text/javascript" src="{{ url_for( 'static', filename='js/post.js' ) }}"></script>
 		<!-- Execute a test database query from frontend JavaScript -->
 		<script type="text/javascript" src="{{ url_for( 'static', filename='js/query.js' ) }}"></script>
 	</head>

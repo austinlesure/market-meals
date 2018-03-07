@@ -5,14 +5,24 @@
 var http = new XMLHttpRequest( )
 
 
-window.addEventListener( 'load', grabData )
+window.addEventListener( 'load', getZipCode )
 
+
+function getZipCode( ) {
+	if ( document.getElementById( 'map' ) ) {
+		http.onreadystatechange = function( ) {
+			if ( http.readyState === XMLHttpRequest.DONE && http.status === 200 ) {
+				viewGeocode( new google.maps.Geocoder( ), http.responseText )
+			}
+		}
+		http.open( 'GET', '/data' )
+		http.send( )
+	}
+}
 
 function grabData( ) {
 	if ( window.location.pathname === '/' ) {
-		// Generate click event on identified button
 		document.getElementById( 'search' ).onclick = function( ) {
-			// Value from input field used for post method
 			var zipcode = document.getElementById( 'zipcode' ).value
 			hostData( zipcode )
 		}
@@ -21,12 +31,9 @@ function grabData( ) {
 
 function hostData( zipcode ) {
 	http.onreadystatechange = returnData
-	// See if script is ran on click by logging the below
 	console.log( 'Ajax JavaScript POST' )
 	http.open( 'POST', '/post' )
-	// Declare request header's MIME type before sending
 	http.setRequestHeader( 'Content-Type', 'text/plain' )
-	// Format/encode data to ensure server can parse it
 	http.send( encodeURIComponent( zipcode ) )
 }
 
@@ -35,5 +42,6 @@ function returnData( ) {
 		console.log( 'POST Response: ' + http.response )
 	}
 }
+
 
 
