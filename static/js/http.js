@@ -15,7 +15,7 @@ function getZipCode( ) {
 				viewGeocode( new google.maps.Geocoder( ), http.responseText )
 			}
 		}
-		http.open( 'GET', '/data' )
+		http.open( 'GET', '/zone' )
 		http.send( )
 	}
 }
@@ -23,13 +23,23 @@ function getZipCode( ) {
 function exportJson( amalgam ) {
 	http.onreadystatechange = function( ) {
 		if ( http.readyState === XMLHttpRequest.DONE && http.status === 200 ) {
-			console.log( 'Response: ', http.response )
+			console.log( 'Response: ', http.responseText )
+			var extra = document.getElementsByClassName( 'extra' )[ 0 ]
+			extra.setAttribute( 'action', '/' + http.responseText )
+			var visit = document.getElementsByClassName( 'visit' )[ 0 ]
+			console.log( extra )
+			console.log( visit )
+			var url = document.createElement( 'input' )
+			url.setAttribute( 'type', 'hidden' )
+			url.setAttribute( 'name', 'url' )
+			url.setAttribute( 'value', http.responseText )
+			extra.insertBefore( url, visit )
 		}
 	}
-	http.open( 'POST', '/json' )
+	http.open( 'POST', '/url' )
 	http.setRequestHeader( 'Content-Type', 'application/json' )
-	http.responseType = 'json'
 	http.send( JSON.stringify( amalgam ) )
 }
+
 
 

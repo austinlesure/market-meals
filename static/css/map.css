@@ -95,7 +95,7 @@
 	margin: 25px 40px 10px;
 }
 
-.extra button {
+.extra .retract {
 	position: absolute;
 	font-size: 1.5em;
 	text-align: center;
@@ -108,7 +108,7 @@
 	transform: scale( 1.25, 1 );
 }
 
-.extra button:hover {
+.extra .retract:hover {
 	background: #dedede;
 	color: #757575;
 }
@@ -118,14 +118,16 @@
 	margin: 0 25px 75px;
 }
 
-.extra a {
+.extra .visit {
 	position: absolute;
 	font-size: 1.5em;
 	background: #a5ef8a;
+	border: 0;
 	border-radius: 5px;
 	left: 0;
 	right: 0;
 	bottom: 15px;
+	width: 200px;
 	padding: 10px 0;
 	margin: 0 100px;
 }

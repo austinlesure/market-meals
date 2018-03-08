@@ -3,7 +3,8 @@
 
 
 {% block content %}
-	<h1>market_title</h1>
+	<h1>{{ market.name }}</h1>
+	<h3>{{ market.formatted_address }}</h3>
 
 	<div id='veg_and_farm_list'>
 		
@@ -84,6 +85,5 @@
 			
 	</div>
 {% endblock %}
-
 
 

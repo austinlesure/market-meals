@@ -3,12 +3,11 @@
 
 
 from app import db
-from flask import Blueprint, request
+from flask import Blueprint
 from models import Farmer
 
 
 
-## Setup blueprint for data module to enable route access
 data = Blueprint( 'data', __name__ )
 
 
@@ -41,5 +40,6 @@ def get_farmer_prodcat_link( ):
 
 def get_products( ):
 	return Product.query.filter_by( ).all( ) '''
+
 
 

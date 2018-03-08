@@ -13,9 +13,15 @@ from urllib import parse
 app = Flask( __name__ )
 db = SQLAlchemy( app )
 
+
 ## Modularize app by registering blueprints
+from code import code
+from farm import farm
 from data import data
+app.register_blueprint( code )
+app.register_blueprint( farm )
 app.register_blueprint( data )
+
 
 ## Using psycopg2 to connect to database
 parse.uses_netloc.append( 'postgres' )
@@ -29,6 +35,7 @@ conn = psycopg2.connect(
 	port = url.port
 )
 
+
 app.config[ 'DEBUG' ] = True
 ## Hook up SQLAlchemy to the connection info
 app.config[ 'SQLALCHEMY_DATABASE_URI' ] = os.environ[ 'DATABASE_URL' ]
@@ -38,6 +45,7 @@ app.config[ 'SQLALCHEMY_DATABASE_URI' ] = os.environ[ 'DATABASE_URL' ]
 	'postgresql+psycopg2://' + 'user' + ':' + 'password' + '@' + 'host' + ':' + 'port' + '/' + 'dbname'
 ) '''
 app.config[ 'SQLALCHEMY_ECHO' ] = False
+
 
 app.secret_key = 'MarKetMeaLSiSAMAzinG'
 

@@ -10,6 +10,9 @@ function viewGeocode( geocode, zipcode ) {
 			console.log( 'Geocode:', geodata[ 0 ] )
 			drawMap( coords, zipcode )
 		}
+		else if ( window.location.pathname === '/' ) {
+			return
+		}
 		else {
 			console.error( 'There was a problem trying to geocode!  ' + feedback )
 			window.location.pathname = ''
@@ -23,7 +26,6 @@ function reverseGeocode( geocode, market ) {
 	geocode.geocode( id, function( geodata, feedback ) {
 		if ( feedback === 'OK' ) {
 			console.log( 'Amalgam:', geodata )
-			// Amalgamation of chosen fields from both geocodes
 			var amalgam = {
 				address_components: geodata[ 0 ].address_components,
 				formatted_address: market.formatted_address,
@@ -34,7 +36,6 @@ function reverseGeocode( geocode, market ) {
 				reference: market.reference,
 				types: [ market.types, geodata[ 0 ].types ]
 			}
-			// Post request to the backend for database inspection
 			exportJson( amalgam )
 		}
 		else {
@@ -42,6 +43,5 @@ function reverseGeocode( geocode, market ) {
 		}
 	} )
 }
-
 
 

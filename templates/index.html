@@ -8,7 +8,7 @@
 	<p>Please enter your zipcode below, so we can show the markets near you.</p>
 	
 	<!-- Form behavior below can also be replicated by entering zip a code through the url -->
-	<form action="/data" method="POST">
+	<form action="/zone" method="POST">
 		<div>
 			<label>ZIP Code</label>
 			<input id="zipcode" type="text" name="zipcode" pattern="[0-9]{5}" title="Five digit zip code" />
@@ -16,8 +16,10 @@
 			<button id="search" type="submit" value="Search">Search</button>
 		</div>
 	</form>
+	
 	<!-- Experimental button for testing database inserts and queries -->
 	<button id="query">Query</button>
 {% endblock %}
+
 
 
