@@ -3,6 +3,7 @@
 
 
 import re
+import json as jsonx
 from app import app, db
 from flask import render_template, redirect, url_for, request, session
 from models import Farmer, Market, Category, FarmerProduct
@@ -28,10 +29,8 @@ def about( ):
 
 @app.route( '/data', methods = [ 'GET', 'POST' ] )
 def data( ):
-	## Fetch zip code from JavaScript for use in maps api
 	if request.method == 'GET':
 		return session[ 'zipcode' ]
-	## Build url from zip code and redirect to the new route
 	elif request.method == 'POST':
 		zipcode = request.form[ 'zipcode' ]
 		return redirect( url_for( 'zipcode', zipcode = zipcode ) )
@@ -39,19 +38,37 @@ def data( ):
 
 @app.route( '/<zipcode>', methods = [ 'GET' ] )
 def zipcode( zipcode ):
-	## Preserve zip code data so api can use it for geocoding
 	session[ 'zipcode' ] = zipcode
 	print( 'SESSION ' + session[ 'zipcode' ] )
 	print( 'ZIPCODE ' + zipcode )
-	## Verify that incoming url data is in valid zip code format
 	digits = re.compile( r'^[0-9]{5}$' )
-	## Zip code meets criteria for this route's map api needs
 	if digits.match( zipcode ):
 		zipcode = zipcode
 		return render_template( 'map.html', zipcode = zipcode )
-	## Non-matching url pattern, so redirect back to index
 	else:
 		return redirect( '/' )
+
+
+@app.route( '/json', methods = [ 'POST' ] )
+def json( ):
+	market = jsonx.loads( request.data.decode( 'utf-8' ) )
+	session[ 'market' ] = market
+	print( session[ 'market' ] )
+	## Build new url to route to by parsing market's name
+	url = ''
+	print( market[ 'name' ] )
+	for char in market[ 'name' ]:
+		## Accept only lowercase alphanumeric characters
+		if char.isalnum( ):
+			if char.isupper( ):
+				url += char.lower( )
+			else:
+				url += char
+		## Remove all whitespace and replace with hyphens
+		elif char.isspace( ):
+			url += '-'
+	print( url )
+	return jsonx.dumps( market )
 
 
 @app.route( '/market' )
@@ -96,6 +113,5 @@ def recipe( ):
 
 if __name__ == '__main__':
 	app.run( )
-
 
 
