@@ -2,8 +2,9 @@
 
 
 
+import json
 from app import db
-from flask import Blueprint, request
+from flask import Flask, Blueprint, request
 from models import Farmer
 
 
@@ -13,12 +14,19 @@ data = Blueprint( 'data', __name__ )
 
 
 
-@data.route( '/post', methods = [ 'POST' ] )
+@data.route( '/json', methods = [ 'POST' ] )
 def post( ):
+	## View initial request json data as bytes type
+	data = request.data
+	print( type( request.data ) )
 	## Decode encoded data posted from frontend
 	data = request.data.decode( 'utf-8' )
-	print( data )
-	return data
+	print( type( data ) )
+	## Transform json string into operable dictionary
+	data = json.loads( data )
+	print( type( data ) )
+	## Give back data reverted into json response
+	return json.dumps( data )
 
 
 @data.route( '/query', methods = [ 'GET', 'POST' ] )

@@ -5,7 +5,7 @@
 function drawMap( coords, zipcode ) {
 	if ( coords ) {
 		console.log( 'ZipCode: ' + zipcode )
-		console.log( 'Location:', coords )
+		console.log( 'Coords:', coords )
 		var geo = { center: coords, zoom: 11 }
 		var map = new google.maps.Map( document.getElementById( 'map' ), geo )
 		browseMarkets( map, coords )
@@ -18,12 +18,12 @@ function browseMarkets( map, coords ) {
 	var zone = { location: coords, radius: '250', query: 'farmers market' }
 	seeker.textSearch( zone, function( markets, feedback ) {
 		if ( feedback == google.maps.places.PlacesServiceStatus.OK ) {
-			console.log( 'TEXT Markets:', markets )
+			console.log( 'Markets:', markets )
 			for ( var idx = 0; idx < markets.length; idx++ ) {
 				var view = createLocation( markets[ idx ], map )
 				views.push( view )
 				if ( idx + 1 === markets.length ) {
-					console.log( views )
+					console.log( 'Views:', views )
 				}
 			}
 		}

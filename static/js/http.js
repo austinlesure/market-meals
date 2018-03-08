@@ -20,28 +20,16 @@ function getZipCode( ) {
 	}
 }
 
-function grabData( ) {
-	if ( window.location.pathname === '/' ) {
-		document.getElementById( 'search' ).onclick = function( ) {
-			var zipcode = document.getElementById( 'zipcode' ).value
-			hostData( zipcode )
+function exportJson( amalgam ) {
+	http.onreadystatechange = function( ) {
+		if ( http.readyState === XMLHttpRequest.DONE && http.status === 200 ) {
+			console.log( 'Response: ', http.response )
 		}
 	}
+	http.open( 'POST', '/json' )
+	http.setRequestHeader( 'Content-Type', 'application/json' )
+	http.responseType = 'json'
+	http.send( JSON.stringify( amalgam ) )
 }
-
-function hostData( zipcode ) {
-	http.onreadystatechange = returnData
-	console.log( 'Ajax JavaScript POST' )
-	http.open( 'POST', '/post' )
-	http.setRequestHeader( 'Content-Type', 'text/plain' )
-	http.send( encodeURIComponent( zipcode ) )
-}
-
-function returnData( ) {
-	if ( http.readyState === XMLHttpRequest.DONE && http.status === 200 ) {
-		console.log( 'POST Response: ' + http.response )
-	}
-}
-
 
 
