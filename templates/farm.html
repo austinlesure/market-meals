@@ -4,17 +4,19 @@
 
     <h1>{{farmer.farmer_name}}</h1>
 
-    {% for prodcat in prodcat_list %}
+    {% for prodcat in prodcats %}
 
         <h3>{{ prodcat.prodcat_name }}</h3>
 
-        {% for product in prodcat.product %}
+        {% for product in product_list %}
 
-            <p>{{ product.product_name }}</p>
+            {% if prodcat.prodcat_id == product.prodcat_id %}
+
+            <h4 style="text-indent: 50px">{{ product.product_name }}</h4>
+
+            {% endif %}
 
         {% endfor %}
-
-        <hr />
 
     {% endfor %}
 

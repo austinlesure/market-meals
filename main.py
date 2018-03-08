@@ -1,25 +1,10 @@
 from flask import render_template, session, flash, request, redirect
 from app import app, db
-from models import Farmer, Product, Prodcat, Market, Marketday, Recipe, Recipeproduct, FarmerProdcatLink
+from models import Farmer, Product, Prodcat, Market, Marketday, Recipe, Recipeproduct, FarmerProductLink, FarmerMarketLink
 from hashutils import check_pw_hash
-
-def get_farmers():
-    return Farmer.query.filter_by().all()
-
-def get_markets():
-    return Market.query.filter_by().all()
-
-def get_recipes():
-    return Recipe.query.filter_by().all()
 
 def get_prodcats():
     return Prodcat.query.filter_by().all()
-
-def get_farmer_prodcat_link():
-    return FarmerProdcatLink.query.filter_by().all()
-
-def get_products():
-    return Product.query.filter_by().all()
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
@@ -36,15 +21,29 @@ def about():
 
 @app.route('/farm', methods=['GET'])
 def farmer():
-    prodcat_list = []
+    product_list = []
     farmer = request.args.get('farmer')
     if farmer:
         farmer = Farmer.query.filter_by(farmer_name=farmer).first()
-        prodcatsId = FarmerProdcatLink.query.filter_by(farmer_id=farmer.farmer_id).all()
-        for prodcatId in prodcatsId:
-            prodcat = Prodcat.query.filter_by(prodcat_id=prodcatId.prodcat_id).first()
-            prodcat_list.append(prodcat)
-        return render_template('farm.html', farmer=farmer, prodcatsId=prodcatsId, prodcat_list=prodcat_list)
+        productIds = FarmerProductLink.query.filter_by(farmer_id=farmer.farmer_id).all()
+        for productId in productIds:
+            product = Product.query.filter_by(product_id=productId.product_id).first()
+            product_list.append(product)
+
+
+            '''
+            
+            get all prodcats
+            for prodcat in prodcats
+            see which 
+            
+            '''
+
+
+
+        return render_template('farm.html', farmer=farmer, product_list=product_list, prodcats=get_prodcats())
+    else:
+        return redirect("/")
 
 @app.route('/market')
 def market():
@@ -53,6 +52,16 @@ def market():
 @app.route('/recipe')
 def recipe():
     return render_template('recipe.html')
+
+
+if __name__ == '__main__':
+    app.run()
+
+
+
+
+
+
 
 '''
 @app.route('/login')
@@ -75,6 +84,3 @@ def farm_user():
 def map():
     return render_template('map.html')
 '''
-
-if __name__ == '__main__':
-    app.run()

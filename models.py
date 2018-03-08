@@ -1,11 +1,17 @@
 from app import db
 #from datetime import datetime
 
-class FarmerProdcatLink(db.Model):
+class FarmerProductLink(db.Model):
     __table_args__ = {'extend_existing': True}
-    __tablename__ = 'farmer_prodcat_link'
+    __tablename__ = 'farmer_product_link'
     farmer_id = db.Column(db.Integer, db.ForeignKey('farmer.farmer_id'), primary_key=True)
-    prodcat_id = db.Column(db.Integer, db.ForeignKey('prodcat.prodcat_id'), primary_key=True)
+    product_id = db.Column(db.Integer, db.ForeignKey('product.product_id'), primary_key=True)
+
+class FarmerMarketLink(db.Model):
+    __table_args__ = {'extend_existing': True}
+    __tablename__ = 'farmer_market_link'
+    farmer_id = db.Column(db.Integer, db.ForeignKey('farmer.farmer_id'), primary_key=True)
+    market_id = db.Column(db.Integer, db.ForeignKey('market.market_id'), primary_key=True)
 
 class Farmer(db.Model):
     __table_args__ = {'extend_existing': True}
@@ -13,7 +19,8 @@ class Farmer(db.Model):
     farmer_id = db.Column(db.Integer, primary_key=True)
     farmer_name = db.Column(db.String(255))
     marketday_id = db.relationship('Marketday', backref='owner_farmer')
-    prodcats = db.relationship('Prodcat', secondary='farmer_prodcat_link')
+    products = db.relationship('Product', secondary='farmer_product_link')
+    markets = db.relationship('Market', secondary='farmer_market_link')
 
     def __init__(self, farmer_name):
         self.farmer_name = farmer_name
@@ -29,6 +36,7 @@ class Product(db.Model):
     prodcat_id = db.Column(db.Integer, db.ForeignKey('prodcat.prodcat_id'))
     marketday_id = db.relationship('Marketday', backref='owner_product')
     recipeproduct_id = db.relationship('Recipeproduct', backref='owner_product')
+    farmers = db.relationship('Farmer', secondary='farmer_product_link')
 
     def __init__(self, product_name, owner_prodcat):
         self.product_name = product_name
@@ -43,7 +51,6 @@ class Prodcat(db.Model):
     prodcat_id = db.Column(db.Integer, primary_key=True)
     prodcat_name = db.Column(db.String(255))
     product = db.relationship('Product', backref='owner_prodcat')
-    farmers = db.relationship('Farmer', secondary='farmer_prodcat_link')
 
     def __init__(self, prodcat_name):
         self.prodcat_name = prodcat_name
@@ -62,6 +69,7 @@ class Market(db.Model):
     market_state = db.Column(db.String(2))
     market_zip = db.Column(db.String(5))
     marketday_id = db.relationship('Marketday', backref='owner_market')
+    farmers = db.relationship('Farmer', secondary='farmer_market_link')
 
     def __init__(self, market_name, market_address1, market_address2, market_city, market_state, market_zip):
         self.market_name = market_name
