@@ -12,6 +12,9 @@ def get_farmer_product_links():
 def get_recipe_products():
     return Recipeproduct.query.filter_by().all()
 
+def get_recipes():
+    return Recipe.query.filter_by().all()
+
 @app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == 'GET':
@@ -76,9 +79,9 @@ def recipe():
     recipe = request.args.get('recipe')
     if recipe:
         recipe = Recipe.query.filter_by(recipe_name=recipe).first()
-        return render_template('recipe.html', recipe=recipe)
+        return render_template('recipe.html', recipes=recipe)
     else:
-        return redirect("/")
+        return render_template('recipe.html', recipes=get_recipes())
 
 
 if __name__ == '__main__':

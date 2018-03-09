@@ -2,8 +2,12 @@
 
 {% block content %}
 
-    <h1>{{ recipe.recipe_name }}</h1>
+    {% for recipe in recipes %}
 
-    <h3>{{ recipe.recipe_directions }}</h3>
+        <h1>{{ recipe.recipe_name }}</h1>
+
+        <h3>{{ recipe.recipe_directions }}</h3>
+
+    {% endfor %}
 
 {% endblock %}
