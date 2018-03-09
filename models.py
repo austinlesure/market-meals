@@ -181,14 +181,15 @@ class Market( Base ):
 	
 	days = db.relationship( 'MarketDay', backref = 'markets' )
 	
-	def __init__( self, name, url, website, email_address, phone_number, address_1, address_2, city, state, zip_code ):
+	def __init__( self, name, url, address_1,  city, state, zip_code ):
+		''' website, email_address, phone_number, address_2, '''
 		self.name = name
 		self.url = url
-		self.website = website
+		''' self.website = website
 		self.email_address = email_address
-		self.phone_number = phone_number
+		self.phone_number = phone_number '''
 		self.address_1 = address_1
-		self.address_2 = address_2
+		''' self.address_2 = address_2 '''
 		self.city = city
 		self.state = state
 		self.zip_code = zip_code
@@ -274,6 +275,7 @@ class Direction( Base ):
 	__tablename__ = 'directions'
 	direction_id = db.Column( db.Integer, autoincrement = True, primary_key = True )
 	order = db.Column( db.SmallInteger ) ## NOT NULL
+	summary = db.Column( db.String( 200 ) )
 	instruction = db.Column( db.Text ) ## NOT NULL
 	created_at = db.Column( db.DateTime( timezone = True ), nullable = False, default = lambda : datetime.now( timezone.utc ) )
 	updated_at = db.Column( db.DateTime( timezone = True ), onupdate = lambda : datetime.now( timezone.utc ) )

@@ -110,7 +110,7 @@ function ViewClass( ) {
 				open.parentElement.firstChild.style.display = 'block'
 				open.parentElement.removeChild( open )
 			}
-			reverseGeocode( new google.maps.Geocoder( ), market )
+			reverseGeocode( new google.maps.Geocoder( ), market, false )
 			view.style.display = 'none'
 			offset.appendChild( extra )
 		} )

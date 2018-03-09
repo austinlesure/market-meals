@@ -13,6 +13,7 @@ function drawMap( coords, zipcode ) {
 }
 
 function browseMarkets( map, coords ) {
+	var codex = [ ]
 	var views = [ ]
 	var seeker = new google.maps.places.PlacesService( map )
 	var zone = { location: coords, radius: '250', query: 'farmers market' }
@@ -41,5 +42,6 @@ function createLocation( market, map ) {
 	farmerMarket.setMap( map )
 	return farmerMarket
 }
+
 
 

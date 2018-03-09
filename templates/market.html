@@ -8,6 +8,14 @@
 
 	<div id='veg_and_farm_list'>
 		
+		<!-- <ul id="address">
+			{% for part in market.address_components %}
+				{% if part.types[ 0 ] != 'neighborhood' %}
+					<li>{{ part.short_name }}</li>
+				{% endif %}
+			{% endfor %}
+		</ul> -->
+		
 		<h2>What's available this week?</h2>
 		<div id='{{ veg_id }}' class=''>
 			

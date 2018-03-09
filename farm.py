@@ -3,7 +3,9 @@
 
 
 import json
+from app import db
 from flask import Blueprint, request, render_template, redirect, url_for, session
+from models import Market
 
 
 
@@ -27,6 +29,37 @@ def url( ):
 			market += '-'
 	print( 'NEWURL ' + market )
 	session[ 'url' ] = market
+	## Add new market to the database if not already recorded
+	url = Market.query.filter_by( url = session[ 'url' ] ).first( )
+	if url is None:
+		street = ''
+		city = ''
+		state = ''
+		zipcode = None
+		for sub in session[ 'market' ][ 'address_components' ]:
+			for area in sub[ 'types' ]:
+				if area == 'street_number':
+					street = sub[ 'short_name' ] + ' '
+				## Some markets don't hsve route strings provided
+				elif area == 'route':
+					street += sub[ 'short_name' ]
+				elif area == 'locality':
+					city = sub[ 'short_name' ]
+				## Incorrectly interpreting the shorter state value
+				elif area == 'administrative_area_level_1':
+					state = sub[ 'short_name' ]
+				elif area == 'postal_code':
+					zipcode = sub[ 'short_name' ]
+		location = Market(
+			name = session[ 'market' ][ 'name' ],
+			url = session[ 'url' ],
+			address_1 = street,
+			city = city,
+			state = state,
+			zip_code = zipcode
+		)
+		db.session.add( location )
+		db.session.commit( )
 	return market
 
 
@@ -34,6 +67,5 @@ def url( ):
 def market( market ):
 	market = market
 	return render_template( 'market.html', market = session[ 'market' ] )
-
 
 

@@ -2,9 +2,11 @@
 
 
 
+import json
 from app import db
-from flask import Blueprint
-from models import Farmer
+from farm import farm
+from flask import Blueprint, request, session
+from models import Market
 
 
 
@@ -12,7 +14,7 @@ data = Blueprint( 'data', __name__ )
 
 
 
-@data.route( '/query', methods = [ 'GET', 'POST' ] )
+@data.route( '/query', methods = [ 'POST' ] )
 def query( ):
 	## Insert a new database entry
 	bob = Farmer( first_name = 'Bob', last_name = 'Bobbson' )
@@ -20,10 +22,10 @@ def query( ):
 	db.session.commit( )
 	## Query new entry and return it
 	data = db.session.query( Farmer ).filter_by( first_name = 'Bob' ).first( )
-	return data.first_name
+	return json.dumps( session[ 'volume' ] )
 
 
-''' def get_farmers( ):
+def get_farmers( ):
 	return Farmer.query.filter_by( ).all( )
 
 def get_markets( ):
