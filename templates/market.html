@@ -1,7 +1,53 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>market.html</h1>
+    <h2>{{ market.market_name }}</h2>
+
+    <p style="text-align: center">
+        {{ market.market_address1 }} <br>
+        {{ market.market_address2 }} <br>
+        {{ market.market_city }}, {{ market.market_state }} {{ market.market_zip }}
+    </p>
+
+    {% for farmer in farmer_list %}
+
+        <h2 style="text-align: left">{{ farmer.farmer_name }}</h2>
+
+        {% for prodcat in prodcats %}
+
+            <h3>{{ prodcat.prodcat_name }}</h3>
+
+            {% for key in dic %}
+
+                {% if key == farmer.farmer_id %}
+
+                    {% for a in dic.get(key) %}
+
+                        {% if a.prodcat_id == prodcat.prodcat_id %}
+
+                            <h4 style="text-indent: 50px">{{ a.product_name }}</h4>
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                {% endif %}
+
+            {% endfor %}
+
+        {% endfor %}
+
+        <hr />
+
+    {% endfor %}
+
+    <h2>Recipes from Products Being Sold at</br>{{ market.market_name }}</h2>
+
+    {% for recipe in recipes %}
+
+        <a href="/recipe?recipe={{ recipe.recipe_name }}">{{ recipe.recipe_name }}</a>
+
+    {% endfor %}
 
 
 
