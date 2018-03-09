@@ -3,6 +3,9 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+  <!--  <link href="{{ url_for('static', filename='scripts/bootstrap/dist/css/bootstrap.css') }}" rel="stylesheet">-->
+
     <!--Following looks to see if title is provided, renders default title if not-->
     {% if title %}
       <title>{{ title }} - MarketMeals</title>
@@ -17,6 +20,7 @@
         <ul>
           <a href='/'><li>Home</li></a>
           <a href='/about'><li>About</li></a>
+          <a href='/recipe'><li>Recipes</li></a>
           <!--We'll remove the comment below if/when we get the login functionality going.-->
           <!--<a href='/login'><li>Login/Register</li></a>-->
         </ul>
