@@ -6,13 +6,8 @@ from hashutils import check_pw_hash
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
-	if request.method == 'GET':
-		return render_template( 'index.html' )
+    return render_template( 'index.html' )
 	
-	elif request.method == 'POST':
-		zipcode = request.form[ 'zipcode' ]
-		markets = Market.query.filter_by( market_zip = zipcode )
-		return render_template( 'market.html', markets = markets )
 
 @app.route('/about')
 def about():
