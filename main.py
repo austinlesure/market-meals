@@ -1,11 +1,20 @@
-from flask import render_template #session, flash, request, redirect
-from app import app #db
-#from models import User
-#from hashutils import check_pw_hash
+from flask import render_template, session, flash, request, redirect
+from app import app, db
+from models import Farmer, Product, Prodcat, Market, Marketday, Recipe, Recipeproduct
+from hashutils import check_pw_hash
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    if request.method == 'GET':
+	return render_template( 'index.html' )
+	
+    elif request.method == 'POST':
+	zipcode = request.form[ 'zipcode' ]
+        markets = Market.query.filter_by( market_zip = zipcode )
+	return render_template( 'market.html', markets = markets )
+
+#def index():
+#    return render_template('index.html')
 
 @app.route('/about')
 def about():
