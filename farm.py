@@ -40,7 +40,7 @@ def url( ):
 			for area in sub[ 'types' ]:
 				if area == 'street_number':
 					street = sub[ 'short_name' ] + ' '
-				## Some markets don't hsve route strings provided
+				## Some markets don't have route strings provided
 				elif area == 'route':
 					street += sub[ 'short_name' ]
 				elif area == 'locality':
@@ -63,9 +63,11 @@ def url( ):
 	return market
 
 
-@farm.route( '/<market>', methods = [ 'POST' ] )
+@farm.route( '/<market>', methods = [ 'GET', 'POST' ] )
 def market( market ):
+	print( 'Arrived at Market!' )
 	market = market
 	return render_template( 'market.html', market = session[ 'market' ] )
+
 
 

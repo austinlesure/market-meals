@@ -24,6 +24,7 @@ def zone( ):
 
 @code.route( '/<zipcode>', methods = [ 'GET' ] )
 def zipcode( zipcode ):
+	print( 'Arrived at Zipcode!' )
 	digits = re.compile( r'^[0-9]{5}$' )
 	if digits.match( zipcode ):
 		session[ 'zipcode' ] = zipcode
@@ -32,6 +33,5 @@ def zipcode( zipcode ):
 		return render_template( 'map.html', zipcode = zipcode )
 	else:
 		return redirect( '/' )
-
 
 

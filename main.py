@@ -2,6 +2,7 @@
 
 
 
+import re
 from app import app, db
 from flask import request, render_template, redirect, url_for, session
 from models import Farmer, Market, Category, FarmerProduct
@@ -11,10 +12,12 @@ from hashutils import check_pw_hash
 
 @app.route( '/', methods = [ 'GET' ] )
 def index( ):
-	if request.method == 'GET':
-		return render_template( 'index.html' )
+	return render_template( 'index.html' )
+	
 	## Unused method, but temporary placement for now
-	''' elif request.method == 'POST':
+	''' if request.method == 'GET':
+		return render_template( 'index.html' )
+	elif request.method == 'POST':
 		zipcode = request.form[ 'zipcode' ]
 		markets = Market.query.filter_by( market_zip = zipcode )
 		return render_template( 'market.html', markets = markets ) '''
@@ -23,6 +26,32 @@ def index( ):
 @app.route( '/about', methods = [ 'GET' ] )
 def about( ):
 	return render_template( 'about.html' )
+
+
+@app.route( '/wild', methods = [ 'GET' ] )
+def wild( wild ):
+	print( 'Arrived at Wild!' )
+	print( wild )
+	if re.match( r'^[0-9]{5}$', wild ):
+		print( 'Zipcode!' )
+		return redirect( url_for( 'code.zipcode', zipcode = wild ) )
+	elif re.match( r'^([a-z]+-)*(market){1}(-[a-z]+)*$', wild ):
+		print( 'Market!' )
+		return redirect( url_for( 'farm.market', market = wild ) )
+	return 'Error!'
+	
+	""" print( 'Arrived at Wild!' )
+	print( wild )
+	print( re.match( 'market', wild ) )
+	print( None )
+	if re.match( r'^[0-9]{5}$', wild ):
+		print( 'Zipcode!' )
+		return redirect( url_for( 'code.zipcode', zipcode = wild ) )
+	elif re.match( 'market', wild ):
+		print( 'Market! ')
+		return redirect( url_for( 'market', market = wild ) )
+	else:
+		return redirect( '/' ) """
 
 
 @app.route( '/farm', methods = [ 'GET' ] )
@@ -57,6 +86,11 @@ def farm_user( ):
 @app.route( '/recipe' )
 def recipe( ):
 	return render_template( 'recipe.html' )
+
+
+@app.route( '/error' )
+def error( ):
+	return 'Bad route!'
 
 
 

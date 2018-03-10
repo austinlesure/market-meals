@@ -25,7 +25,7 @@ def query( ):
 	return json.dumps( session[ 'volume' ] )
 
 
-def get_farmers( ):
+""" def get_farmers( ):
 	return Farmer.query.filter_by( ).all( )
 
 def get_markets( ):
@@ -41,7 +41,7 @@ def get_farmer_prodcat_link( ):
 	return FarmerProdcatLink.query.filter_by( ).all( )
 
 def get_products( ):
-	return Product.query.filter_by( ).all( ) '''
+	return Product.query.filter_by( ).all( ) """
 
 
 

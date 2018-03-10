@@ -3,13 +3,13 @@
 
 
 {% block content %}
-	<h1>{{ farmer.farmer_name }}</h1>
-
-	{% for prodcat in prodcat_list %}
-		<h3>{{ prodcat.prodcat_name }}</h3>
+	<h1>{{ farmer.first_name }} {{ farmer.last_name }}</h1>
+	
+	{% for category in catalog %}
+		<h3>{{ category.category }}</h3>
 		
-		{% for product in prodcat.product %}
-			<p>{{ product.product_name }}</p>
+		{% for product in category.product %}
+			<p>{{ product.name }}</p>
 		{% endfor %}
 		
 		<hr />
