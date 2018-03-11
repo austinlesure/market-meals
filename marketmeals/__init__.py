@@ -15,9 +15,9 @@ db = SQLAlchemy( app )
 
 
 ## Modularize app by registering blueprints
-from code import code
-from farm import farm
-from data import data
+from marketmeals.code import code
+from marketmeals.farm import farm
+from marketmeals.data import data
 app.register_blueprint( code )
 app.register_blueprint( farm )
 app.register_blueprint( data )
@@ -37,7 +37,6 @@ conn = psycopg2.connect(
 
 
 app.config[ 'DEBUG' ] = True
-## Hook up SQLAlchemy to the connection info
 app.config[ 'SQLALCHEMY_DATABASE_URI' ] = os.environ[ 'DATABASE_URL' ]
 ## Omitted placeholder database access data
 ''' app.config[ 'SQLALCHEMY_DATABASE_URI' ] = os.environ.get(
@@ -47,7 +46,12 @@ app.config[ 'SQLALCHEMY_DATABASE_URI' ] = os.environ[ 'DATABASE_URL' ]
 app.config[ 'SQLALCHEMY_ECHO' ] = False
 
 
+## This is a security risk and should be moved
 app.secret_key = 'MarKetMeaLSiSAMAzinG'
+
+
+
+import marketmeals.views
 
 
 

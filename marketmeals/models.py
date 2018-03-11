@@ -2,8 +2,8 @@
 
 
 
-from app import db
-from day import Day
+from marketmeals import db
+from marketmeals.day import Day
 from sqlalchemy.dialects import postgresql
 from datetime import datetime, timezone
 

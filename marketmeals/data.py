@@ -2,9 +2,9 @@
 
 
 
-from app import db
+from marketmeals import db
+from marketmeals.models import Farmer
 from flask import Blueprint, jsonify
-from models import Farmer
 
 
 

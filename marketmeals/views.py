@@ -3,10 +3,9 @@
 
 
 import re
-from app import app, db
+from marketmeals import app, db
+from marketmeals.models import Farmer, Market, Category, FarmerProduct
 from flask import request, render_template, redirect, url_for, session
-from models import Farmer, Market, Category, FarmerProduct
-from hashutils import check_pw_hash
 
 
 
@@ -91,11 +90,6 @@ def recipe( ):
 @app.route( '/error' )
 def error( ):
 	return 'Bad route!'
-
-
-
-if __name__ == '__main__':
-	app.run( )
 
 
 

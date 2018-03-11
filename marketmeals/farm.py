@@ -3,9 +3,9 @@
 
 
 import json
-from app import db
+from marketmeals import db
+from marketmeals.models import Market
 from flask import Blueprint, request, render_template, redirect, url_for, session
-from models import Market
 
 
 
