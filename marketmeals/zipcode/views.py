@@ -18,7 +18,7 @@ def location( ):
 		return session[ 'zipcode' ]
 	elif request.method == 'POST':
 		session[ 'zipcode' ] = request.form[ 'zipcode' ]
-		return redirect( url_for( 'zipcode.zipcode', zipcode = session[ 'zipcode' ] ) )
+		return redirect( url_for( 'zipcode.mapapi', zipcode = session[ 'zipcode' ] ) )
 	else:
 		return redirect( '/' )
 

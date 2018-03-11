@@ -20,7 +20,7 @@
 		<script type="text/javascript" src="{{ url_for( 'zipcode.static', filename='js/geo.js' ) }}"></script>
 		<script type="text/javascript" src="{{ url_for( 'zipcode.static', filename='js/view.js' ) }}"></script>
 		<!-- Execute a test database query from frontend JavaScript -->
-		<script type="text/javascript" src="{{ url_for( 'farmer.static', filename='js/query.js' ) }}"></script>
+		<script type="text/javascript" src="{{ url_for( 'static', filename='js/query.js' ) }}"></script>
 	</head>
 	
 	<body>
@@ -28,8 +28,8 @@
 			<h1>MarketMeals</h1>
 			<nav>
 				<ul>
-					<a href='/'><li>Home</li></a>
-					<a href='/about'><li>About</li></a>
+					<a href="/"><li>Home</li></a>
+					<a href="/about"><li>About</li></a>
 					<!-- We'll remove the comment below if/when we get the login functionality going -->
 					<!-- <a href='/login'><li>Login/Register</li></a> -->
 				</ul>

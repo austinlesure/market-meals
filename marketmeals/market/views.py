@@ -2,6 +2,7 @@
 
 
 
+import re
 import json
 from marketmeals import db
 from marketmeals.market.utils import html, urlify, catalog
@@ -35,7 +36,8 @@ def view( market ):
 		print( 'Market!' )
 		market = market
 		return render_template( 'market/market.html', market = session[ 'market' ] )
-	else return redirect( '/' )
+	else:
+		return redirect( '/' )
 
 
 
