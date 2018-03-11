@@ -19,10 +19,10 @@ function queryData( ) {
 function observeData( ) {
 	http.onreadystatechange = function( ) {
 		if ( http.readyState === XMLHttpRequest.DONE && http.status === 200 ) {
-			console.log( 'SQL Query: ' + http.response )
+			console.log( 'Farmers:', JSON.parse( http.response ) )
 		}
 	}
-	http.open( 'POST', '/query' )
+	http.open( 'GET', '/query' )
 	http.send( )
 }
 

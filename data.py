@@ -3,7 +3,7 @@
 
 
 from app import db
-from flask import Blueprint
+from flask import Blueprint, jsonify
 from models import Farmer
 
 
@@ -12,13 +12,19 @@ data = Blueprint( 'data', __name__ )
 
 
 
-@data.route( '/query', methods = [ 'POST' ] )
+@data.route( '/query', methods = [ 'GET' ] )
 def query( ):
 	## Try a full database query of farmers
-	farmers = Farmer.query.all( )
-	for farmer in farmers:
-		print( farmer )
-	return 'Hah'
+	query = Farmer.query.all( )
+	farmers = [ ]
+	for item in query:
+		farmer = {  }
+		for data in dir( item ):
+			## Only grab table data from query
+			if not hasattr( super( Farmer, item ), data ) and data[ 0 ].isalpha( ):
+				farmer[ data ] = getattr( item, data )
+		farmers.append( farmer )
+	return jsonify( farmers )
 
 
 """ def get_farmers( ):
