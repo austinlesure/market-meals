@@ -3,18 +3,18 @@
 
 
 import re
-from marketmeals.portal.utils import html
+from marketmeals.home.utils import html
 from flask import Blueprint, render_template, redirect, url_for
 
 
 
-portal = Blueprint( 'portal', __name__, template_folder = html )
+home = Blueprint( 'home', __name__, template_folder = html )
 
 
 
-@portal.route( '/', methods = [ 'GET' ] )
+@home.route( '/', methods = [ 'GET' ] )
 def index( ):
-	return render_template( 'portal/index.html' )
+	return render_template( 'home/index.html' )
 	
 	## Unused method, but temporary placement for now
 	''' if request.method == 'GET':
@@ -25,12 +25,13 @@ def index( ):
 		return render_template( 'market.html', markets = markets ) '''
 
 
-@portal.route( '/about', methods = [ 'GET' ] )
+@home.route( '/about', methods = [ 'GET' ] )
 def about( ):
-	return render_template( 'portal/about.html' )
+	return render_template( 'home/about.html' )
 
 
-@portal.route( '/wild', methods = [ 'GET' ] )
+## Depreciated for the time being and may be removed
+@home.route( '/wild', methods = [ 'GET' ] )
 def wild( wild ):
 	print( 'Arrived at Wild!' )
 	print( wild )
@@ -39,7 +40,7 @@ def wild( wild ):
 		return redirect( url_for( 'geoapi.zipcode', zipcode = wild ) )
 	elif re.match( r'^([a-z]+-)*(market){1}(-[a-z]+)*$', wild ):
 		print( 'Market!' )
-		return redirect( url_for( 'farm.market', market = wild ) )
+		return redirect( url_for( 'location.market', market = wild ) )
 	return 'Error!'
 	
 	""" print( 'Arrived at Wild!' )
@@ -56,8 +57,9 @@ def wild( wild ):
 		return redirect( '/' ) """
 
 
-@portal.route( '/error' )
+@home.route( '/error' )
 def error( ):
-	return render_template( 'portal/error.html' )
+	return render_template( 'home/error.html' )
+
 
 

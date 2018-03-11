@@ -15,13 +15,13 @@ db = SQLAlchemy( app )
 
 
 ## Modularize app by registering blueprints
-from marketmeals.portal.views import portal
+from marketmeals.home.views import home
 from marketmeals.geoapi.views import geoapi
-from marketmeals.farm import farm
+from marketmeals.location.views import location
 from marketmeals.data import data
-app.register_blueprint( portal )
+app.register_blueprint( home )
 app.register_blueprint( geoapi )
-app.register_blueprint( farm )
+app.register_blueprint( location )
 app.register_blueprint( data )
 
 

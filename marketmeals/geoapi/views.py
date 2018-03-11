@@ -12,8 +12,8 @@ geoapi = Blueprint( 'geoapi', __name__, static_url_path = path, static_folder = 
 
 
 
-@geoapi.route( '/area', methods = [ 'GET', 'POST' ] )
-def area( ):
+@geoapi.route( '/geolocate', methods = [ 'GET', 'POST' ] )
+def geolocate( ):
 	if request.method == 'GET':
 		return session[ 'zipcode' ]
 	elif request.method == 'POST':
@@ -23,7 +23,7 @@ def area( ):
 		return redirect( '/' )
 
 
-@geoapi.route( '/<zipcode>', methods = [ 'GET' ] )
+@geoapi.route( '/zipcode/<zipcode>', methods = [ 'GET' ] )
 def zipcode( zipcode ):
 	print( 'Arrived at Zipcode!' )
 	digits = re.compile( r'^[0-9]{5}$' )

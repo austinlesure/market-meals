@@ -15,7 +15,7 @@ function getZipCode( ) {
 				viewGeocode( new google.maps.Geocoder( ), http.responseText )
 			}
 		}
-		http.open( 'GET', '/area' )
+		http.open( 'GET', '/geolocate' )
 		http.send( )
 	}
 }
@@ -25,7 +25,7 @@ function exportJson( amalgam ) {
 		if ( http.readyState === XMLHttpRequest.DONE && http.status === 200 ) {
 			console.log( 'Response: ', http.responseText )
 			var extra = document.getElementsByClassName( 'extra' )[ 0 ]
-			extra.setAttribute( 'action', '/' + http.responseText )
+			extra.setAttribute( 'action', '/market/' + http.responseText )
 			var visit = document.getElementsByClassName( 'visit' )[ 0 ]
 			console.log( extra )
 			console.log( visit )
