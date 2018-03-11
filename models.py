@@ -56,7 +56,7 @@ class Farmer( Base ):
 		self.last_name = last_name
 	
 	def __repr__( self ):
-		return '<Farmer %r' % self.farmer_name
+		return str( self.first_name + ' ' + self.last_name )
 
 
 class FarmerProduct( Base ):

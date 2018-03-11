@@ -5,31 +5,25 @@
 var http = new XMLHttpRequest( )
 
 
-window.addEventListener( 'load', loadData )
+window.addEventListener( 'load', queryData )
 
 
-function loadData( ) {
+function queryData( ) {
 	if ( document.getElementById( 'query' ) ) {
-		// Allow button element to initialize query
 		document.getElementById( 'query' ).onclick = function( ) {
-			insertData( )
+			observeData( )
 		}
 	}
 }
 
-function insertData( ) {
-	http.onreadystatechange = queryData
-	// Go insert data into database from backend
+function observeData( ) {
+	http.onreadystatechange = function( ) {
+		if ( http.readyState === XMLHttpRequest.DONE && http.status === 200 ) {
+			console.log( 'SQL Query: ' + http.response )
+		}
+	}
 	http.open( 'POST', '/query' )
 	http.send( )
 }
-
-function queryData( ) {
-	if ( http.readyState === XMLHttpRequest.DONE && http.status === 200 ) {
-		// View database insertion if successful
-		console.log( 'SQL Query: ' + http.response )
-	}
-}
-
 
 
