@@ -6,19 +6,19 @@
 	
 	<head>
 		<meta charset="UTF-8">
-		<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-		<link rel="stylesheet" href="{{ url_for('static', filename='css/map.css') }}">
+		<link rel="stylesheet" href="{{ url_for( 'static', filename='css/style.css' ) }}">
+		<link rel="stylesheet" href="{{ url_for( 'geoapi.static', filename='css/map.css' ) }}">
 		{% if title %}
 			<title>{{ title }} - MarketMeals</title>
 		{% else %}
 			<title>MarketMeals</title>
 		{% endif %}
 		<!-- JavaScript file for frontend calls to the Flask backend -->
-		<script type="text/javascript" src="{{ url_for( 'static', filename='js/http.js' ) }}"></script>
+		<script type="text/javascript" src="{{ url_for( 'geoapi.static', filename='js/http.js' ) }}"></script>
 		<!-- Local scripts to create and operate the google maps api -->
-		<script type="text/javascript" src="{{ url_for( 'static', filename='js/map.js' ) }}"></script>
-		<script type="text/javascript" src="{{ url_for( 'static', filename='js/geo.js' ) }}"></script>
-		<script type="text/javascript" src="{{ url_for( 'static', filename='js/view.js' ) }}"></script>
+		<script type="text/javascript" src="{{ url_for( 'geoapi.static', filename='js/map.js' ) }}"></script>
+		<script type="text/javascript" src="{{ url_for( 'geoapi.static', filename='js/geo.js' ) }}"></script>
+		<script type="text/javascript" src="{{ url_for( 'geoapi.static', filename='js/view.js' ) }}"></script>
 		<!-- Execute a test database query from frontend JavaScript -->
 		<script type="text/javascript" src="{{ url_for( 'static', filename='js/query.js' ) }}"></script>
 	</head>

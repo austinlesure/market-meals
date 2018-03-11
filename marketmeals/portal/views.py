@@ -3,11 +3,12 @@
 
 
 import re
+from marketmeals.portal.utils import html
 from flask import Blueprint, render_template, redirect, url_for
 
 
 
-portal = Blueprint( 'portal', __name__, static_folder = 'static', template_folder = 'templates' )
+portal = Blueprint( 'portal', __name__, template_folder = html )
 
 
 
@@ -35,7 +36,7 @@ def wild( wild ):
 	print( wild )
 	if re.match( r'^[0-9]{5}$', wild ):
 		print( 'Zipcode!' )
-		return redirect( url_for( 'code.zipcode', zipcode = wild ) )
+		return redirect( url_for( 'geoapi.zipcode', zipcode = wild ) )
 	elif re.match( r'^([a-z]+-)*(market){1}(-[a-z]+)*$', wild ):
 		print( 'Market!' )
 		return redirect( url_for( 'farm.market', market = wild ) )
@@ -58,6 +59,5 @@ def wild( wild ):
 @portal.route( '/error' )
 def error( ):
 	return render_template( 'portal/error.html' )
-
 
 
