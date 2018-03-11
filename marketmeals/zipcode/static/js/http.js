@@ -15,7 +15,7 @@ function getZipCode( ) {
 				viewGeocode( new google.maps.Geocoder( ), http.responseText )
 			}
 		}
-		http.open( 'GET', '/geolocate' )
+		http.open( 'GET', '/location' )
 		http.send( )
 	}
 }

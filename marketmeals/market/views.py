@@ -4,17 +4,17 @@
 
 import json
 from marketmeals import db
-from marketmeals.location.utils import html, urlify, catalog
-from marketmeals.location.models import Market
+from marketmeals.market.utils import html, urlify, catalog
+from marketmeals.market.models import Market
 from flask import Blueprint, request, render_template, redirect, url_for, session
 
 
 
-location = Blueprint( 'location', __name__, template_folder = html )
+market = Blueprint( 'market', __name__, template_folder = html )
 
 
 
-@location.route( '/url', methods = [ 'POST' ] )
+@market.route( '/url', methods = [ 'POST' ] )
 def url( ):
 	session[ 'market' ] = json.loads( request.data.decode( 'utf-8' ) )
 	print( 'MARKET ' + session[ 'market' ][ 'name' ] )
@@ -28,10 +28,14 @@ def url( ):
 	return session[ 'url' ]
 
 
-@location.route( '/market/<market>', methods = [ 'GET', 'POST' ] )
-def market( market ):
+@market.route( '/market/<market>', methods = [ 'GET', 'POST' ] )
+def view( market ):
 	print( 'Arrived at Market!' )
-	market = market
-	return render_template( 'location/market.html', market = session[ 'market' ] )
+	if re.match( r'^([a-z]+-)*(market){1}(-[a-z]+)*$', market ):
+		print( 'Market!' )
+		market = market
+		return render_template( 'market/market.html', market = session[ 'market' ] )
+	else return redirect( '/' )
+
 
 

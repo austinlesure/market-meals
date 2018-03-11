@@ -4,8 +4,8 @@
 
 import enum
 from marketmeals import db
-from marketmeals.home.utils import get_now
-from marketmeals.home.models import Base
+from marketmeals.index.utils import get_now
+from marketmeals.index.models import Base
 from sqlalchemy.dialects import postgresql
 
 

@@ -3,7 +3,7 @@
 
 
 from marketmeals import db
-from marketmeals.location.models import Market
+from marketmeals.market.models import Market
 
 
 
