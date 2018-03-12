@@ -9,7 +9,7 @@
 	<p style="text-align: center">
 		{{ market.address_1 }} <br>
 		{{ market.address_2 }} <br>
-		{{ market.city }}, {{ market.state }} {{ market.zip_code }}
+		{{ market.city }} {{ market.state }} {{ market.zip_code }}
 	</p>
 	
 	<!-- <div id='veg_and_farm_list'> -->
@@ -27,7 +27,7 @@
 		<!-- <h2 style="text-align: left">{{ farmer.first_name }} {{ farmer.last_name }}</h2> -->
 		<!-- <h3 style="text-align: left">{{ farmer.first_name }} {{ farmer.last_name }}</h3> -->
 		
-		<h3>Produce available at {{ farmer.first_name }} {{ farmer.last_name }</h3>
+		<h3>Produce available at {{ farmer.first_name }} {{ farmer.last_name }}</h3>
 		
 		{% for category in categories %}
 			<!-- <h3>{{ category.name }}</h3> -->
@@ -37,11 +37,11 @@
 				{% if key == farmer.farmer_id %}
 					
 					<ul>
-						{% for id in identifiers.get( key ) %}
+						{% for pid in identifiers.get( key ) %}
 							
-								{% if id.category_id == category.category_id %}
+								{% if pid.category_id == category.category_id %}
 									<!-- <h4 style="text-indent: 50px">{{ a.name }}</h4> -->
-									<li>{{ id.name }}</li>
+									<li>{{ pid.name }}</li>
 								{% endif %}
 							
 						{% endfor %}
@@ -61,7 +61,7 @@
 		
 	<ul>
 		{% for recipe in recipes %}
-			<li><a href="/recipe?recipe={{ recipe.recipe_name }}">{{ recipe.name }}</a></li>
+			<li><a href="/recipe?recipe={{ recipe.name }}">{{ recipe.name }}</a></li>
 		{% endfor %}
 	</ul>
 		
