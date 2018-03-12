@@ -38,7 +38,36 @@ def farmer():
 
 @app.route('/market')
 def market():
-    return render_template('market.html')
+    farmer_list = []
+    recipes = []
+    dic = {}
+
+    market = request.args.get('market')
+    if market:
+        market = Market.query.filter_by(market_name=market).first()
+        farmersId = FarmerMarketLink.query.filter_by(market_id=market.market_id).all()
+        for farmerId in farmersId:
+            farmer = Farmer.query.filter_by(farmer_id=farmerId.farmer_id).first()
+            x = farmer.farmer_id
+            farmer_list.append(farmer)
+            productsId = FarmerProductLink.query.filter_by(farmer_id=farmer.farmer_id).all()
+            for productId in productsId:
+                product = Product.query.filter_by(product_id=productId.product_id).first()
+                for recipe_product in get_recipe_products():
+                    if recipe_product.product_id == product.product_id:
+                        if recipe_product not in recipes:
+                            recipes.append(Recipe.query.filter_by(recipe_id=recipe_product.recipe_id).first())
+                if x in dic:
+                    # append the new number to the existing array at this slot
+                    dic[x].append(product)
+                else:
+                    # create a new array in this slot
+                    dic[x] = [product]
+        return render_template('market.html', market=market, farmer_list=farmer_list,prodcats=get_prodcats(), dic=dic,
+                               recipes=recipes)
+    else:
+        return redirect("/")
+   
 
 @app.route('/map')
 def map():
