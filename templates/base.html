@@ -2,9 +2,48 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
-  <!--  <link href="{{ url_for('static', filename='scripts/bootstrap/dist/css/bootstrap.css') }}" rel="stylesheet">-->
+
+    <!--begin bootstrap-->
+    <!--bootstrap flavor: navbar fixed-->
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+
+    <!--stylesheets-->
+
+    <!--base bootstrap css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+
+    
+    <!-- custom css overrides bootstrap, not using
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+      -->
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ie10-viewport-bug-workaround.css') }}">
+
+   <!-- Custom styles for this template-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar-fixed-top.css') }}">
+
+
+    <!--js-->
+
+    <script src="{{ url_for('static', filename='js/ie-emulation-modes-warning.js') }}"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+
 
     <!--Following looks to see if title is provided, renders default title if not-->
     {% if title %}
@@ -12,22 +51,72 @@
     {% else %}
       <title>MarketMeals</title>
     {% endif %}
+
+    <!--begin and end head content flags, enables Google Maps API-->
+
+    {% block head %} 
+    {% endblock %}
+
+
   </head>
   <body>
-    <header>
-      <h1>MarketMeals</h1>
-      <nav>
-        <ul>
-          <a href='/'><li>Home</li></a>
-          <a href='/about'><li>About</li></a>
-          <a href='/recipe'><li>Recipes</li></a>
-          <!--We'll remove the comment below if/when we get the login functionality going.-->
-          <!--<a href='/login'><li>Login/Register</li></a>-->
-        </ul>
-      </nav>
-    </header>
-    <main>
+
+
+<!--bootstrap content-->
+<nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Market Meals</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/recipe">Recipes</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://github.com/austinlesure/market-meals">Get the Code</a></li>
+          </ul>
+
+
+
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        
+      <!--Jinja-->
+       <main>
       {% block content %}{% endblock %}
-    </main>
+      </main>
+      <!--end Jinja-->
+
+
+      </div>
+
+    </div> <!-- /container -->
+    <!--end bootstrap content-->
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="{{ url_for('static', filename='js/vendor/jquery.min.js') }}"><\/script>')</script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{{ url_for('static', filename='js/ie10-viewport-bug-workaround.js') }}"></script>
+
   </body>
 </html>
