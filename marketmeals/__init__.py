@@ -19,12 +19,14 @@ from marketmeals.index.views import index
 from marketmeals.zipcode.views import zipcode
 from marketmeals.market.views import market
 from marketmeals.farmer.views import farmer
+from marketmeals.customer.views import customer
 from marketmeals.product.views import product
 from marketmeals.recipe.views import recipe
 app.register_blueprint( index )
 app.register_blueprint( zipcode )
 app.register_blueprint( market )
 app.register_blueprint( farmer )
+app.register_blueprint( customer )
 app.register_blueprint( product )
 app.register_blueprint( recipe )
 
@@ -54,10 +56,6 @@ app.config[ 'SQLALCHEMY_ECHO' ] = False
 
 ## This is a security risk and should be moved
 app.secret_key = 'MarKetMeaLSiSAMAzinG'
-
-
-
-import marketmeals.views
 
 
 

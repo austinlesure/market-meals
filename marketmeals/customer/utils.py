@@ -2,10 +2,13 @@
 
 
 
+import string
 import hashlib
 import random
-import string
 
+
+
+html = 'templates'
 
 
 def make_salt( ):
@@ -25,5 +28,6 @@ def check_pw_hash( password, hash ):
 	if make_pw_hash( password, salt ) == hash:
 		return True
 	return False
+
 
 
