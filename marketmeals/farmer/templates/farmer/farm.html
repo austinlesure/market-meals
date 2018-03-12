@@ -8,14 +8,22 @@
 	{% for category in catalog %}
 		<h3>{{ category.category }}</h3>
 		
-		{% for product in category.product %}
-			<p>{{ product.name }}</p>
-		{% endfor %}
+		<ul>
+			{% for product in category.product %}
+				
+				<!-- <p>{{ product.name }}</p> -->
+				
+				{% if category.category_id == product.category_id %}
+					<li>{{ product.name }}</li>
+				{% endif %}
+				
+			{% endfor %}
+		</ul>
 		
 		<hr />
 	{% endfor %}
-
-	<h1>farm.html</h1>
+	
 {% endblock %}
+
 
 

@@ -22,37 +22,48 @@
 			{% endfor %}
 		</ul> -->
 		
-		{% for farmer in farmer_list %}
-			
-			<h2 style="text-align: left">{{ farmer.first_name }} {{ farmer.last_name }}</h2>
-					
-			{% for category in categories %}
-				<h3>{{ category.name }}</h3>
-				{% for key in dic %}
-					
-					{% if key == farmer.farmer_id %}
-						{% for a in dic.get( key ) %}
-								
-								{% if a.category_id == category.category_id %}
-									<h4 style="text-indent: 50px">{{ a.name }}</h4>
-								{% endif %}
-								
-						{% endfor %}
-					{% endif %}
-					
-				{% endfor %}
-				
-			{% endfor %}
-			<hr />
-			
-		{% endfor %}
-	
-	
-	<h2>Recipes from Products Being Sold at</br>{{ market.name }}</h2>
+	{% for farmer in farmers %}
 		
-		{% for recipe in recipes %}
-			<a href="/recipe?recipe={{ recipe.recipe_name }}">{{ recipe.name }}</a>
+		<!-- <h2 style="text-align: left">{{ farmer.first_name }} {{ farmer.last_name }}</h2> -->
+		<!-- <h3 style="text-align: left">{{ farmer.first_name }} {{ farmer.last_name }}</h3> -->
+		
+		<h3>Produce available at {{ farmer.first_name }} {{ farmer.last_name }</h3>
+		
+		{% for category in categories %}
+			<!-- <h3>{{ category.name }}</h3> -->
+			<h4>{{ category.name }}</h4>
+			
+			{% for key in identifiers %}
+				{% if key == farmer.farmer_id %}
+					
+					<ul>
+						{% for id in identifiers.get( key ) %}
+							
+								{% if id.category_id == category.category_id %}
+									<!-- <h4 style="text-indent: 50px">{{ a.name }}</h4> -->
+									<li>{{ id.name }}</li>
+								{% endif %}
+							
+						{% endfor %}
+					</ul>
+					
+				{% endif %}
+			{% endfor %}
+			
 		{% endfor %}
+		<hr />
+		
+	{% endfor %}
+	
+	
+	<!-- <h2>Recipes from Products Being Sold at</br>{{ market.name }}</h2> -->
+	<h3>Recipes from Products Being Sold at</br>{{ market.name }}</h3>
+		
+	<ul>
+		{% for recipe in recipes %}
+			<li><a href="/recipe?recipe={{ recipe.recipe_name }}">{{ recipe.name }}</a></li>
+		{% endfor %}
+	</ul>
 		
 		
 		<!-- <h2>What's available this week?</h2>
@@ -133,5 +144,6 @@
 	</div> -->
 	
 {% endblock %}
+
 
 

@@ -2,7 +2,93 @@
 
 
 
-@import url( 'https://fonts.googleapis.com/css?family=Montserrat:300' );
+@import url( 'https://fonts.googleapis.com/css?family=Montserrat:300,500,700' );
+/* @import url( 'https://fonts.googleapis.com/css?family=Montserrat:300' ); */
+
+
+
+/* html {
+	font-family: 'Montserrat', sans-serif;
+	max-width: 780px;
+	margin: auto;
+} */
+
+body {
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 300;
+	/* max-width: 780px; */
+	/* margin: auto; */
+}
+
+h1 {
+	font-size: 3.5rem;
+	font-weight: 700; /* NEW */
+	text-align: center;
+}
+
+h2 {
+	font-size: 2.5rem;
+	font-weight: 500; /* NEW */
+	text-align: center;
+}
+
+h3 {
+	/* text-align: center; */
+	font-size: 1.5rem;
+	font-weight: 500; /* NEW */
+}
+
+/* NEW */
+h4 {
+	font-weight: 300;
+}
+
+/* NEW */
+nav {
+	font-size: 1.3rem;
+}
+
+/* Ian's changes */
+nav ul {
+	text-align: center;
+	padding: 0;
+}
+
+nav ul li {
+	display: inline;
+	margin: 0 4em;
+}
+
+form, form div {
+	display: inline-block;
+}
+
+a {
+	cursor: pointer;
+	outline: none;
+}
+
+button {
+	cursor: pointer;
+	outline: none;
+}
+
+#address {
+	display: inline-block;
+	text-align: center;
+	list-style-type: none;
+}
+
+#address li {
+	display: inline-block;
+	list-style-type: none;
+	margin: 0 2px;
+}
+
+
+
+/* OLD SETTINGS */
+/* @import url( 'https://fonts.googleapis.com/css?family=Montserrat:300' );
 
 
 
@@ -61,7 +147,7 @@ button {
 	display: inline-block;
 	list-style-type: none;
 	margin: 0 2px;
-}
+} */
 
 
 
