@@ -68,7 +68,8 @@ class Category( Base ):
 	__table_args__ = { 'extend_existing': True }
 	__tablename__ = 'categories'
 	category_id = db.Column( db.Integer, autoincrement = True, primary_key = True )
-	category = db.Column( db.String( 255 ) )
+	group = db.Column( db.String( 30 ), nullable = False )
+	category = db.Column( db.String( 30 ), nullable = False )
 	created_at = db.Column( db.DateTime( timezone = True ), nullable = False, default = get_now( ) )
 	updated_at = db.Column( db.DateTime( timezone = True ), default = get_now( ), onupdate = get_now( ) )
 	
@@ -88,6 +89,5 @@ product_days = db.Table( 'product_days', Base.metadata,
 	db.Column( 'product_id', db.Integer, db.ForeignKey( 'products.product_id' ), primary_key = True ),
 	db.Column( 'market_day_id', db.Integer, db.ForeignKey( 'market_days.market_day_id' ), primary_key = True )
 )
-
 
 
