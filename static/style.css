@@ -1,13 +1,13 @@
  @import url('https://fonts.googleapis.com/css?family=Montserrat:300');
 
-html {
+body {
   font-family: 'Montserrat', sans-serif;
-  max-width: 780px;
-  margin: auto;
+  /*max-width: 780px;
+  margin: auto;*/
 
 }
 
-h1 {
+/*h1 {
   font-size: 3.5em;
   text-align: center;
 }
@@ -27,3 +27,4 @@ nav ul li {
   margin-right: 4em;
   display: inline;
 }
+*/
