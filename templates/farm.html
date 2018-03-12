@@ -2,22 +2,24 @@
 
 {% block content %}
 
-    <h1>{{farmer.farmer_name}}</h1>
+    <h2>{{farmer.farmer_name}}</h2>
 
     {% for prodcat in prodcats %}
 
         <h3>{{ prodcat.prodcat_name }}</h3>
 
+        <ul>
         {% for product in product_list %}
 
             {% if prodcat.prodcat_id == product.prodcat_id %}
 
-            <h4 style="text-indent: 50px">{{ product.product_name }}</h4>
+            <li>{{ product.product_name }}</li>
 
             {% endif %}
 
+        
         {% endfor %}
-
+        </ul>
         <hr />
 
     {% endfor %}
