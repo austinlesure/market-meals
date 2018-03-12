@@ -22,11 +22,6 @@ def customer( ):
 	return render_template( 'customer.html' )
 
 
-@app.route( '/recipe' )
-def recipe( ):
-	return render_template( 'recipe.html' )
-
-
 """ def get_farmers( ):
 	return Farmer.query.filter_by( ).all( )
 
@@ -44,6 +39,5 @@ def get_farmer_products( ):
 
 def get_products( ):
 	return Product.query.filter_by( ).all( ) """
-
 
 

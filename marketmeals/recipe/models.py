@@ -3,8 +3,9 @@
 
 
 from marketmeals import db
+from marketmeals.index.utils import get_now
+from marketmeals.index.models import Base
 from sqlalchemy.dialects import postgresql
-from datetime import datetime, timezone
 
 
 
@@ -29,8 +30,8 @@ class Recipe( Base ):
 	name = db.Column( db.String( 50 ), nullable = False, unique = True )
 	## Refactoring into its own normalized, alternative table
 	''' recipe_directions = db.Column( db.Text ) '''
-	created_at = db.Column( db.DateTime( timezone = True ), nullable = False, default = lambda : datetime.now( timezone.utc ) )
-	updated_at = db.Column( db.DateTime( timezone = True ), onupdate = lambda : datetime.now( timezone.utc ) )
+	created_at = db.Column( db.DateTime( timezone = True ), nullable = False, default = get_now( ) )
+	updated_at = db.Column( db.DateTime( timezone = True ), default = get_now( ), onupdate = get_now( ) )
 	
 	ingredients = db.relationship( 'Ingredient', backref = 'recipes' )
 	directions = db.relationship( 'Direction', backref = 'recipes' )
@@ -52,8 +53,8 @@ class Direction( Base ):
 	order = db.Column( db.SmallInteger ) ## NOT NULL
 	summary = db.Column( db.String( 200 ) )
 	instruction = db.Column( db.Text ) ## NOT NULL
-	created_at = db.Column( db.DateTime( timezone = True ), nullable = False, default = lambda : datetime.now( timezone.utc ) )
-	updated_at = db.Column( db.DateTime( timezone = True ), onupdate = lambda : datetime.now( timezone.utc ) )
+	created_at = db.Column( db.DateTime( timezone = True ), nullable = False, default = get_now( ) )
+	updated_at = db.Column( db.DateTime( timezone = True ), default = get_now( ), onupdate = get_now( ) )
 	
 	recipe_id = db.Column( db.Integer, db.ForeignKey( 'recipes.recipe_id' ) )
 	
@@ -71,8 +72,8 @@ class Ingredient( Base ):
 	__tablename__ = 'ingredients'
 	ingredient_id = db.Column( db.Integer, autoincrement = True, primary_key = True )
 	ingredient_quantity = db.Column( db.String( 255 ) )
-	created_at = db.Column( db.DateTime( timezone = True ), nullable = False, default = lambda : datetime.now( timezone.utc ) )
-	updated_at = db.Column( db.DateTime( timezone = True ), onupdate = lambda : datetime.now( timezone.utc ) )
+	created_at = db.Column( db.DateTime( timezone = True ), nullable = False, default = get_now( ) )
+	updated_at = db.Column( db.DateTime( timezone = True ), default = get_now( ), onupdate = get_now( ) )
 	
 	recipe_id = db.Column( db.Integer, db.ForeignKey( 'recipes.recipe_id' ) )
 	product_id = db.Column( db.Integer, db.ForeignKey( 'products.product_id' ) )
@@ -86,6 +87,5 @@ class Ingredient( Base ):
 	
 	def __repr__( self ):
 		return '<Ingredient %r' % self.ingredient_quantity
-
 
 

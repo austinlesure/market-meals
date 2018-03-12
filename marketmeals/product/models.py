@@ -5,7 +5,7 @@
 from marketmeals import db
 from marketmeals.index.utils import get_now
 from marketmeals.index.models import Base
-from marketmeals.models import Ingredient
+from marketmeals.recipe.models import Ingredient
 from sqlalchemy.dialects import postgresql
 
 
