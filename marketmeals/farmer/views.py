@@ -2,10 +2,10 @@
 
 
 
-from marketmeals import app, db
+from marketmeals import db
 from marketmeals.farmer.utils import path, html, static
 from marketmeals.farmer.models import Farmer
-from marketmeals.models import Category, FarmerProduct
+from marketmeals.product.models import Category, FarmerProduct
 from flask import Blueprint, render_template, redirect, jsonify
 
 

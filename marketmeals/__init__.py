@@ -19,10 +19,12 @@ from marketmeals.index.views import index
 from marketmeals.zipcode.views import zipcode
 from marketmeals.market.views import market
 from marketmeals.farmer.views import farmer
+from marketmeals.product.views import product
 app.register_blueprint( index )
 app.register_blueprint( zipcode )
 app.register_blueprint( market )
 app.register_blueprint( farmer )
+app.register_blueprint( product )
 
 
 ## Using psycopg2 to connect to database
