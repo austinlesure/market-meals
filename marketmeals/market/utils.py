@@ -12,14 +12,24 @@ html = 'templates'
 
 def urlify( label ):
 	url = ''
+	prev = ''
 	for char in label:
-		if char.isalnum( ):
+		if prev == '-' and not char.isalnum( ):
+			if char == '&':
+				url += char
+				prev = char
+			else:
+				pass
+		elif char.isalnum( ):
 			if char.isupper( ):
 				url += char.lower( )
+				prev = char.lower( )
 			else:
 				url += char
+				prev = char
 		elif char.isspace( ):
 			url += '-'
+			prev = '-'
 	return url
 
 

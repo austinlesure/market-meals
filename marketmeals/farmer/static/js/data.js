@@ -22,7 +22,7 @@ function observeData( ) {
 			console.log( 'Farmers:', JSON.parse( http.response ) )
 		}
 	}
-	http.open( 'GET', '/query' )
+	http.open( 'GET', '/data' )
 	http.send( )
 }
 

@@ -32,12 +32,14 @@ def url( ):
 @market.route( '/market/<market>', methods = [ 'GET', 'POST' ] )
 def view( market ):
 	print( 'Arrived at Market!' )
-	if re.match( r'^([a-z]+-)*(market){1}(-[a-z]+)*$', market ):
+	print( market )
+	print( session[ 'url' ] )
+	print( Market.query.filter_by( url = market ).first( ) )
+	if market == session[ 'url' ] or Market.query.filter_by( url = market ).first( ):
 		print( 'Market!' )
-		market = market
 		return render_template( 'market/market.html', market = session[ 'market' ] )
 	else:
+		print( 'Bad!' )
 		return redirect( '/' )
-
 
 

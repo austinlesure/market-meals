@@ -18,11 +18,11 @@ db = SQLAlchemy( app )
 from marketmeals.index.views import index
 from marketmeals.zipcode.views import zipcode
 from marketmeals.market.views import market
-from marketmeals.data import data
+from marketmeals.farmer.views import farmer
 app.register_blueprint( index )
 app.register_blueprint( zipcode )
 app.register_blueprint( market )
-app.register_blueprint( data )
+app.register_blueprint( farmer )
 
 
 ## Using psycopg2 to connect to database
