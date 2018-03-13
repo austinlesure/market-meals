@@ -18,10 +18,10 @@ function fetchMarket( ) {
 		seeker.textSearch( query, function( markets, feedback ) {
 			if ( feedback == google.maps.places.PlacesServiceStatus.OK ) {
 				console.log( 'Markets:', markets )
+				reverseGeocode( new google.maps.Geocoder( ), markets[ 0 ] )
 			}
 		} )
 	}
 }
-
 
 

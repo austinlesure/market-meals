@@ -12,6 +12,7 @@
 		<!-- Ordinary css stylesheets placed in regular package's static folders-->
 		<link rel="stylesheet" href="{{ url_for( 'static', filename='css/style.css' ) }}">
 		<link rel="stylesheet" href="{{ url_for( 'zipcode.static', filename='css/map.css' ) }}">
+		<link rel="stylesheet" href="{{ url_for( 'market.static', filename='css/market.css' ) }}">
 		
 		<!-- Following looks to see if title is provided, renders default title if not-->
 		{% if title %}
@@ -21,7 +22,7 @@
 		{% endif %}
 		
 		<!-- JavaScript file for frontend calls to the Flask backend -->
-		<script type="text/javascript" src="{{ url_for( 'zipcode.static', filename='js/http.js' ) }}"></script>
+		<script type="text/javascript" src="{{ url_for( 'static', filename='js/http.js' ) }}"></script>
 		<!-- Local scripts to create and operate the google maps api -->
 		<script type="text/javascript" src="{{ url_for( 'zipcode.static', filename='js/map.js' ) }}"></script>
 		<script type="text/javascript" src="{{ url_for( 'zipcode.static', filename='js/geo.js' ) }}"></script>
@@ -77,5 +78,6 @@
 	</body>
 	
 </html>
+
 
 

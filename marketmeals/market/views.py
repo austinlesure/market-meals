@@ -10,7 +10,7 @@ from marketmeals.market.models import Market
 from marketmeals.farmer.models import Farmer, farmer_days
 from marketmeals.product.models import FarmerProduct, Category
 from marketmeals.recipe.models import Recipe, Ingredient
-from flask import Blueprint, request, render_template, redirect, url_for, session
+from flask import Blueprint, request, render_template, redirect, url_for, session, jsonify
 
 
 
@@ -30,7 +30,8 @@ def url( ):
 		market = catalog( session[ 'market' ][ 'name' ], session[ 'url' ], session[ 'market' ][ 'address_components' ] )
 		db.session.add( market )
 		db.session.commit( )
-	return session[ 'url' ]
+	via = { 'url': session[ 'url' ], 'title': session[ 'market' ][ 'name' ] }
+	return jsonify( via )
 
 
 @market.route( '/market/<market>', methods = [ 'GET', 'POST' ] )
@@ -91,5 +92,6 @@ def join( ):
 		)
 	else:
 		return redirect( '/' )
+
 
 
