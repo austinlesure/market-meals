@@ -5,7 +5,7 @@
 import re
 import json
 from marketmeals import db
-from marketmeals.market.utils import html, urlify, catalog
+from marketmeals.market.utils import path, html, static, urlify, catalog
 from marketmeals.market.models import Market
 from marketmeals.farmer.models import Farmer, farmer_days
 from marketmeals.product.models import FarmerProduct, Category
@@ -14,7 +14,7 @@ from flask import Blueprint, request, render_template, redirect, url_for, sessio
 
 
 
-market = Blueprint( 'market', __name__, template_folder = html )
+market = Blueprint( 'market', __name__, static_url_path = path, static_folder = static, template_folder = html )
 
 
 
@@ -22,7 +22,8 @@ market = Blueprint( 'market', __name__, template_folder = html )
 def url( ):
 	session[ 'market' ] = json.loads( request.data.decode( 'utf-8' ) )
 	print( 'MARKET ' + session[ 'market' ][ 'name' ] )
-	session[ 'url' ] = urlify( session[ 'market' ][ 'name' ] )
+	print( 'ZIPURL ' + session[ 'market' ][ 'zip_code' ] )
+	session[ 'url' ] = urlify( session[ 'market' ][ 'name' ], session[ 'market' ][ 'zip_code' ] )
 	print( 'NEWURL ' + session[ 'url' ] )
 	url = Market.query.filter_by( url = session[ 'url' ] ).first( )
 	if url is None:
@@ -90,6 +91,5 @@ def join( ):
 		)
 	else:
 		return redirect( '/' )
-
 
 

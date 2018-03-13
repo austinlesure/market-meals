@@ -7,10 +7,12 @@ from marketmeals.market.models import Market
 
 
 
+path = '/market/static'
 html = 'templates'
+static = 'static'
 
 
-def urlify( label ):
+def urlify( label, zipcode ):
 	url = ''
 	prev = ''
 	for char in label:
@@ -30,6 +32,7 @@ def urlify( label ):
 		elif char.isspace( ):
 			url += '-'
 			prev = '-'
+	url = url + '-' + zipcode
 	return url
 
 
@@ -53,5 +56,6 @@ def catalog( name, url, addresses ):
 				zipcode = sub[ 'short_name' ]
 	market = Market( name = name, url = url, address_1 = street, city = city, state = state, zip_code = zipcode )
 	return market
+
 
 
