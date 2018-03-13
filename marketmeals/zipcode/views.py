@@ -25,7 +25,6 @@ def location( ):
 
 @zipcode.route( '/zipcode/<zipcode>', methods = [ 'GET' ] )
 def mapapi( zipcode ):
-	print( 'Arrived at Zipcode!' )
 	if re.match( r'^[0-9]{5}$', zipcode ):
 		session[ 'zipcode' ] = zipcode
 		print( 'SESSION ' + session[ 'zipcode' ] )
@@ -33,5 +32,6 @@ def mapapi( zipcode ):
 		return render_template( 'zipcode/map.html', zipcode = zipcode )
 	else:
 		return redirect( '/' )
+
 
 

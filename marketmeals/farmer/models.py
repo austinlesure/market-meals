@@ -12,8 +12,6 @@ class Farmer( Base ):
 	__table_args__ = { 'extend_existing': True }
 	__tablename__ = 'farmers'
 	farmer_id = db.Column( db.Integer, autoincrement = True, primary_key = True )
-	## Split off name column into first and last name columns
-	''' farmer_name = db.Column( db.String( 255 ) ) '''
 	first_name = db.Column( db.String( 40 ), nullable = False )
 	last_name = db.Column( db.String( 40 ), nullable = False )
 	## Potential columns for login and registration authentication
@@ -33,15 +31,13 @@ class Farmer( Base ):
 	
 	markets = db.relationship( 'MarketDay', secondary = 'farmer_days', backref = 'farmers' )
 	products = db.relationship( 'FarmerProduct', backref = 'vendors' )
-	## Temporarily omitted property snce its table is disabled
-	''' prodcats = db.relationship( 'Prodcat', secondary = 'farmer_prodcat_link' ) '''
 	
 	def __init__( self, first_name, last_name ):
 		self.first_name = first_name
 		self.last_name = last_name
 	
 	def __repr__( self ):
-		return str( self.first_name + ' ' + self.last_name )
+		return str( 'Farmer: ' + farmer_id + ' ' + self.first_name + ' ' + self.last_name )
 
 
 ## Optional table for participating farms at market
@@ -71,7 +67,7 @@ class Farm( Base ):
 		self.zip_code = zip_code
 	
 	def __repr__( self ):
-		return 'Farm %r' % self.name
+		return str( 'Farm: ' + farm_id + ' ' + self.name )
 
 
 ## Farmers' days at market, a many-to-many db.relationship

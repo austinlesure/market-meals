@@ -25,45 +25,33 @@ class Product( Base ):
 	farmers = db.relationship( 'FarmerProduct', backref = 'wares' )
 	
 	def __init__( self, name ):
-		''' owner_prodcat '''
 		self.name = name
-		## Yet to understand its use and purpose in this model
-		''' self.owner_prodcat = owner_prodcat '''
 	
 	def __repr__( self ):
-		return '<Product %r' % self.product_name
+		return str( 'Product: ' + self.product_id + ' ' + self.name + ' ' + self.category_id )
 
 
 class FarmerProduct( Base ):
 	__table_args__ = { 'extend_existing': True }
 	__tablename__ = 'farmer_products'
-	## Better to use foreign keys as the primary key here
-	''' farmer_product_id = db.Column( db.Integer, primary_key = True ) '''
 	farmer_id = db.Column( db.Integer, db.ForeignKey( 'farmers.farmer_id' ), primary_key = True )
 	product_id = db.Column( db.Integer, db.ForeignKey( 'products.product_id' ), primary_key = True )
 	price = db.Column( postgresql.MONEY ) ## NOT NULL
 	available = db.Column( db.Boolean ) ## NOT NULL
+	created_at = db.Column( db.DateTime( timezone = True ), nullable = False, default = get_now( ) )
+	updated_at = db.Column( db.DateTime( timezone = True ), default = get_now( ), onupdate = get_now( ) )
 	
 	farmers = db.relationship( 'Farmer', backref = 'wares' )
 	products = db.relationship( 'Product', backref = 'vendors' )
 	
-	## Moved to other many-to-many tables for normalization
-	''' market_day_id = db.Column( db.Integer, db.ForeignKey( 'market_days.market_day_id' ) ) '''
-	
 	def __init__( self, price, available ):
-		## Taken out until deeper understanding of use is known
-		''' owner_farmer, owner_product, owner_marketday '''
 		self.price = price
 		self.available = available
-		''' self.owner_farmer = owner_farmer
-		self.owner_product = owner_product
-		self.owner_marketday = owner_marketday '''
 	
 	def __repr__( self ):
-		return '<FarmerProduct %r' % self.available
+		return str( 'FarmerProduct: ' + self.farmer_id + ' ' + self.name + ' ' + self.category_id )
 
 
-## Formerly the Prodcat table, as it was ambiguously named
 class Category( Base ):
 	__table_args__ = { 'extend_existing': True }
 	__tablename__ = 'categories'
@@ -74,14 +62,12 @@ class Category( Base ):
 	updated_at = db.Column( db.DateTime( timezone = True ), default = get_now( ), onupdate = get_now( ) )
 	
 	products = db.relationship( 'Product', backref = 'categories' )
-	## Not sure what db.relationship this table has with farmers
-	''' farmers = db.relationship( 'Farmer', secondary = 'farmer_prodcat_link' ) '''
 	
 	def __init__( self, category ):
 		self.category = category
 	
 	def __repr__( self ):
-		return '<Category %r' % self.category
+		return str( 'Category: ' + self.category_id + ' ' + self.group + ' ' + self.category )
 
 
 ## A many-to-many table for which day products are sold

@@ -53,7 +53,7 @@ class Market( Base ):
 		self.zip_code = zip_code
 	
 	def __repr__( self ):
-		return '<Market %r' % self.name
+		return str( 'Market: ' + self.market_id + ' ' + self.name + ' ' + self.url )
 
 
 class MarketDay( Base ):
@@ -68,26 +68,14 @@ class MarketDay( Base ):
 	updated_at = db.Column( db.DateTime( timezone = True ), default = get_now( ), onupdate = get_now( ) )
 	
 	market_id = db.Column( db.Integer, db.ForeignKey( 'markets.market_id' ) )
-	## Better used in two separate many-to-many tables
-	''' farmer_id = db.Column( db.Integer, db.ForeignKey( 'farmers.farmer_id' ) )
-	product_id = db.Column( db.Integer, db.ForeignKey( 'products.product_id' ) ) '''
-	
-	## Implemented through primary key table joins instead
-	''' farmerproduct_id = db.relationship( 'FarmerProduct', backref = 'owner_marketday' ) '''
 	
 	def __init__( self, date, day, opens, closes ):
-		## Unknown uses for the following assigned variables
-		''' owner_market, owner_farmer, owner_product '''
-		self.date = date
+		""" self.date = date
 		self.day = day
 		self.opens = opens
-		self.closes = closes
-		''' self.owner_market = owner_market
-		self.owner_farmer = owner_farmer
-		self.owner_product = owner_product '''
+		self.closes = closes """
 	
 	def __repr__( self ):
-		return '<MarketDay %r' % self.market_day_date
-
+		return str( 'MarketDay: ' + str( self.market_day_id ) + ' ' + str( self.market_id ) )
 
 

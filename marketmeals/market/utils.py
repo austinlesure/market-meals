@@ -48,7 +48,7 @@ def catalog( name, url, addresses ):
 			## Some markets don't have route strings provided
 			elif area == 'route':
 				street += sub[ 'short_name' ]
-			elif area == 'locality':
+			elif area == 'locality' or area == 'sublocality' or area == 'neighborhood':
 				city = sub[ 'short_name' ]
 			elif area == 'administrative_area_level_1':
 				state = sub[ 'short_name' ]

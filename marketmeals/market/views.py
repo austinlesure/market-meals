@@ -6,7 +6,7 @@ import re
 import json
 from marketmeals import db
 from marketmeals.market.utils import path, html, static, urlify, catalog
-from marketmeals.market.models import Market
+from marketmeals.market.models import Market, MarketDay
 from marketmeals.farmer.models import Farmer, farmer_days
 from marketmeals.product.models import FarmerProduct, Category
 from marketmeals.recipe.models import Recipe, Ingredient
@@ -36,15 +36,24 @@ def url( ):
 
 @market.route( '/market/<market>', methods = [ 'GET', 'POST' ] )
 def view( market ):
-	print( 'Arrived at Market!' )
-	print( market )
-	print( session[ 'url' ] )
-	print( Market.query.filter_by( url = market ).first( ) )
-	if market == session[ 'url' ] or Market.query.filter_by( url = market ).first( ):
-		print( 'Market!' )
-		return render_template( 'market/market.html', market = session[ 'market' ] )
+	print( 'GETURL ' + market )
+	print( 'SESURL ' + session[ 'url' ] )
+	data = Market.query.filter_by( url = market ).first( )
+	if market == session[ 'url' ] or data:
+		vendors = [ ]
+		days = MarketDay.query.filter_by( market_id = data.market_id ).all( )
+		for day in days:
+			vendors.append( day.farmers )
+			print( 'FARMDAY ', day.farmers )
+		for farmers in vendors:
+			print( 'FARMERS ', farmers )
+		total = {
+			'session': session[ 'market' ],
+			'database': data,
+			'vendors': vendors,
+		}
+		return render_template( 'market/market.html', total = total )
 	else:
-		print( 'Bad!' )
 		return redirect( '/' )
 
 
@@ -92,6 +101,5 @@ def join( ):
 		)
 	else:
 		return redirect( '/' )
-
 
 

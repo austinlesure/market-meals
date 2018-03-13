@@ -3,145 +3,69 @@
 
 
 {% block content %}
-	<h1 id="title">{{ market.name }}</h1>
-	<h3>{{ market.formatted_address }}</h3>
+	<h1 id="title">{{ total.session.name }}</h1>
+	<h3>{{ total.session.formatted_address }}</h3>
 	
-	<p style="text-align: center">
-		{{ market.address_1 }} <br>
-		{{ market.address_2 }} <br>
-		{{ market.city }} {{ market.state }} {{ market.zip_code }}
+	<p id="address">
+		{{ total.database.address_1 }}{% if total.database.address_2  %} {{ total.database.address_2 }} {% endif %},
+		{{ total.database.city }}, {{ total.database.state }} {{ total.database.zip_code }}
 	</p>
 	
 	<!-- <div id='veg_and_farm_list'> -->
 		
 		<!-- <ul id="address">
-			{% for part in market.address_components %}
+			{% for part in total.session.address_components %}
 				{% if part.types[ 0 ] != 'neighborhood' %}
 					<li>{{ part.short_name }}</li>
 				{% endif %}
 			{% endfor %}
 		</ul> -->
 		
-	{% for farmer in farmers %}
+	{% for farmers in total.vendors %}
+		{% for farmer in farmers %}
 		
 		<!-- <h2 style="text-align: left">{{ farmer.first_name }} {{ farmer.last_name }}</h2> -->
 		<!-- <h3 style="text-align: left">{{ farmer.first_name }} {{ farmer.last_name }}</h3> -->
 		
-		<h3>Produce available at {{ farmer.first_name }} {{ farmer.last_name }}</h3>
-		
-		{% for category in categories %}
-			<!-- <h3>{{ category.name }}</h3> -->
-			<h4>{{ category.name }}</h4>
+			<h3>Produce available from {{ farmer.first_name }} {{ farmer.last_name }}</h3>
 			
-			{% for key in identifiers %}
-				{% if key == farmer.farmer_id %}
-					
-					<ul>
-						{% for pid in identifiers.get( key ) %}
-							
-								{% if pid.category_id == category.category_id %}
-									<!-- <h4 style="text-indent: 50px">{{ a.name }}</h4> -->
-									<li>{{ pid.name }}</li>
-								{% endif %}
-							
-						{% endfor %}
-					</ul>
-					
-				{% endif %}
+			{% for category in categories %}
+				<!-- <h3>{{ category.name }}</h3> -->
+				<h4>{{ category.name }}</h4>
+				
+				{% for key in identifiers %}
+					{% if key == farmer.farmer_id %}
+						
+						<ul>
+							{% for pid in identifiers.get( key ) %}
+								
+									{% if pid.category_id == category.category_id %}
+										<!-- <h4 style="text-indent: 50px">{{ a.name }}</h4> -->
+										<li>{{ pid.name }}</li>
+									{% endif %}
+								
+							{% endfor %}
+						</ul>
+						
+					{% endif %}
+				{% endfor %}
+				
 			{% endfor %}
-			
-		{% endfor %}
-		<hr />
+			<hr />
 		
+		{% endfor %}
 	{% endfor %}
 	
 	
-	<!-- <h2>Recipes from Products Being Sold at</br>{{ market.name }}</h2> -->
-	<h3>Recipes from Products Being Sold at</br>{{ market.name }}</h3>
+	<!-- <h2>Recipes from Products Being Sold at</br>{{ total.session.name }}</h2> -->
+	<h3>Recipes from Products Being Sold at {{ total.session.name }}</h3>
 		
 	<ul>
 		{% for recipe in recipes %}
 			<li><a href="/recipe?recipe={{ recipe.name }}">{{ recipe.name }}</a></li>
 		{% endfor %}
 	</ul>
-		
-		
-		<!-- <h2>What's available this week?</h2>
-		<div id='{{ veg_id }}' class=''>
-			
-			<h3>veg_name</h3>
-			<div id='{{ farm_id }}'>
-				<h4><a href='#'><button>Visit</button><a/> - farm_name</h4>
-			</div>
-			<div id='{{ farm_id }}'>
-				<h4><a href='#'><button>Visit</button><a/> - farm_name</h4>
-			</div>
-			<div id='{{ farm_id }}'>
-				<h4><a href='#'><button>Visit</button><a/> - farm_name</h4>
-			</div>
-			<div id='{{ farm_id }}'>
-				<h4><a href='#'><button>Visit</button><a/> - farm_name</h4>
-			</div>
-			
-		</div>
-		
-		<div id='{{ veg_id }}' class=''>
-			
-			<h3>veg_name</h3>
-			<div id='{{ farm_id }}'>
-				<h4><a href='#'><button>Visit</button><a/> - farm_name</h4>
-			</div>
-			<div id='{{ farm_id }}'>
-				<h4><a href='#'><button>Visit</button><a/> - farm_name</h4>
-			</div>
-			<div id='{{ farm_id }}'>
-				<h4><a href='#'><button>Visit</button><a/> - farm_name</h4>
-			</div>
-			<div id='{{ farm_id }}'>
-				<h4><a href='#'><button>Visit</button><a/> - farm_name</h4>
-			</div>
-			
-		</div>
-		
-		<div id='{{ veg_id }}' class=''>
-			
-			<h3>veg_name</h3>
-			<div id='{{ farm_id }}'>
-				<h4><a href='#'><button>Visit</button><a/> - farm_name</h4>
-			</div>
-			<div id='{{ farm_id }}'>
-				<h4><a href='#'><button>Visit</button><a/> - farm_name</h4>
-			</div>
-			<div id='{{ farm_id }}'>
-				<h4><a href='#'><button>Visit</button><a/> - farm_name</h4>
-			</div>
-			<div id='{{ farm_id }}'>
-				<h4><a href='#'><button>Visit</button><a/> - farm_name</h4>
-			</div>
-			
-		</div>
-		
-		</div>
-		
-		<div id='recipe_list'>
-			
-			<h2>What all these can make...</h2>
-			<div id='{{ farm_id }}'>
-				<h3><a href='#'><button>See Recipe</button><a/>	- recipe_name</h3>
-			</div>
-			<div id='{{ farm_id }}'>
-				<h3><a href='#'><button>See Recipe</button><a/>	- recipe_name</h3>
-			</div>
-			<div id='{{ farm_id }}'>
-				<h3><a href='#'><button>See Recipe</button><a/>	- recipe_name</h3>
-			</div>
-			<div id='{{ farm_id }}' class=''>
-				<h3><a href='#'><button>See Recipe</button><a/>	- recipe_name</h3>
-			</div>
-			
-		</div>
-		
-	</div> -->
+	
 	
 	<!-- Importing in Google Maps api source -->
 	<script
