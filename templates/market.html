@@ -17,13 +17,13 @@
 
             <h3>{{ prodcat.prodcat_name }}</h3>
 
+            <ul>
             {% for key in dic %}
 
                 {% if key == farmer.farmer_id %}
 
                     {% for a in dic.get(key) %}
 
-                    	<ul>
                         {% if a.prodcat_id == prodcat.prodcat_id %}
                         	
                             <li>
@@ -32,13 +32,14 @@
                         	
 
                         {% endif %}
-                        </ul>
+                        
 
                     {% endfor %}
 
                 {% endif %}
 
             {% endfor %}
+            </ul>
 
         {% endfor %}
 
