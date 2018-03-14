@@ -4,7 +4,7 @@
 
 {% block content %}
 	<h1 id="title">{{ total.session.name }}</h1>
-	<h3>{{ total.session.formatted_address }}</h3>
+	<h3 id="address">{{ total.session.formatted_address }}</h3>
 	
 	<p id="address">
 		{{ total.database.address_1 }}{% if total.database.address_2  %} {{ total.database.address_2 }} {% endif %},
@@ -21,12 +21,12 @@
 			{% endfor %}
 		</ul> -->
 		
-	{% for farmers in total.vendors %}
+	{% for farmers in total.farmers %}
 		{% for farmer in farmers %}
 		
 		<!-- <h2 style="text-align: left">{{ farmer.first_name }} {{ farmer.last_name }}</h2> -->
 		<!-- <h3 style="text-align: left">{{ farmer.first_name }} {{ farmer.last_name }}</h3> -->
-		
+			
 			<h3>Produce available from {{ farmer.first_name }} {{ farmer.last_name }}</h3>
 			
 			{% for category in categories %}
@@ -52,14 +52,14 @@
 				
 			{% endfor %}
 			<hr />
-		
+			
 		{% endfor %}
 	{% endfor %}
 	
 	
 	<!-- <h2>Recipes from Products Being Sold at</br>{{ total.session.name }}</h2> -->
 	<h3>Recipes from Products Being Sold at {{ total.session.name }}</h3>
-		
+	
 	<ul>
 		{% for recipe in recipes %}
 			<li><a href="/recipe?recipe={{ recipe.name }}">{{ recipe.name }}</a></li>

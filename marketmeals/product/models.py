@@ -28,7 +28,7 @@ class Product( Base ):
 		self.name = name
 	
 	def __repr__( self ):
-		return str( 'Product: ' + self.product_id + ' ' + self.name + ' ' + self.category_id )
+		return str( 'Product: ' + str( self.product_id ) + ' ' + self.name + ' ' + str( self.category_id ) )
 
 
 class FarmerProduct( Base ):
@@ -44,12 +44,15 @@ class FarmerProduct( Base ):
 	farmers = db.relationship( 'Farmer', backref = 'wares' )
 	products = db.relationship( 'Product', backref = 'vendors' )
 	
-	def __init__( self, price, available ):
-		self.price = price
-		self.available = available
+	def __init__( self, farmer_id, product_id ):
+		""" price, available """
+		self.farmer_id = farmer_id
+		self.product_id = product_id
+		""" self.price = price
+		self.available = available """
 	
 	def __repr__( self ):
-		return str( 'FarmerProduct: ' + self.farmer_id + ' ' + self.name + ' ' + self.category_id )
+		return str( 'FarmerProduct: ' + str( self.farmer_id ) + ' ' + str( self.product_id ) )
 
 
 class Category( Base ):
@@ -67,7 +70,7 @@ class Category( Base ):
 		self.category = category
 	
 	def __repr__( self ):
-		return str( 'Category: ' + self.category_id + ' ' + self.group + ' ' + self.category )
+		return str( 'Category: ' + str( self.category_id ) + ' ' + self.group + ' ' + self.category )
 
 
 ## A many-to-many table for which day products are sold
@@ -75,5 +78,6 @@ product_days = db.Table( 'product_days', Base.metadata,
 	db.Column( 'product_id', db.Integer, db.ForeignKey( 'products.product_id' ), primary_key = True ),
 	db.Column( 'market_day_id', db.Integer, db.ForeignKey( 'market_days.market_day_id' ), primary_key = True )
 )
+
 
 

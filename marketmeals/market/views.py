@@ -8,7 +8,7 @@ from marketmeals import db
 from marketmeals.market.utils import path, html, static, urlify, catalog
 from marketmeals.market.models import Market, MarketDay
 from marketmeals.farmer.models import Farmer, farmer_days
-from marketmeals.product.models import FarmerProduct, Category
+from marketmeals.product.models import Product, FarmerProduct, Category
 from marketmeals.recipe.models import Recipe, Ingredient
 from flask import Blueprint, request, render_template, redirect, url_for, session, jsonify
 
@@ -40,17 +40,29 @@ def view( market ):
 	print( 'SESURL ' + session[ 'url' ] )
 	data = Market.query.filter_by( url = market ).first( )
 	if market == session[ 'url' ] or data:
-		vendors = [ ]
+		farmers = [ ]
+		categories = [ ]
+		products = [ ]
 		days = MarketDay.query.filter_by( market_id = data.market_id ).all( )
 		for day in days:
-			vendors.append( day.farmers )
+			farmers.append( day.farmers )
 			print( 'FARMDAY ', day.farmers )
-		for farmers in vendors:
-			print( 'FARMERS ', farmers )
+		print( 'FARMERS ', farmers )
+		for vendors in farmers:
+			for farmer in vendors:
+				matches = [ ]
+				print( 'NEWFARMER' )
+				print( farmer.products )
+				for product in farmer.products:
+					pid = product.product_id
+					matches.append( Product.query.filter_by( product_id = pid ).first( ) )
+				farmer.products = matches
+				print( 'PRODUCTS ', farmer.products )
+		categories = Category.query.all( )
 		total = {
 			'session': session[ 'market' ],
 			'database': data,
-			'vendors': vendors,
+			'farmers': farmers,
 		}
 		return render_template( 'market/market.html', total = total )
 	else:

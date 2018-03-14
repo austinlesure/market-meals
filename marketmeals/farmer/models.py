@@ -37,7 +37,7 @@ class Farmer( Base ):
 		self.last_name = last_name
 	
 	def __repr__( self ):
-		return str( 'Farmer: ' + farmer_id + ' ' + self.first_name + ' ' + self.last_name )
+		return str( 'Farmer: ' + str( self.farmer_id ) + ' ' + self.first_name + ' ' + self.last_name )
 
 
 ## Optional table for participating farms at market
@@ -67,7 +67,7 @@ class Farm( Base ):
 		self.zip_code = zip_code
 	
 	def __repr__( self ):
-		return str( 'Farm: ' + farm_id + ' ' + self.name )
+		return str( 'Farm: ' + str( self.farm_id ) + ' ' + self.name )
 
 
 ## Farmers' days at market, a many-to-many db.relationship
