@@ -3,41 +3,43 @@
 {% block content %}
     <h2>{{ market.market_name }}</h2>
 
-    <p style="text-align: center">
-        {{ market.market_address1 }} <br />
-        {{ market.market_address2 }} <br />
+    <p>
+        {{ market.market_address1 }} <br>
+        {{ market.market_address2 }} <br>
         {{ market.market_city }}, {{ market.market_state }} {{ market.market_zip }}
     </p>
 
     {% for farmer in farmer_list %}
 
-        <h3>Produce available at {{ farmer.farmer_name }}</h3>
+        <h2>{{ farmer.farmer_name }}</h2>
 
         {% for prodcat in prodcats %}
 
-            <h4>{{ prodcat.prodcat_name }}</h4>
+            <h3>{{ prodcat.prodcat_name }}</h3>
 
-            {% for key in dic %}
+            <ul>
+                {% for key in dic %}
 
-                {% if key == farmer.farmer_id %}
+                    {% if key == farmer.farmer_id %}
 
-                    <ul>
+                        {% for a in dic.get(key) %}
 
-                    {% for a in dic.get(key) %}
+                            {% if a.prodcat_id == prodcat.prodcat_id %}
 
-                        {% if a.prodcat_id == prodcat.prodcat_id %}
+                                <li>
+                                    {{ a.product_name }}
+                                </li>
 
-                            <li>{{ a.product_name }}</li>
 
-                        {% endif %}
+                            {% endif %}
 
-                    {% endfor %}
-                
-                    </ul>
 
-                {% endif %}
+                        {% endfor %}
 
-            {% endfor %}
+                    {% endif %}
+
+                {% endfor %}
+            </ul>
 
         {% endfor %}
 
@@ -45,16 +47,17 @@
 
     {% endfor %}
 
-    <h3>Recipes from Products Being Sold at<br />{{ market.market_name }}</h3>
+    <h2>Recipes from Products Being Sold at</br>{{ market.market_name }}</h2>
 
     <ul>
+        {% for recipe in recipes %}
+            <li>
+                <a href="/recipe?recipe={{ recipe.recipe_name }}">{{ recipe.recipe_name }}</a>
+            </li>
 
-    {% for recipe in recipes %}
-
-        <li><a href="/recipe?recipe={{ recipe.recipe_name }}">{{ recipe.recipe_name }}</a></li>
-
-    {% endfor %}
-
+        {% endfor %}
     </ul>
+
+
 
 {% endblock %}

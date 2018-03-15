@@ -18,11 +18,14 @@ def get_recipes():
 @app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == 'GET':
-        return render_template('index.html')
+        markets = []
+        for market in Market.query.filter_by().all():
+            markets.append([market.market_name, market.market_address1 + ", " + market.market_city + ", " + market.market_state + " " + market.market_zip])
+        return render_template('index.html', markets=markets)
     elif request.method == 'POST':
         zipcode = request.form['zipcode']
         markets = Market.query.filter_by(market_zip=zipcode)
-        return render_template('market.html', markets=markets)
+        return render_template('map.html', markets=markets)
 
 @app.route('/about')
 def about():
@@ -109,7 +112,15 @@ def customer():
 @app.route('/farmer-user')
 def farm_user():
     return render_template('farmer_user.html')
-    
+
+@app.route('/farm')
+def farmer():
+    return render_template('farm.html')
+
+@app.route('/market')
+def market():
+    return render_template('market.html')
+
 @app.route('/map')
 def map():
     return render_template('map.html')

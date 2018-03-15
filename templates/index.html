@@ -1,19 +1,107 @@
 {% extends 'base.html' %}
+{% block head %}
 
+    <style>
+
+      #map {
+        height: 100%;
+      }
+      html, body {
+        height: 80%;
+        margin: 0;
+        padding: 0;
+      }
+      #floating-panel {
+        position: absolute;
+        top: 10px;
+        left: 25%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+      }
+    </style>
+    <script type="text/javascript">
+        var marker, i;
+
+        var locations = {{ markets|safe }}
+
+
+        function initMap() {
+
+            var map = new google.maps.Map(document.getElementById('myMap'), {
+                zoom: 12,
+                center: {lat: 47.6062, lng: -122.3321}
+            });
+            var geocoder = new google.maps.Geocoder();
+            for(i = 0; i < locations.length; i += 1){
+                var address = locations[i][1];
+                var name = locations[i][0];
+                geocodeAddress(geocoder, map, address, name);
+            }
+        }
+
+        function geocodeAddress(geocoder, resultsMap, address, name) {
+
+            geocoder.geocode({'address': address}, function(results, status) {
+                if (status === 'OK') {
+                    resultsMap.setCenter(results[0].geometry.location);
+
+                    var infoWindow = new google.maps.InfoWindow();
+
+                    var marker = new google.maps.Marker({
+                        map: resultsMap,
+                        position: results[0].geometry.location
+                    });
+
+                    google.maps.event.addListener(marker, 'click', function() {
+                        var a = document.createElement('a');
+                        var linkText = document.createTextNode(name);
+                        a.appendChild(linkText);
+                        a.href = "/market?market=" + name;
+                        document.body.appendChild(a);
+                        infoWindow.setContent(a);
+                        infoWindow.open(myMap, marker);
+                    });
+
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+           });
+        }
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbMJCohPUaKEFGsIzZjG1K3mbU2NRMvjc&callback=initMap">
+    </script>
+{% endblock %}
 {% block content %}
-  <h2>Welcome to MarketMeals!</h2>
-  <p>Thank you for visiting MarketMeals, the link between your local farmer and your next meal.<p>
-  <p>Please enter your zipcode below, so we can show the markets near you.</p>
+    <center>
+    <h2>Welcome to MarketMeals!</h2>
+    <p>Thank you for visiting MarketMeals, the link between your local farmer and your next meal.</p>
+    <p>Please enter your zipcode below, so we can show the markets near you.</p>
 
-  <form method="post">
-    <div>
-      <Label>ZIP Code</Label>
-      <input id="example" type="text" name="zipcode" pattern="[0-9]{5}" title="Five digit zip code" />
-      <input type="submit" value="Send">
-    </div>
-  </form>
-  
-  <div class="map">
-    <code>Map of Markets</code>
-  </div>
+
+    <form method="post">
+        <div>
+          <Label>Zipcode</Label>
+          <input id="example" type="text" name="zipcode" pattern="[0-9]{5}" title="Five digit zip code" />
+          <input type="submit" value="Send">
+        </div>
+
+
+
+        <div id="myMap" style="border:1px solid black; height:600px; width:700px" >
+            <label>Map of Markets</label>
+
+
+            <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+            <meta charset="utf-8"/>
+        </div>
+    </form>
+    </center>
+
 {% endblock %}
