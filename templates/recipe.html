@@ -1,23 +1,5 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-    {% if recipes %}
-
-        {% for recipe in recipes %}
-
-            <h2>{{ recipe.recipe_name }}</h2>
-
-            <p>{{ recipe.recipe_directions }}</p>
-
-        {% endfor %}
-
-    {% else %}
-
-        <h2>{{ recipe.recipe_name }}</h2>
-
-        <p>{{ recipe.recipe_directions }}</p>
-
-    {% endif %}
-
+  <h1>recipe.html</h1>
 {% endblock %}
