@@ -82,7 +82,7 @@ def recipe():
     recipe = request.args.get('recipe')
     if recipe:
         recipe = Recipe.query.filter_by(recipe_name=recipe).first()
-        return render_template('recipe.html', recipes=recipe)
+        return render_template('recipe.html', recipe=recipe)
     else:
         return render_template('recipe.html', recipes=get_recipes())
 

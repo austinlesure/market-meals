@@ -2,12 +2,22 @@
 
 {% block content %}
 
-    {% for recipe in recipes %}
+    {% if recipes %}
+
+        {% for recipe in recipes %}
+
+            <h2>{{ recipe.recipe_name }}</h2>
+
+            <p>{{ recipe.recipe_directions }}</p>
+
+        {% endfor %}
+
+    {% else %}
 
         <h2>{{ recipe.recipe_name }}</h2>
 
         <p>{{ recipe.recipe_directions }}</p>
 
-    {% endfor %}
+    {% endif %}
 
 {% endblock %}
