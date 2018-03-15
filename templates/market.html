@@ -11,35 +11,33 @@
 
     {% for farmer in farmer_list %}
 
-        <h2>{{ farmer.farmer_name }}</h2>
+        <h3>Produce available at {{ farmer.farmer_name }}</h3>
 
         {% for prodcat in prodcats %}
 
-            <h3>{{ prodcat.prodcat_name }}</h3>
+            <h4>{{ prodcat.prodcat_name }}</h4>
 
-            <ul>
-                {% for key in dic %}
+            {% for key in dic %}
 
-                    {% if key == farmer.farmer_id %}
+                {% if key == farmer.farmer_id %}
 
-                        {% for a in dic.get(key) %}
+                    <ul>
 
-                            {% if a.prodcat_id == prodcat.prodcat_id %}
+                    {% for a in dic.get(key) %}
 
-                                <li>
-                                    {{ a.product_name }}
-                                </li>
+                        {% if a.prodcat_id == prodcat.prodcat_id %}
 
+                            <li>{{ a.product_name }}</li>
 
-                            {% endif %}
+                        {% endif %}
 
+                    {% endfor %}
 
-                        {% endfor %}
+                    </ul>
 
-                    {% endif %}
+                {% endif %}
 
-                {% endfor %}
-            </ul>
+            {% endfor %}
 
         {% endfor %}
 
@@ -47,15 +45,16 @@
 
     {% endfor %}
 
-    <h2>Recipes from Products Being Sold at</br>{{ market.market_name }}</h2>
+    <h3>Recipes from Products Being Sold at<br />{{ market.market_name }}</h3>
 
     <ul>
-        {% for recipe in recipes %}
-            <li>
-                <a href="/recipe?recipe={{ recipe.recipe_name }}">{{ recipe.recipe_name }}</a>
-            </li>
 
-        {% endfor %}
+    {% for recipe in recipes %}
+
+        <li><a href="/recipe?recipe={{ recipe.recipe_name }}">{{ recipe.recipe_name }}</a></li>
+
+    {% endfor %}
+
     </ul>
 
 

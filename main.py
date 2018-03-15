@@ -72,7 +72,7 @@ def market():
                 else:
                     # create a new array in this slot
                     dic[x] = [product]
-        return render_template('market.html', market=market, farmer_list=farmer_list,prodcats=get_prodcats(), dic=dic,
+        return render_template('market.html', market=market, farmer_list=farmer_list, prodcats=get_prodcats(), dic=dic,
                                recipes=recipes)
     else:
         return redirect("/")
