@@ -1,12 +1,27 @@
 from flask import render_template, session, flash, request, redirect
 from app import app, db
-from models import Farmer, Product, Prodcat, Market, Marketday, Recipe, Recipeproduct
+from models import Farmer, Product, Prodcat, Market, Marketday, Recipe, Recipeproduct, FarmerMarketLink, FarmerProductLink
 from hashutils import check_pw_hash
+
+def get_prodcats():
+    return Prodcat.query.filter_by().all()
+
+def get_farmer_product_links():
+    return FarmerProductLink.query.filter_by().all()
+
+def get_recipe_products():
+    return Recipeproduct.query.filter_by().all()
+
+def get_recipes():
+    return Recipe.query.filter_by().all()
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == 'GET':
-        return render_template('index.html')
+        markets = []
+        for market in Market.query.filter_by().all():
+            markets.append([market.market_name, market.market_address1 + ", " + market.market_city + ", " + market.market_state + " " + market.market_zip])
+        return render_template('index.html', markets=markets)
     elif request.method == 'POST':
         zipcode = request.form['zipcode']
         markets = Market.query.filter_by(market_zip=zipcode)
@@ -36,7 +51,7 @@ def farm_user():
 def farmer():
     return render_template('farm.html')
 
-@app.route('/market')
+@app.route('/market', methods=['GET'])
 def market():
     farmer_list = []
     recipes = []
