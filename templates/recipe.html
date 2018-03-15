@@ -2,22 +2,14 @@
 
 {% block content %}
 
-    {% if recipes %}
+    {% for recipe in recipes %}
 
-        {% for recipe in recipes %}
-
-            <h2>{{ recipe.recipe_name }}</h2>
-
-            <p>{{ recipe.recipe_directions }}</p>
-
-        {% endfor %}
-
-    {% else %}
-
-        <h2>{{ recipe.recipe_name }}</h2>
+    gi    <h2>{{ recipe.recipe_name }}</h2>
 
         <p>{{ recipe.recipe_directions }}</p>
 
-    {% endif %}
+        <img src="{{ url_for('static', filename='images/recipe_sm.jpg') }}">
+
+    {% endfor %}
 
 {% endblock %}
