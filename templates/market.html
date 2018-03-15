@@ -11,7 +11,7 @@
 
     {% for farmer in farmer_list %}
 
-        <h3>Produce available at {{ farmer.farmer_name }}</h3>
+        <h3>Produce available at <a href='/farm?farmer={{ farmer.farmer_name }}'>{{ farmer.farmer_name }}</a></h3>
 
         {% for prodcat in prodcats %}
 
