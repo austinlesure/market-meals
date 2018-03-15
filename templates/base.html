@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
 
 
@@ -27,11 +27,12 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/ie10-viewport-bug-workaround.css') }}">
 
-   <!-- Custom styles for this template-->
+    <!-- Custom styles for this template-->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar-fixed-top.css') }}">
 
 
     <!--js-->
+
     <script src="{{ url_for('static', filename='js/ie-emulation-modes-warning.js') }}"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -46,9 +47,9 @@
 
     <!--Following looks to see if title is provided, renders default title if not-->
     {% if title %}
-      <title>{{ title }} - MarketMeals</title>
+        <title>{{ title }} - MarketMeals</title>
     {% else %}
-      <title>MarketMeals</title>
+        <title>MarketMeals</title>
     {% endif %}
 
     <!--begin and end head content flags, enables Google Maps API-->
@@ -57,81 +58,74 @@
     {% endblock %}
 
 
-  </head>
-  <body>
+</head>
+<body>
 
 
 <!--bootstrap content-->
-<nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
+<nav class="navbar navbar-default navbar-fixed-top" style='padding-bottom: 0px; margin-bottom: 0px;'>
+    <div class="container">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/">Market Meals</a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Market Meals</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/recipe">Recipes</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="https://github.com/austinlesure/market-meals">Get the Code</a></li>
-             <!--We'll remove the comment below if/when we get the login functionality going.-->
-            <!--
-            <li class="active"><a href="/login">Login <span class="sr-only">(current)</span></a></li>
-            <li class="active"><a href="/register">Register <span class="sr-only">(current)</span></a></li>
-          -->
+            <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/recipe">Recipes</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="https://github.com/austinlesure/market-meals">Get the Code</a></li>
+                <!--We'll remove the comment below if/when we get the login functionality going.-->
+                <!--
+                <li class="active"><a href="/login">Login <span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="/register">Register <span class="sr-only">(current)</span></a></li>
+              -->
 
-          </ul>
+            </ul>
 
 
 
         </div><!--/.nav-collapse -->
-      </div>
+    </div>
 </nav>
 
-<div class="container">
+<div class="container" style='background-color: rgb(245, 245, 245); border-radius: 3rem;'>
 
-      <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron">
+    <!-- Main component for a primary marketing message or call to action -->
+    <!--<div class="jumbotron">-->
 
-      <!--Jinja-->
-       <main>
-      {% block content %}{% endblock %}
-      </main>
-      <!--end Jinja-->
+    <!--Jinja-->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <!--end Jinja-->
 
-      </div>
+</div>
 
 </div> <!-- /container -->
 <!--end bootstrap content-->
 
-     <!--Jquery-->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <!--end Jquery-->
+<!--Jquery-->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<!--end Jquery-->
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="{{ url_for('static', filename='js/vendor/jquery.min.js') }}"><\/script>')</script>
-    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="{{ url_for('static', filename='js/ie10-viewport-bug-workaround.js') }}"></script>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="{{ url_for('static', filename='js/vendor/jquery.min.js') }}"><\/script>')</script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="{{ url_for('static', filename='js/ie10-viewport-bug-workaround.js') }}"></script>
 
-    <!--dynamic nav bootstrap-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="{{ url_for('static', filename='js/dynamic-menu.js') }}"></script>
-    <script>$('#navbar').dynamicMenu();</script>
-    <!--end dynamic nav boostrap-->
-
-  </body>
+</body>
 </html>

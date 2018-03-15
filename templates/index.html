@@ -1,11 +1,32 @@
 {% extends 'base.html' %}
+{% block head %}
 
+    <style>
+        .pac-controls label {
+            font-family: Roboto;
+            font-size: 13px;
+            font-weight: 300;
+        }
+        #pac-input {
+            background-color: #fff;
+            font-family: Roboto;
+            font-size: 15px;
+            font-weight: 300;
+            margin-left: 12px;
+            padding: 0 11px 0 13px;
+            text-overflow: ellipsis;
+            width: 400px;
+        }
+        #pac-input:focus {
+            border-color: #4d90fe;
+        }
+    </style>
+{% endblock %}
 {% block content %}
-
     <center>
-    <h1 style='margin-top: 2px; padding-top: 2px;'>Welcome to MarketMeals!</h1>
-    <p>Thank you for visiting MarketMeals, the link between your local farmer and your next meal.</p>
-    <p>Please enter your zipcode below, so we can show the markets near you.</p>
+        <h1 style='margin-top: 2px; padding-top: 2px;'>Welcome to MarketMeals!</h1>
+        <p>Thank you for visiting MarketMeals, the link between your local farmer and your next meal.</p>
+        <p>Please enter your zipcode below, so we can show the markets near you.</p>
         <input id="pac-input" class="controls" type="text" placeholder="Search Box" />
         <div id="myMap" style="border:1px solid black; height:550px; width:650px" >
             <label>Map of Markets</label>
@@ -15,42 +36,32 @@
 
         <script type="text/javascript">
             var marker, i;
-
             var locations = {{ markets|safe }}
-
-
                 function initAutocomplete() {
-
                     var map = new google.maps.Map(document.getElementById('myMap'), {
                         zoom: 12,
                         center: {lat: 47.6062, lng: -122.3321}
                     });
-
                     var input = document.getElementById('pac-input');
                     var searchBox = new google.maps.places.SearchBox(input);
                     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
                     // Bias the SearchBox results towards current map's viewport.
                     map.addListener('bounds_changed', function() {
                         searchBox.setBounds(map.getBounds());
                     });
-
                     var markers = [];
                     // Listen for the event fired when the user selects a prediction and retrieve
                     // more details for that place.
                     searchBox.addListener('places_changed', function() {
                         var places = searchBox.getPlaces();
-
                         if (places.length == 0) {
                             return;
                         }
-
                         // Clear out the old markers.
                         markers.forEach(function(marker) {
                             marker.setMap(null);
                         });
                         markers = [];
-
                         // For each place, get the icon, name and location.
                         var bounds = new google.maps.LatLngBounds();
                         places.forEach(function(place) {
@@ -67,7 +78,6 @@
                         });
                         map.fitBounds(bounds);
                     });
-
                     var geocoder = new google.maps.Geocoder();
                     for(i = 0; i < locations.length; i += 1){
                         var address = locations[i][1];
@@ -75,20 +85,15 @@
                         geocodeAddress(geocoder, map, address, name);
                     }
                 }
-
             function geocodeAddress(geocoder, resultsMap, address, name) {
-
                 geocoder.geocode({'address': address}, function(results, status) {
                     if (status === 'OK') {
                         resultsMap.setCenter(results[0].geometry.location);
-
                         var infoWindow = new google.maps.InfoWindow();
-
                         var marker = new google.maps.Marker({
                             map: resultsMap,
                             position: results[0].geometry.location
                         });
-
                         google.maps.event.addListener(marker, 'click', function() {
                             var a = document.createElement('a');
                             var linkText = document.createTextNode(name);
@@ -98,7 +103,6 @@
                             infoWindow.setContent(a);
                             infoWindow.open(myMap, marker);
                         });
-
                     } else {
                         alert('Geocode was not successful for the following reason: ' + status);
                     }
