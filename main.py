@@ -1,6 +1,6 @@
 from flask import render_template, session, flash, request, redirect
 from app import app, db
-from models import Farmer, Product, Prodcat, Market, Marketday, Recipe, Recipeproduct, FarmerMarketLink, FarmerProductLink
+from models import Farmer, Product, Prodcat, Market, Marketday, Recipe, Recipeproduct, FarmerProductLink, FarmerMarketLink
 from hashutils import check_pw_hash
 
 def get_prodcats():
@@ -31,25 +31,19 @@ def index():
 def about():
     return render_template('about.html')
 
-@app.route('/login')
-def login():
-    return render_template('login.html')
-
-@app.route('/logout')
-def logout():
-    return render_template('index.html')
-
-@app.route('/customer')
-def customer():
-    return render_template('customer.html')
-
-@app.route('/farmer-user')
-def farm_user():
-    return render_template('farmer_user.html')
-
-@app.route('/farm')
+@app.route('/farm', methods=['GET'])
 def farmer():
-    return render_template('farm.html')
+    product_list = []
+    farmer = request.args.get('farmer')
+    if farmer:
+        farmer = Farmer.query.filter_by(farmer_name=farmer).first()
+        productIds = FarmerProductLink.query.filter_by(farmer_id=farmer.farmer_id).all()
+        for productId in productIds:
+            product = Product.query.filter_by(product_id=productId.product_id).first()
+            product_list.append(product)
+        return render_template('farm.html', farmer=farmer, product_list=product_list, prodcats=get_prodcats())
+    else:
+        return redirect("/")
 
 @app.route('/market', methods=['GET'])
 def market():
@@ -82,15 +76,52 @@ def market():
                                recipes=recipes)
     else:
         return redirect("/")
-   
+
+@app.route('/recipe')
+def recipe():
+    recipe = request.args.get('recipe')
+    if recipe:
+        recipe = Recipe.query.filter_by(recipe_name=recipe).first()
+        return render_template('recipe.html', recipes=recipe)
+    else:
+        return render_template('recipe.html', recipes=get_recipes())
+
+
+if __name__ == '__main__':
+    app.run()
+
+
+
+
+
+
+
+'''
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    return render_template('index.html')
+
+@app.route('/customer')
+def customer():
+    return render_template('customer.html')
+
+@app.route('/farmer-user')
+def farm_user():
+    return render_template('farmer_user.html')
+
+@app.route('/farm')
+def farmer():
+    return render_template('farm.html')
+
+@app.route('/market')
+def market():
+    return render_template('market.html')
 
 @app.route('/map')
 def map():
     return render_template('map.html')
-
-@app.route('/recipe')
-def recipe():
-    return render_template('recipe.html')
-
-if __name__ == '__main__':
-    app.run()
+'''
