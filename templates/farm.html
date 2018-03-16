@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-    <h2>{{farmer.farmer_name}}</h2>
+            <img style='display: block; margin: auto; padding-top: 1rem;' src="{{ url_for('static', filename='images/farmer_sm.jpg') }}">
+    <h2 class='text-center'>{{farmer.farmer_name}}</h2>
 
     {% for prodcat in prodcats %}
 
