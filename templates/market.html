@@ -3,9 +3,7 @@
 {% block content %}
     <h2 class="text-center">{{ market.market_name }}</h2>
 
-    <br />
-    <img src="{{ url_for('static', filename='images/farmersmarket_sm.jpg') }}">
-    <br />
+    <img style='display: block; margin: auto;' src="{{ url_for('static', filename='images/farmersmarket_sm.jpg') }}">
 
 
     <address class="text-center">
@@ -14,17 +12,18 @@
         {{ market.market_city }}, {{ market.market_state }} {{ market.market_zip }}
     </address>
 
+    <hr />  
     {% for farmer in farmer_list %}
-
-        <h3>Produce available at <a href='/farm?farmer={{ farmer.farmer_name }}'>{{ farmer.farmer_name }}</a></h3>
-        <div style='margin-left: 3rem;'>
+        <img  style='display: block; margin: auto;' src="{{ url_for('static', filename='images/farmer_sm.jpg') }}">
+        <h3 class='text-center'>Produce available at <a href='/farm?farmer={{ farmer.farmer_name }}'>{{ farmer.farmer_name }}</a></h3>
+        
             {% for prodcat in prodcats %}
+                <div style='margin-left: 25rem;'>
                 <h4>{{ prodcat.prodcat_name }}</h4>
 
                 {% for key in dic %}
 
                     {% if key == farmer.farmer_id %}
-                    <img src="{{ url_for('static', filename='images/farmer_sm.jpg') }}">
 
                         <ul>
 
@@ -41,13 +40,15 @@
                         </ul>
 
                     {% endif %}
-
                 {% endfor %}
+                </div>
             {% endfor %}
-        </div>
+        
+
         <hr />
 
     {% endfor %}
+            </div>
 
     <h2 class='text-center'>Recipes from Products Being Sold at<br /><span style="font-size: 75%;">{{ market.market_name }}</span></h2>
 
